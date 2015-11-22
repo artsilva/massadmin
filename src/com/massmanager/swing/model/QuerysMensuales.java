@@ -114,4 +114,77 @@ public class QuerysMensuales extends Conexion {
         }
         return rs;
     }
+    //QUERYS GRAFICOS
+
+    public ResultSet graficoExtremidad(String extremidad, String mes) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_mensual\n"
+                    + "WHERE extremidad = ? AND mes = ?");
+            pst.setString(1, extremidad);
+            pst.setString(2, mes);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
+
+    public ResultSet graficoIncidenteTipo(String tipo, String mes) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_mensual\n"
+                    + "WHERE incidente = ? AND mes = ?;");
+            pst.setString(1, tipo);
+            pst.setString(2, mes);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
+
+    public ResultSet graficoIncidenteArea(String area, String mes) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_mensual\n"
+                    + "WHERE area = ? AND mes = ?");
+            pst.setString(1, area);
+            pst.setString(2, mes);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
+
+    public ResultSet graficoIncidenteSector(String sector, String mes) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_mensual\n"
+                    + "WHERE sector = ? AND mes = ?;");
+            pst.setString(1, sector);
+            pst.setString(2, mes);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
 }

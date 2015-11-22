@@ -5,9 +5,6 @@
  */
 package com.massmanager.swing.view;
 
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.jfree.chart.ChartFactory;
@@ -32,9 +29,16 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         
-        Datos.addValue(7, "Cantidad Incidentes", "Produccion");
-        Datos.addValue(2, "Cantidad Incidentes", "Bio Bio");
-        Datos.addValue(1, "Cantidad Incidentes", "Administrativo");
+        Datos.addValue(3, "Cantidad Incidentes", "Producción");
+        Datos.addValue(8, "Cantidad Incidentes mes pasado", "Producción");
+        Datos.addValue(1, "Cantidad Incidentes", "Bio Bio");
+        Datos.addValue(2, "Cantidad Incidentes mes pasado", "Bio Bio");
+        Datos.addValue(0, "Cantidad Incidentes", "Administrativo");
+        Datos.addValue(1, "Cantidad Incidentes mes pasado", "Administrativo");
+        Datos.addValue(0, "Cantidad Incidentes", "Informática");
+        Datos.addValue(1, "Cantidad Incidentes mes pasado", "Informática");
+        Datos.addValue(0, "Cantidad Incidentes", "RRHH");
+        Datos.addValue(1, "Cantidad Incidentes mes pasado", "RRHH");
     /*
         Datos.addValue(2, "Negocio 2", "Lunes");
         Datos.addValue(4, "Negocio 2", "Martes");
@@ -60,10 +64,28 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelMensual = new javax.swing.JPanel();
         panelGraficoMensual = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnGraficarMensual = new javax.swing.JButton();
+        panelFiltroMensual = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        panelIncidenciaMensual = new javax.swing.JPanel();
+        rdExtremidad = new javax.swing.JRadioButton();
+        rdSector = new javax.swing.JRadioButton();
+        rdArea = new javax.swing.JRadioButton();
+        rdTipo = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
         panelAnual = new javax.swing.JPanel();
+        panelFiltroAnual = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox();
+        panelIncidenciaAnual = new javax.swing.JPanel();
+        rdExtremidad2 = new javax.swing.JRadioButton();
+        rdSector2 = new javax.swing.JRadioButton();
+        rdArea2 = new javax.swing.JRadioButton();
+        rdTipo2 = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
         panelGraficoAnual = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnGraficarAnual = new javax.swing.JButton();
         panelPeriodico = new javax.swing.JPanel();
         panelGraficoPeriodico = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -71,6 +93,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoTorta = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(93, 130, 189));
         setClosable(true);
         setTitle("Reportes Graficos");
         setPreferredSize(new java.awt.Dimension(1180, 662));
@@ -90,28 +113,142 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoMensual.setLayout(panelGraficoMensualLayout);
         panelGraficoMensualLayout.setHorizontalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1473, Short.MAX_VALUE)
+            .addGap(0, 925, Short.MAX_VALUE)
         );
         panelGraficoMensualLayout.setVerticalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Graficar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficarMensual.setText("Graficar");
+        btnGraficarMensual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGraficarMensualActionPerformed(evt);
             }
         });
+
+        panelFiltroMensual.setBackground(new java.awt.Color(255, 255, 255));
+        panelFiltroMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro Mensual")));
+
+        jLabel1.setText("Elegir Mes a Graficar:");
+
+        jComboBox1.setBackground(new java.awt.Color(250, 250, 250));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout panelFiltroMensualLayout = new javax.swing.GroupLayout(panelFiltroMensual);
+        panelFiltroMensual.setLayout(panelFiltroMensualLayout);
+        panelFiltroMensualLayout.setHorizontalGroup(
+            panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroMensualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 41, Short.MAX_VALUE))
+        );
+        panelFiltroMensualLayout.setVerticalGroup(
+            panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroMensualLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelIncidenciaMensual.setBackground(new java.awt.Color(255, 255, 255));
+        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+
+        rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
+        rdExtremidad.setText("Extremidad Afectada");
+        rdExtremidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdExtremidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdExtremidadMouseClicked(evt);
+            }
+        });
+
+        rdSector.setBackground(new java.awt.Color(255, 255, 255));
+        rdSector.setText("Sector");
+        rdSector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdSector.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdSectorMouseClicked(evt);
+            }
+        });
+
+        rdArea.setBackground(new java.awt.Color(255, 255, 255));
+        rdArea.setText("Area");
+        rdArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdAreaMouseClicked(evt);
+            }
+        });
+        rdArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdAreaActionPerformed(evt);
+            }
+        });
+
+        rdTipo.setBackground(new java.awt.Color(255, 255, 255));
+        rdTipo.setText("Tipo");
+        rdTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdTipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTipoMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Elegir Incidencia por:");
+
+        javax.swing.GroupLayout panelIncidenciaMensualLayout = new javax.swing.GroupLayout(panelIncidenciaMensual);
+        panelIncidenciaMensual.setLayout(panelIncidenciaMensualLayout);
+        panelIncidenciaMensualLayout.setHorizontalGroup(
+            panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIncidenciaMensualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelIncidenciaMensualLayout.createSequentialGroup()
+                        .addComponent(rdTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(rdExtremidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdSector, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rdArea, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        panelIncidenciaMensualLayout.setVerticalGroup(
+            panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaMensualLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(rdTipo)
+                .addGap(18, 18, 18)
+                .addComponent(rdArea)
+                .addGap(18, 18, 18)
+                .addComponent(rdSector)
+                .addGap(18, 18, 18)
+                .addComponent(rdExtremidad)
+                .addGap(17, 17, 17))
+        );
 
         javax.swing.GroupLayout panelMensualLayout = new javax.swing.GroupLayout(panelMensual);
         panelMensual.setLayout(panelMensualLayout);
         panelMensualLayout.setHorizontalGroup(
             panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMensualLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMensualLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGraficarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelMensualLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -119,12 +256,16 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMensualLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMensualLayout.createSequentialGroup()
+                        .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnGraficarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 162, Short.MAX_VALUE))
+                    .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMensualLayout.createSequentialGroup()
-                .addContainerGap(540, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
         );
 
         jTabbedPane1.addTab("% Incidencias Mensuales", panelMensual);
@@ -132,23 +273,129 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        panelFiltroAnual.setBackground(new java.awt.Color(255, 255, 255));
+        panelFiltroAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro Anual")));
+
+        jLabel5.setText("Elegir Mes a Graficar:");
+
+        jComboBox3.setBackground(new java.awt.Color(250, 250, 250));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout panelFiltroAnualLayout = new javax.swing.GroupLayout(panelFiltroAnual);
+        panelFiltroAnual.setLayout(panelFiltroAnualLayout);
+        panelFiltroAnualLayout.setHorizontalGroup(
+            panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroAnualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 41, Short.MAX_VALUE))
+        );
+        panelFiltroAnualLayout.setVerticalGroup(
+            panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltroAnualLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelIncidenciaAnual.setBackground(new java.awt.Color(255, 255, 255));
+        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+
+        rdExtremidad2.setBackground(new java.awt.Color(255, 255, 255));
+        rdExtremidad2.setText("Extremidad Afectada");
+        rdExtremidad2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdExtremidad2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdExtremidad2MouseClicked(evt);
+            }
+        });
+
+        rdSector2.setBackground(new java.awt.Color(255, 255, 255));
+        rdSector2.setText("Sector");
+        rdSector2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdSector2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdSector2MouseClicked(evt);
+            }
+        });
+
+        rdArea2.setBackground(new java.awt.Color(255, 255, 255));
+        rdArea2.setText("Area");
+        rdArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdArea2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdArea2MouseClicked(evt);
+            }
+        });
+        rdArea2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdArea2ActionPerformed(evt);
+            }
+        });
+
+        rdTipo2.setBackground(new java.awt.Color(255, 255, 255));
+        rdTipo2.setText("Tipo");
+        rdTipo2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdTipo2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTipo2MouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("Elegir Incidencia por:");
+
+        javax.swing.GroupLayout panelIncidenciaAnualLayout = new javax.swing.GroupLayout(panelIncidenciaAnual);
+        panelIncidenciaAnual.setLayout(panelIncidenciaAnualLayout);
+        panelIncidenciaAnualLayout.setHorizontalGroup(
+            panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIncidenciaAnualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdTipo2)
+                    .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(rdExtremidad2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdSector2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rdArea2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        panelIncidenciaAnualLayout.setVerticalGroup(
+            panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaAnualLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(rdTipo2)
+                .addGap(18, 18, 18)
+                .addComponent(rdArea2)
+                .addGap(18, 18, 18)
+                .addComponent(rdSector2)
+                .addGap(18, 18, 18)
+                .addComponent(rdExtremidad2)
+                .addGap(17, 17, 17))
+        );
+
         panelGraficoAnual.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
         javax.swing.GroupLayout panelGraficoAnualLayout = new javax.swing.GroupLayout(panelGraficoAnual);
         panelGraficoAnual.setLayout(panelGraficoAnualLayout);
         panelGraficoAnualLayout.setHorizontalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1473, Short.MAX_VALUE)
+            .addGap(0, 925, Short.MAX_VALUE)
         );
         panelGraficoAnualLayout.setVerticalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton2.setText("Graficar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficarAnual.setText("Graficar");
+        btnGraficarAnual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGraficarAnualActionPerformed(evt);
             }
         });
 
@@ -157,9 +404,15 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnualLayout.setHorizontalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAnualLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGraficarAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelAnualLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -167,12 +420,16 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAnualLayout.createSequentialGroup()
+                        .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 162, Short.MAX_VALUE))
+                    .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAnualLayout.createSequentialGroup()
-                .addContainerGap(540, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
         );
 
         jTabbedPane1.addTab("% Incidencias Anuales", panelAnual);
@@ -277,7 +534,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1164, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,40 +547,99 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGraficarMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarMensualActionPerformed
         // TODO add your handling code here:
         ChartPanel panel = new ChartPanel(Grafica);        
         panelGraficoMensual.setLayout(new java.awt.BorderLayout());
         panelGraficoMensual.add(panel);   
         panelGraficoMensual.validate();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnGraficarMensualActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void rdTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdTipoMouseClicked
+
+    private void rdAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAreaMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_rdAreaMouseClicked
+
+    private void rdAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdAreaActionPerformed
+
+    private void rdSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSectorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdSectorMouseClicked
+
+    private void rdExtremidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdExtremidadMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdExtremidadMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void rdExtremidad2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdExtremidad2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdExtremidad2MouseClicked
+
+    private void rdSector2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSector2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdSector2MouseClicked
+
+    private void rdArea2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdArea2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdArea2MouseClicked
+
+    private void rdArea2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdArea2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdArea2ActionPerformed
+
+    private void rdTipo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipo2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdTipo2MouseClicked
+
+    private void btnGraficarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarAnualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGraficarAnualActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGraficarAnual;
+    private javax.swing.JButton btnGraficarMensual;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelAnual;
+    private javax.swing.JPanel panelFiltroAnual;
+    private javax.swing.JPanel panelFiltroMensual;
     private javax.swing.JPanel panelGraficoAnual;
     private javax.swing.JPanel panelGraficoMensual;
     private javax.swing.JPanel panelGraficoPeriodico;
     private javax.swing.JPanel panelGraficoTorta;
+    private javax.swing.JPanel panelIncidenciaAnual;
+    private javax.swing.JPanel panelIncidenciaMensual;
     private javax.swing.JPanel panelMensual;
     private javax.swing.JPanel panelPeriodico;
     private javax.swing.JPanel panelTorta;
+    private javax.swing.JRadioButton rdArea;
+    private javax.swing.JRadioButton rdArea2;
+    private javax.swing.JRadioButton rdExtremidad;
+    private javax.swing.JRadioButton rdExtremidad2;
+    private javax.swing.JRadioButton rdSector;
+    private javax.swing.JRadioButton rdSector2;
+    private javax.swing.JRadioButton rdTipo;
+    private javax.swing.JRadioButton rdTipo2;
     // End of variables declaration//GEN-END:variables
 }

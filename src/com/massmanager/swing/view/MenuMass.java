@@ -62,14 +62,14 @@ public class MenuMass extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1300, 720));
         setResizable(false);
 
-        jPanel3.setBackground(new java.awt.Color(80, 129, 181));
+        jPanel3.setBackground(new java.awt.Color(93, 130, 189));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel3.setForeground(new java.awt.Color(204, 204, 204));
 
-        jPanel1.setBackground(new java.awt.Color(80, 129, 181));
+        jPanel1.setBackground(new java.awt.Color(93, 130, 189));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        rdReportes.setBackground(new java.awt.Color(80, 129, 181));
+        rdReportes.setBackground(new java.awt.Color(93, 130, 189));
         rdReportes.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdReportes.setForeground(new java.awt.Color(255, 255, 255));
         rdReportes.setSelected(true);
@@ -81,7 +81,7 @@ public class MenuMass extends javax.swing.JFrame {
             }
         });
 
-        rdGraficos.setBackground(new java.awt.Color(80, 129, 181));
+        rdGraficos.setBackground(new java.awt.Color(93, 130, 189));
         rdGraficos.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdGraficos.setForeground(new java.awt.Color(255, 255, 255));
         rdGraficos.setText("Gráficos");
