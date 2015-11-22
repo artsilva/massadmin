@@ -5,7 +5,9 @@
  */
 package com.massmanager.swing.view;
 
+import com.massmanager.swing.model.AnchoColumnas;
 import com.massmanager.swing.model.Conexion;
+import com.massmanager.swing.model.QuerysMensuales;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -26,7 +28,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
      */
     public MenuMassMensual() {
         initComponents();
-        
+        //Configuracion Grilla Mensual principal(grdMensual)
         grdMensual.setAutoResizeMode(grdMensual.AUTO_RESIZE_OFF);
         grdMensual.doLayout();
         
@@ -42,8 +44,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         
         dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario" });
         
-        Conexion cn = new Conexion();
-        rs = cn.ExtraerAtencionesMensual();
+        QuerysMensuales query = new QuerysMensuales();
+        rs = query.ExtraerAtencionesMensual();
         try{
             while(rs.next()){
                 dfm.addRow(new Object[] { rs.getInt("id_atencion"), rs.getString("nombre"),rs.getString("apellido"),  rs.getInt("rut"), rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"),rs.getDate("fecha"), rs.getString("mes") , rs.getString("lugarincidente"), rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario") });
@@ -51,6 +53,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         }catch(Exception e){
             
         }
+        //Setea el ancho de las columnas con valores del Metodo de la Clase AnchoColumnas
+        AnchoColumnas columna = new AnchoColumnas();
+        columna.setAnchoColumnasMensual(grdMensual);
     }
 
     /**
@@ -86,7 +91,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdMensual = new javax.swing.JTable();
 
-        setClosable(true);
+        setTitle("Reportes Mensuales");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(1180, 662));
 
@@ -256,7 +261,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             .addGroup(panelGrillasMensualesLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -287,8 +292,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jLayeredPane1.setLayer(panelTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -312,7 +317,6 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         //Setea variables de la Query con el contenido del ComboBox
@@ -321,66 +325,63 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         String tipo = (String) this.boxOpcion.getSelectedItem();
         String area = (String) this.boxOpcion.getSelectedItem();
         String sector = (String) this.boxOpcion.getSelectedItem();
-        //Borra el contenido de la tabla antes de cargar datos
-        if (rdExtremidad.isSelected()){
-            grdMensual.setModel(new DefaultTableModel());
-            Conexion cn = new Conexion();
-            ResultSet rsExtr = cn.ExtraerAtencionMensualExtremidad(extremidad, mes);
-            DefaultTableModel dfm = new DefaultTableModel();
+        
+        grdMensual.setModel(new DefaultTableModel());
+        QuerysMensuales query = new QuerysMensuales();
+        DefaultTableModel dfm = new DefaultTableModel();
+        AnchoColumnas columna = new AnchoColumnas();
+        
+        if (rdExtremidad.isSelected()) {
+            ResultSet rsExtr = query.ExtraerAtencionMensualExtremidad(extremidad, mes);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"  });
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
-                while(rsExtr.next()){
-                    dfm.addRow(new Object[]{ rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"),rsExtr.getString("apellido"),  rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"),rsExtr.getDate("fecha"), rsExtr.getString("mes") , rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario") });
+                while (rsExtr.next()) {
+                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            columna.setAnchoColumnasMensual(grdMensual);
         }
-        if (rdTipo.isSelected()){
-            grdMensual.setModel(new DefaultTableModel());
-            Conexion cn = new Conexion();
-            ResultSet rsExtr = cn.ExtraerAtencionMensualTipo(tipo, mes);
-            DefaultTableModel dfm = new DefaultTableModel();
+        if (rdTipo.isSelected()) {
+            ResultSet rsExtr = query.ExtraerAtencionMensualTipo(tipo, mes);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"  });
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
-                while(rsExtr.next()){
-                dfm.addRow(new Object[]{ rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"),rsExtr.getString("apellido"),  rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"),rsExtr.getDate("fecha"), rsExtr.getString("mes") , rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario") });
-                }
-            } catch (Exception e) {
-            
-            }
-        }
-        if (rdArea.isSelected()){
-            grdMensual.setModel(new DefaultTableModel());
-            Conexion cn = new Conexion();
-            ResultSet rsExtr = cn.ExtraerAtencionMensualArea(area, mes);
-            DefaultTableModel dfm = new DefaultTableModel();
-            this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"  });
-            try {
-                while(rsExtr.next()){
-                dfm.addRow(new Object[]{ rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"),rsExtr.getString("apellido"),  rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"),rsExtr.getDate("fecha"), rsExtr.getString("mes") , rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario") });
+                while (rsExtr.next()) {
+                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            columna.setAnchoColumnasMensual(grdMensual);
         }
-        if (rdSector.isSelected()){
-            grdMensual.setModel(new DefaultTableModel());
-            Conexion cn = new Conexion();
-            ResultSet rsExtr = cn.ExtraerAtencionMensualSector(sector, mes);
-            DefaultTableModel dfm = new DefaultTableModel();
+        if (rdArea.isSelected()) {
+            ResultSet rsExtr = query.ExtraerAtencionMensualArea(area, mes);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"  });
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
-                while(rsExtr.next()){
-                dfm.addRow(new Object[]{ rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"),rsExtr.getString("apellido"),  rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"),rsExtr.getDate("fecha"), rsExtr.getString("mes") , rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario") });
+                while (rsExtr.next()) {
+                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
-            
+                e.printStackTrace();
             }
+            columna.setAnchoColumnasMensual(grdMensual);
+        }
+        if (rdSector.isSelected()) {
+            ResultSet rsExtr = query.ExtraerAtencionMensualSector(sector, mes);
+            this.grdMensual.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsExtr.next()) {
+                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasMensual(grdMensual);
         }
         
     }//GEN-LAST:event_btnFiltrarActionPerformed
@@ -409,6 +410,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 this.boxMes.addItem(rs6.getString("mes_msg"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdTipoMouseClicked
 
@@ -432,6 +434,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 this.boxMes.addItem(rs6.getString("mes_msg"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdAreaMouseClicked
 
@@ -450,6 +453,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs4.getString("nombre_sector"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         //Setea el Mes en el COmboBox de MES cuando se selecciona un radioButton
         ResultSet rs6;
@@ -482,6 +486,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 this.boxMes.addItem(rs6.getString("mes_msg"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdExtremidadMouseClicked
 

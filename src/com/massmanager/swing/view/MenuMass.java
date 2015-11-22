@@ -6,8 +6,12 @@
 package com.massmanager.swing.view;
 
 import java.awt.Component;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -21,6 +25,9 @@ public class MenuMass extends javax.swing.JFrame {
     public MenuMass() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        grupoPrimero.add(rdGraficos);
+        grupoPrimero.add(rdReportes);
     }
 
     /**
@@ -32,10 +39,11 @@ public class MenuMass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoPrimero = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        rdReportes = new javax.swing.JRadioButton();
+        rdGraficos = new javax.swing.JRadioButton();
         btnPeriodico = new javax.swing.JButton();
         btnMensual = new javax.swing.JButton();
         btnHistorico = new javax.swing.JButton();
@@ -61,20 +69,28 @@ public class MenuMass extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(80, 129, 181));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCheckBox1.setBackground(new java.awt.Color(80, 129, 181));
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Reportes");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+        rdReportes.setBackground(new java.awt.Color(80, 129, 181));
+        rdReportes.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        rdReportes.setForeground(new java.awt.Color(255, 255, 255));
+        rdReportes.setSelected(true);
+        rdReportes.setText("Reportes");
+        rdReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdReportesMouseClicked(evt);
             }
         });
 
-        jCheckBox2.setBackground(new java.awt.Color(80, 129, 181));
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Gráficos");
+        rdGraficos.setBackground(new java.awt.Color(80, 129, 181));
+        rdGraficos.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        rdGraficos.setForeground(new java.awt.Color(255, 255, 255));
+        rdGraficos.setText("Gráficos");
+        rdGraficos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rdGraficos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdGraficosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,18 +99,18 @@ public class MenuMass extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox1))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(rdReportes)
+                    .addComponent(rdGraficos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jCheckBox1)
+                .addGap(20, 20, 20)
+                .addComponent(rdReportes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(rdGraficos)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         btnPeriodico.setText("Periodico");
@@ -152,7 +168,7 @@ public class MenuMass extends javax.swing.JFrame {
                 .addComponent(btnPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
@@ -255,22 +271,41 @@ public class MenuMass extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGraficoActionPerformed
 
     private void btnMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensualActionPerformed
+        // TODO add your handling code here:
         MenuMassMensual m = new MenuMassMensual();
-        desktopMass.add(m);
+        this.desktopMass.add(m);
+        m.show();
+        try {
+            m.setMaximum(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
         m.setVisible(true);
     }//GEN-LAST:event_btnMensualActionPerformed
 
     private void btnAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnualActionPerformed
         MenuMassAnual a = new MenuMassAnual();
         desktopMass.add(a);
+        a.show();
+        try {
+            a.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+        }
         a.setVisible(true);
         
     }//GEN-LAST:event_btnAnualActionPerformed
 
     private void btnPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriodicoActionPerformed
-        
+        // TODO add your handling code here
         MenuMassPeriodico p = new MenuMassPeriodico();
         desktopMass.add(p);
+        p.show();
+        try {
+            p.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+        }
         p.setVisible(true);
     }//GEN-LAST:event_btnPeriodicoActionPerformed
 
@@ -282,6 +317,11 @@ public class MenuMass extends javax.swing.JFrame {
         // TODO add your handling code here:
         AtencionesSpaMass a = new AtencionesSpaMass();
         desktopMass.add(a);
+        try {
+            a.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+        }
         a.setVisible(true);
     }//GEN-LAST:event_menuAtencionesActionPerformed
 
@@ -297,12 +337,49 @@ public class MenuMass extends javax.swing.JFrame {
         // TODO add your handling code here:
         MenuMassHistorico his = new MenuMassHistorico();
         desktopMass.add(his);
+        try {
+            his.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+        }
         his.setVisible(true);
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void rdReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdReportesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        if (this.rdReportes.isSelected()){
+            this.btnAnual.setVisible(true);
+            this.btnMensual.setVisible(true);
+            this.btnPeriodico.setVisible(true);
+            this.btnHistorico.setVisible(true);
+            MenuMassAnual a = new MenuMassAnual();
+            desktopMass.add(a);
+            try {
+                a.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_rdReportesMouseClicked
+
+    private void rdGraficosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdGraficosMouseClicked
+        // TODO add your handling code here:
+        if (rdGraficos.isSelected()){
+            this.btnAnual.setVisible(false);
+            this.btnMensual.setVisible(false);
+            this.btnPeriodico.setVisible(false);
+            this.btnHistorico.setVisible(false);
+            MassGraficos g = new MassGraficos();
+            desktopMass.add(g);
+            try {
+                g.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            g.setVisible(true);
+        }
+    }//GEN-LAST:event_rdGraficosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -314,8 +391,7 @@ public class MenuMass extends javax.swing.JFrame {
     private javax.swing.JButton btnMensual;
     private javax.swing.JButton btnPeriodico;
     private javax.swing.JDesktopPane desktopMass;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.ButtonGroup grupoPrimero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar2;
@@ -326,6 +402,8 @@ public class MenuMass extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuGrafico;
     private javax.swing.JMenuItem menuGrilla;
     private javax.swing.JMenu menuModelos;
+    private javax.swing.JRadioButton rdGraficos;
+    private javax.swing.JRadioButton rdReportes;
     // End of variables declaration//GEN-END:variables
 
     public JButton getBtnAnual() {
@@ -359,8 +437,30 @@ public class MenuMass extends javax.swing.JFrame {
     public void setDesktopMass(JDesktopPane desktopMass) {
         this.desktopMass = desktopMass;
     }
-    
-    
+
+    public JRadioButton getRdGraficos() {
+        return rdGraficos;
+    }
+
+    public void setRdGraficos(JRadioButton rdGraficos) {
+        this.rdGraficos = rdGraficos;
+    }
+
+    public JRadioButton getRdReportes() {
+        return rdReportes;
+    }
+
+    public void setRdReportes(JRadioButton rdReportes) {
+        this.rdReportes = rdReportes;
+    }
+
+    public JButton getBtnHistorico() {
+        return btnHistorico;
+    }
+
+    public void setBtnHistorico(JButton btnHistorico) {
+        this.btnHistorico = btnHistorico;
+    }
 
 }
 

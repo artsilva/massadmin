@@ -7,10 +7,7 @@ package com.massmanager.swing.model;
 
 import java.awt.event.ActionListener;
 import com.massmanager.swing.view.MenuSpa;
-import com.sun.javafx.application.PlatformImpl;
 import java.awt.event.ActionEvent;
-import com.massmanager.swing.model.Conexion;
-import com.sun.xml.internal.ws.streaming.XMLStreamReaderUtil;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 

@@ -6,12 +6,14 @@
 package com.massmanager.swing.view;
 
 import com.massmanager.swing.model.Conexion;
+import com.massmanager.swing.model.EnviadorMail;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -135,7 +137,7 @@ public class MenuSpa extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("MASS PRO SPA LIRQUEN");
+        setTitle("MASS ADMIN SPA LIRQUEN");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(920, 720));
@@ -647,6 +649,13 @@ public class MenuSpa extends javax.swing.JFrame {
 
     private void btnCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorreoActionPerformed
         // TODO add your handling code here:
+        try {
+            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com","Atención ?nombretrabajador? en Sala de Primeros Auxilios", "Buenos dias,\n Junto con saludar, se informa la atencion de indole ?tipo? al sr. ?nombretrabajador? a causa de una ?lesion? en el area ?area? especificamente en ?lugarincidente? mientras ?detalles?, siendo atendido en Spa y ?comentario?.\n\n\n Atte.\n\n\n ?paramedico?\n Paramédico SPA Lirquen Santiago.\n\n\n\n Este fue un mensaje generado automaticamente por MassAdmin, para mas información comunicarse a SPA Vidrios Liquen Santiago.");
+            JOptionPane.showMessageDialog(null, "Se envio el mail correctamente");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocurrio un problema al mandar el mail");
+        }
     }//GEN-LAST:event_btnCorreoActionPerformed
 
     private void txtRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutActionPerformed
