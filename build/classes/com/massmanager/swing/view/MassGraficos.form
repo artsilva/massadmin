@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="grupoMensual">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="grupoAnual">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="bd" green="82" red="5d" type="rgb"/>
@@ -85,18 +91,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Component id="panelFiltroMensual" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="panelIncidenciaMensual" alignment="1" pref="130" max="32767" attributes="0"/>
                           <Component id="btnGraficarMensual" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelIncidenciaMensual" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="panelFiltroMensual" pref="130" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="panelGraficoMensual" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -111,9 +112,9 @@
                               <Component id="panelFiltroMensual" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="panelIncidenciaMensual" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnGraficarMensual" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="162" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
                           </Group>
                           <Component id="panelGraficoMensual" max="32767" attributes="0"/>
                       </Group>
@@ -137,7 +138,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="925" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="993" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -174,13 +175,13 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="127" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="1" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="boxMes" min="-2" pref="98" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -190,7 +191,7 @@
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="boxMes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -199,20 +200,28 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Elegir Mes a Graficar:"/>
+                    <Property name="text" type="java.lang.String" value="Mes a Graficar:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="boxMes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
+                      <StringArray count="12">
+                        <StringItem index="0" value="ENERO"/>
+                        <StringItem index="1" value="FEBRERO"/>
+                        <StringItem index="2" value="MARZO"/>
+                        <StringItem index="3" value="ABRIL"/>
+                        <StringItem index="4" value="MAYO"/>
+                        <StringItem index="5" value="JUNIO"/>
+                        <StringItem index="6" value="JULIO"/>
+                        <StringItem index="7" value="AGOSTO"/>
+                        <StringItem index="8" value="SEPTIEMBRE"/>
+                        <StringItem index="9" value="OCTUBRE"/>
+                        <StringItem index="10" value="NOVIEMBRE"/>
+                        <StringItem index="11" value="DICIEMBRE"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -243,21 +252,25 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="rdTipo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="82" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="rdExtremidad" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="rdSector" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdArea" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="rdExtremidad" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rdTipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdSector" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdArea" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel2" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="32" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -285,14 +298,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Extremidad Afectada"/>
+                    <Property name="text" type="java.lang.String" value="Extremidad"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdExtremidadMouseClicked"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdSector">
                   <Properties>
@@ -304,9 +314,6 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdSectorMouseClicked"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdArea">
                   <Properties>
@@ -318,10 +325,6 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdAreaMouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdAreaActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdTipo">
                   <Properties>
@@ -333,13 +336,10 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdTipoMouseClicked"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Elegir Incidencia por:"/>
+                    <Property name="text" type="java.lang.String" value="Incidencia por:"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -367,44 +367,58 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Component id="panelFiltroAnual" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="btnGraficarAnual" min="-2" pref="81" max="-2" attributes="0"/>
+                      <EmptySpace pref="1019" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="panelIncidenciaAnual" alignment="1" pref="130" max="32767" attributes="0"/>
+                              <Component id="panelFiltroAnual" alignment="0" pref="130" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="btnGraficarAnual" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelIncidenciaAnual" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="panelGraficoAnual" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="panelGraficoAnual" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="panelFiltroAnual" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="panelIncidenciaAnual" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="btnGraficarAnual" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="162" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                      <Component id="btnGraficarAnual" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="panelFiltroAnual" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="panelIncidenciaAnual" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="219" pref="219" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="panelGraficoAnual" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="panelGraficoAnual" alignment="0" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JButton" name="btnGraficarAnual">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Graficar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarAnualActionPerformed"/>
+              </Events>
+            </Component>
             <Container class="javax.swing.JPanel" name="panelFiltroAnual">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -424,13 +438,13 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel5" alignment="1" min="-2" pref="127" max="-2" attributes="0"/>
-                              <Component id="jComboBox3" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="1" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="boxAnual" alignment="1" min="-2" pref="98" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -438,31 +452,28 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
+                          <Component id="boxAnual" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Elegir Mes a Graficar:"/>
+                    <Property name="text" type="java.lang.String" value="A&#xf1;o a Graficar:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox3">
+                <Component class="javax.swing.JComboBox" name="boxAnual">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
+                      <StringArray count="1">
+                        <StringItem index="0" value="2015"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -493,18 +504,25 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rdTipo2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="rdExtremidad2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="rdSector2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdArea2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="1" min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="rdExtremidad2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rdTipo2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdSector2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdArea2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel4" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="32" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -512,7 +530,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="24" max="32767" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="rdTipo2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -532,14 +550,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Extremidad Afectada"/>
+                    <Property name="text" type="java.lang.String" value="Extremidad"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdExtremidad2MouseClicked"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdSector2">
                   <Properties>
@@ -551,9 +566,6 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdSector2MouseClicked"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdArea2">
                   <Properties>
@@ -565,10 +577,6 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdArea2MouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdArea2ActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rdTipo2">
                   <Properties>
@@ -580,13 +588,10 @@
                       <Color id="Cursor de Mano"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdTipo2MouseClicked"/>
-                  </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Elegir Incidencia por:"/>
+                    <Property name="text" type="java.lang.String" value="Incidencia por:"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -605,7 +610,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="925" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="993" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -615,14 +620,6 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JButton" name="btnGraficarAnual">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Graficar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficarAnualActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelPeriodico">
@@ -684,12 +681,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1473" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="930" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="576" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>

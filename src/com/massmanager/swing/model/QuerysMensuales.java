@@ -114,9 +114,11 @@ public class QuerysMensuales extends Conexion {
         }
         return rs;
     }
+
     //QUERYS GRAFICOS
+    //Query para armar el grafico mensual
 
-    public ResultSet graficoExtremidad(String extremidad, String mes) {
+    public ResultSet graficoMensualActual(String variable, String mes, String where) {
         Connection cn;
         PreparedStatement pst;
         ResultSet rs = null;
@@ -124,8 +126,8 @@ public class QuerysMensuales extends Conexion {
             cn = Conectar();
             pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
                     + "FROM mass_dim.dim_rep_mensual\n"
-                    + "WHERE extremidad = ? AND mes = ?");
-            pst.setString(1, extremidad);
+                    + "WHERE " + where + " = ? AND mes = ? AND fecha::TEXT LIKE '2015%'");
+            pst.setString(1, variable);
             pst.setString(2, mes);
             rs = pst.executeQuery();
         } catch (SQLException e) {
@@ -134,7 +136,7 @@ public class QuerysMensuales extends Conexion {
         return rs;
     }
 
-    public ResultSet graficoIncidenteTipo(String tipo, String mes) {
+    public ResultSet graficoMensualAnterior(String variable, String mes, String where) {
         Connection cn;
         PreparedStatement pst;
         ResultSet rs = null;
@@ -142,8 +144,8 @@ public class QuerysMensuales extends Conexion {
             cn = Conectar();
             pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
                     + "FROM mass_dim.dim_rep_mensual\n"
-                    + "WHERE incidente = ? AND mes = ?;");
-            pst.setString(1, tipo);
+                    + "WHERE " + where + " = ? AND mes = ? AND fecha::TEXT LIKE '2014%'");
+            pst.setString(1, variable);
             pst.setString(2, mes);
             rs = pst.executeQuery();
         } catch (SQLException e) {
@@ -152,39 +154,4 @@ public class QuerysMensuales extends Conexion {
         return rs;
     }
 
-    public ResultSet graficoIncidenteArea(String area, String mes) {
-        Connection cn;
-        PreparedStatement pst;
-        ResultSet rs = null;
-        try {
-            cn = Conectar();
-            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
-                    + "FROM mass_dim.dim_rep_mensual\n"
-                    + "WHERE area = ? AND mes = ?");
-            pst.setString(1, area);
-            pst.setString(2, mes);
-            rs = pst.executeQuery();
-        } catch (SQLException e) {
-            e.getSQLState();
-        }
-        return rs;
-    }
-
-    public ResultSet graficoIncidenteSector(String sector, String mes) {
-        Connection cn;
-        PreparedStatement pst;
-        ResultSet rs = null;
-        try {
-            cn = Conectar();
-            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
-                    + "FROM mass_dim.dim_rep_mensual\n"
-                    + "WHERE sector = ? AND mes = ?;");
-            pst.setString(1, sector);
-            pst.setString(2, mes);
-            rs = pst.executeQuery();
-        } catch (SQLException e) {
-            e.getSQLState();
-        }
-        return rs;
-    }
 }

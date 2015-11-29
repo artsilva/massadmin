@@ -5,7 +5,8 @@
  */
 package com.massmanager.swing.view;
 
-import javax.swing.JInternalFrame;
+import com.massmanager.swing.model.DatosGraficos;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -18,40 +19,44 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Artsk
  */
 public class MassGraficos extends javax.swing.JInternalFrame {
-    JInternalFrame Graficos;
+
+    //JFreeChart Grafica;
+    JFreeChart GraficaMensual;
+    JFreeChart GraficaAnual;
+    //Mensual
+    DefaultCategoryDataset Sector = new DefaultCategoryDataset();
+    DefaultCategoryDataset Extremidad = new DefaultCategoryDataset();
+    DefaultCategoryDataset Area = new DefaultCategoryDataset();
+    DefaultCategoryDataset Tipo = new DefaultCategoryDataset();
+    //Anual
+    DefaultCategoryDataset ASector = new DefaultCategoryDataset();
+    DefaultCategoryDataset AExtremidad = new DefaultCategoryDataset();
+    DefaultCategoryDataset AArea = new DefaultCategoryDataset();
+    DefaultCategoryDataset ATipo = new DefaultCategoryDataset();
+    //Periodico
+    DefaultCategoryDataset PSector = new DefaultCategoryDataset();
+    DefaultCategoryDataset PExtremidad = new DefaultCategoryDataset();
+    DefaultCategoryDataset PArea = new DefaultCategoryDataset();
+    DefaultCategoryDataset PTipo = new DefaultCategoryDataset();
     
-    JFreeChart Grafica;
-    DefaultCategoryDataset Datos = new DefaultCategoryDataset();
     /**
      * Creates new form PruebaMass
      */
     public MassGraficos() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        
-        Datos.addValue(3, "Cantidad Incidentes", "Producción");
-        Datos.addValue(8, "Cantidad Incidentes mes pasado", "Producción");
-        Datos.addValue(1, "Cantidad Incidentes", "Bio Bio");
-        Datos.addValue(2, "Cantidad Incidentes mes pasado", "Bio Bio");
-        Datos.addValue(0, "Cantidad Incidentes", "Administrativo");
-        Datos.addValue(1, "Cantidad Incidentes mes pasado", "Administrativo");
-        Datos.addValue(0, "Cantidad Incidentes", "Informática");
-        Datos.addValue(1, "Cantidad Incidentes mes pasado", "Informática");
-        Datos.addValue(0, "Cantidad Incidentes", "RRHH");
-        Datos.addValue(1, "Cantidad Incidentes mes pasado", "RRHH");
-    /*
-        Datos.addValue(2, "Negocio 2", "Lunes");
-        Datos.addValue(4, "Negocio 2", "Martes");
-        Datos.addValue(6, "Negocio 2", "Miércoles");
-        Datos.addValue(8, "Negocio 2", "Jueves");
-        Datos.addValue(10, "Negocio 2", "Viernes");
-        Datos.addValue(12, "Negocio 2", "Sábado");
-        Datos.addValue(14, "Negocio 2", "Domingo");
-*/
-        Grafica = ChartFactory.createBarChart3D("Incidencias por Area",
-        "incidentes", "Areas", Datos,PlotOrientation.VERTICAL, true, true, false);
+
+        grupoMensual.add(rdArea);
+        grupoMensual.add(rdSector);
+        grupoMensual.add(rdExtremidad);
+        grupoMensual.add(rdTipo);
+        grupoAnual.add(rdArea2);
+        grupoAnual.add(rdSector2);
+        grupoAnual.add(rdExtremidad2);
+        grupoAnual.add(rdTipo2);
+
     }
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,13 +66,15 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoMensual = new javax.swing.ButtonGroup();
+        grupoAnual = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelMensual = new javax.swing.JPanel();
         panelGraficoMensual = new javax.swing.JPanel();
         btnGraficarMensual = new javax.swing.JButton();
         panelFiltroMensual = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        boxMes = new javax.swing.JComboBox();
         panelIncidenciaMensual = new javax.swing.JPanel();
         rdExtremidad = new javax.swing.JRadioButton();
         rdSector = new javax.swing.JRadioButton();
@@ -75,17 +82,17 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdTipo = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         panelAnual = new javax.swing.JPanel();
+        btnGraficarAnual = new javax.swing.JButton();
         panelFiltroAnual = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        boxAnual = new javax.swing.JComboBox();
         panelIncidenciaAnual = new javax.swing.JPanel();
         rdExtremidad2 = new javax.swing.JRadioButton();
         rdSector2 = new javax.swing.JRadioButton();
         rdArea2 = new javax.swing.JRadioButton();
         rdTipo2 = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         panelGraficoAnual = new javax.swing.JPanel();
-        btnGraficarAnual = new javax.swing.JButton();
         panelPeriodico = new javax.swing.JPanel();
         panelGraficoPeriodico = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -113,7 +120,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoMensual.setLayout(panelGraficoMensualLayout);
         panelGraficoMensualLayout.setHorizontalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 993, Short.MAX_VALUE)
         );
         panelGraficoMensualLayout.setVerticalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,21 +137,21 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelFiltroMensual.setBackground(new java.awt.Color(255, 255, 255));
         panelFiltroMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro Mensual")));
 
-        jLabel1.setText("Elegir Mes a Graficar:");
+        jLabel1.setText("Mes a Graficar:");
 
-        jComboBox1.setBackground(new java.awt.Color(250, 250, 250));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxMes.setBackground(new java.awt.Color(250, 250, 250));
+        boxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" }));
 
         javax.swing.GroupLayout panelFiltroMensualLayout = new javax.swing.GroupLayout(panelFiltroMensual);
         panelFiltroMensual.setLayout(panelFiltroMensualLayout);
         panelFiltroMensualLayout.setHorizontalGroup(
             panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFiltroMensualLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltroMensualLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 41, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         panelFiltroMensualLayout.setVerticalGroup(
             panelFiltroMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +159,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,64 +167,41 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
-        rdExtremidad.setText("Extremidad Afectada");
+        rdExtremidad.setText("Extremidad");
         rdExtremidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdExtremidad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdExtremidadMouseClicked(evt);
-            }
-        });
 
         rdSector.setBackground(new java.awt.Color(255, 255, 255));
         rdSector.setText("Sector");
         rdSector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdSector.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdSectorMouseClicked(evt);
-            }
-        });
 
         rdArea.setBackground(new java.awt.Color(255, 255, 255));
         rdArea.setText("Area");
         rdArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdArea.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdAreaMouseClicked(evt);
-            }
-        });
-        rdArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdAreaActionPerformed(evt);
-            }
-        });
 
         rdTipo.setBackground(new java.awt.Color(255, 255, 255));
         rdTipo.setText("Tipo");
         rdTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdTipo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdTipoMouseClicked(evt);
-            }
-        });
 
-        jLabel2.setText("Elegir Incidencia por:");
+        jLabel2.setText("Incidencia por:");
 
         javax.swing.GroupLayout panelIncidenciaMensualLayout = new javax.swing.GroupLayout(panelIncidenciaMensual);
         panelIncidenciaMensual.setLayout(panelIncidenciaMensualLayout);
         panelIncidenciaMensualLayout.setHorizontalGroup(
             panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIncidenciaMensualLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaMensualLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelIncidenciaMensualLayout.createSequentialGroup()
-                        .addComponent(rdTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(rdExtremidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rdSector, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rdArea, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(rdExtremidad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaMensualLayout.createSequentialGroup()
+                            .addGroup(panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rdTipo)
+                                .addComponent(rdSector)
+                                .addComponent(rdArea))
+                            .addGap(70, 70, 70))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaMensualLayout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(32, 32, 32)))))
         );
         panelIncidenciaMensualLayout.setVerticalGroup(
             panelIncidenciaMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,15 +224,12 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelMensualLayout.setHorizontalGroup(
             panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMensualLayout.createSequentialGroup()
-                .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMensualLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(btnGraficarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelMensualLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -261,9 +242,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                         .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
+                        .addGap(18, 18, 18)
                         .addComponent(btnGraficarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 162, Short.MAX_VALUE))
+                        .addGap(0, 169, Short.MAX_VALUE))
                     .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -273,32 +254,39 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnGraficarAnual.setText("Graficar");
+        btnGraficarAnual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarAnualActionPerformed(evt);
+            }
+        });
+
         panelFiltroAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelFiltroAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro Anual")));
 
-        jLabel5.setText("Elegir Mes a Graficar:");
+        jLabel3.setText("Año a Graficar:");
 
-        jComboBox3.setBackground(new java.awt.Color(250, 250, 250));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxAnual.setBackground(new java.awt.Color(250, 250, 250));
+        boxAnual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
 
         javax.swing.GroupLayout panelFiltroAnualLayout = new javax.swing.GroupLayout(panelFiltroAnual);
         panelFiltroAnual.setLayout(panelFiltroAnualLayout);
         panelFiltroAnualLayout.setHorizontalGroup(
             panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFiltroAnualLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltroAnualLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 41, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         panelFiltroAnualLayout.setVerticalGroup(
             panelFiltroAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFiltroAnualLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel5)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boxAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,68 +294,47 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdExtremidad2.setBackground(new java.awt.Color(255, 255, 255));
-        rdExtremidad2.setText("Extremidad Afectada");
+        rdExtremidad2.setText("Extremidad");
         rdExtremidad2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdExtremidad2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdExtremidad2MouseClicked(evt);
-            }
-        });
 
         rdSector2.setBackground(new java.awt.Color(255, 255, 255));
         rdSector2.setText("Sector");
         rdSector2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdSector2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdSector2MouseClicked(evt);
-            }
-        });
 
         rdArea2.setBackground(new java.awt.Color(255, 255, 255));
         rdArea2.setText("Area");
         rdArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdArea2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdArea2MouseClicked(evt);
-            }
-        });
-        rdArea2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdArea2ActionPerformed(evt);
-            }
-        });
 
         rdTipo2.setBackground(new java.awt.Color(255, 255, 255));
         rdTipo2.setText("Tipo");
         rdTipo2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rdTipo2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rdTipo2MouseClicked(evt);
-            }
-        });
 
-        jLabel6.setText("Elegir Incidencia por:");
+        jLabel4.setText("Incidencia por:");
 
         javax.swing.GroupLayout panelIncidenciaAnualLayout = new javax.swing.GroupLayout(panelIncidenciaAnual);
         panelIncidenciaAnual.setLayout(panelIncidenciaAnualLayout);
         panelIncidenciaAnualLayout.setHorizontalGroup(
             panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIncidenciaAnualLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaAnualLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdTipo2)
-                    .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(rdExtremidad2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rdSector2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rdArea2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(rdExtremidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaAnualLayout.createSequentialGroup()
+                            .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rdTipo2)
+                                .addComponent(rdSector2)
+                                .addComponent(rdArea2))
+                            .addGap(70, 70, 70))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaAnualLayout.createSequentialGroup()
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(32, 32, 32)))))
         );
         panelIncidenciaAnualLayout.setVerticalGroup(
             panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIncidenciaAnualLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(rdTipo2)
                 .addGap(18, 18, 18)
@@ -385,51 +352,48 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoAnual.setLayout(panelGraficoAnualLayout);
         panelGraficoAnualLayout.setHorizontalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 993, Short.MAX_VALUE)
         );
         panelGraficoAnualLayout.setVerticalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnGraficarAnual.setText("Graficar");
-        btnGraficarAnual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficarAnualActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelAnualLayout = new javax.swing.GroupLayout(panelAnual);
         panelAnual.setLayout(panelAnualLayout);
         panelAnualLayout.setHorizontalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
-                .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAnualLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGraficarAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelAnualLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(57, 57, 57)
+                .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1019, Short.MAX_VALUE))
+            .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAnualLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
+                        .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelAnualLayout.setVerticalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAnualLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelAnualLayout.createSequentialGroup()
-                        .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 162, Short.MAX_VALUE))
-                    .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAnualLayout.createSequentialGroup()
+                .addContainerGap(396, Short.MAX_VALUE)
+                .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
+            .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAnualLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAnualLayout.createSequentialGroup()
+                            .addComponent(panelFiltroAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(panelIncidenciaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(219, 219, 219))
+                        .addComponent(panelGraficoAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
 
         jTabbedPane1.addTab("% Incidencias Anuales", panelAnual);
@@ -443,11 +407,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoPeriodico.setLayout(panelGraficoPeriodicoLayout);
         panelGraficoPeriodicoLayout.setHorizontalGroup(
             panelGraficoPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1473, Short.MAX_VALUE)
+            .addGap(0, 930, Short.MAX_VALUE)
         );
         panelGraficoPeriodicoLayout.setVerticalGroup(
             panelGraficoPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
         jButton3.setText("Graficar");
@@ -549,9 +513,180 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
     private void btnGraficarMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarMensualActionPerformed
         // TODO add your handling code here:
-        ChartPanel panel = new ChartPanel(Grafica);        
+        String mes = (String) this.boxMes.getSelectedItem();
+        String extremidad = "extremidad";
+        String tipo = "incidente";
+        String area = "area";
+        String sector = "sector";
+
+        if (rdExtremidad.isSelected()) {
+            Integer md = DatosGraficos.DatosGraficosActual("Mano derecha", mes, extremidad);
+            Integer mi = DatosGraficos.DatosGraficosActual("Mano izquierda", mes, extremidad);
+            Integer cab = DatosGraficos.DatosGraficosActual("Cabeza", mes, extremidad);
+            Integer cue = DatosGraficos.DatosGraficosActual("Cuello", mes, extremidad);
+            Integer bd = DatosGraficos.DatosGraficosActual("Brazo derecho", mes, extremidad);
+            Integer bi = DatosGraficos.DatosGraficosActual("Brazo izquierdo", mes, extremidad);
+            Integer tro = DatosGraficos.DatosGraficosActual("Tronco", mes, extremidad);
+            Integer abd = DatosGraficos.DatosGraficosActual("Abdomen", mes, extremidad);
+            Integer cox = DatosGraficos.DatosGraficosActual("Coxis", mes, extremidad);
+            Integer pd = DatosGraficos.DatosGraficosActual("Pierna derecha", mes, extremidad);
+            Integer pi = DatosGraficos.DatosGraficosActual("Pierna izquierda", mes, extremidad);
+            Integer pied = DatosGraficos.DatosGraficosActual("Pie derecho", mes, extremidad);
+            Integer piei = DatosGraficos.DatosGraficosActual("Pie izquierdo", mes, extremidad);
+
+            Integer md2 = DatosGraficos.DatosGraficosAnterior("Mano derecha", mes, extremidad);
+            Integer mi2 = DatosGraficos.DatosGraficosAnterior("Mano izquierda", mes, extremidad);
+            Integer cab2 = DatosGraficos.DatosGraficosAnterior("Cabeza", mes, extremidad);
+            Integer cue2 = DatosGraficos.DatosGraficosAnterior("Cuello", mes, extremidad);
+            Integer bd2 = DatosGraficos.DatosGraficosAnterior("Brazo derecho", mes, extremidad);
+            Integer bi2 = DatosGraficos.DatosGraficosAnterior("Brazo izquierdo", mes, extremidad);
+            Integer tro2 = DatosGraficos.DatosGraficosAnterior("Tronco", mes, extremidad);
+            Integer abd2 = DatosGraficos.DatosGraficosAnterior("Abdomen", mes, extremidad);
+            Integer cox2 = DatosGraficos.DatosGraficosAnterior("Coxis", mes, extremidad);
+            Integer pd2 = DatosGraficos.DatosGraficosAnterior("Pierna derecha", mes, extremidad);
+            Integer pi2 = DatosGraficos.DatosGraficosAnterior("Pierna izquierda", mes, extremidad);
+            Integer pied2 = DatosGraficos.DatosGraficosAnterior("Pie derecho", mes, extremidad);
+            Integer piei2 = DatosGraficos.DatosGraficosAnterior("Pie izquierdo", mes, extremidad);
+
+            //Configuracion del gráfico        
+            Extremidad.addValue(md, "Mes Seleccionado", "M. der");
+            Extremidad.addValue(mi, "Mes Seleccionado", "M. izq");
+            Extremidad.addValue(cab, "Mes Seleccionado", "Cab");
+            Extremidad.addValue(cue, "Mes Seleccionado", "Cuello");
+            Extremidad.addValue(bd, "Mes Seleccionado", "Br. der");
+            Extremidad.addValue(bi, "Mes Seleccionado", "Br. izq");
+            Extremidad.addValue(tro, "Mes Seleccionado", "Tronco");
+            Extremidad.addValue(abd, "Mes Seleccionado", "Abd.");
+            Extremidad.addValue(cox, "Mes Seleccionado", "Coxis");
+            Extremidad.addValue(pd, "Mes Seleccionado", "P. der");
+            Extremidad.addValue(pi, "Mes Seleccionado", "P. izq");
+            Extremidad.addValue(pied, "Mes Seleccionado", "Pie der");
+            Extremidad.addValue(piei, "Mes Seleccionado", "Pie izq");
+
+            Extremidad.addValue(md2, "Mes Anterior", "M. der");
+            Extremidad.addValue(mi2, "Mes Anterior", "M. izq");
+            Extremidad.addValue(cab2, "Mes Anterior", "Cab");
+            Extremidad.addValue(cue2, "Mes Anterior", "Cuello");
+            Extremidad.addValue(bd2, "Mes Anterior", "Br. der");
+            Extremidad.addValue(bi2, "Mes Anterior", "Br. izq");
+            Extremidad.addValue(tro2, "Mes Anterior", "Tronco");
+            Extremidad.addValue(abd2, "Mes Anterior", "Abd.");
+            Extremidad.addValue(cox2, "Mes Anterior", "Coxis");
+            Extremidad.addValue(pd2, "Mes Anterior", "P. der");
+            Extremidad.addValue(pi2, "Mes Anterior", "P. izq");
+            Extremidad.addValue(pied2, "Mes Anterior", "Pie der");
+            Extremidad.addValue(piei2, "Mes Anterior", "Pie izq");
+
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias por Extremidad",
+                    "Extremidades", "Cantidad Incidentes", Extremidad, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdSector.isSelected()) {
+            Integer cor = DatosGraficos.DatosGraficosActual("Corte", mes, sector);
+            Integer lam = DatosGraficos.DatosGraficosActual("Laminado", mes, sector);
+            Integer hor = DatosGraficos.DatosGraficosActual("Horno", mes, sector);
+            Integer bot = DatosGraficos.DatosGraficosActual("Bottero", mes, sector);
+            Integer ser = DatosGraficos.DatosGraficosActual("Serigrafia", mes, sector);
+            Integer hort = DatosGraficos.DatosGraficosActual("Horno Templado", mes, sector);
+            Integer sal = DatosGraficos.DatosGraficosActual("Sala armado", mes, sector);
+            Integer bio = DatosGraficos.DatosGraficosActual("Bodega Bio-bio", mes, sector);
+            Integer log = DatosGraficos.DatosGraficosActual("Logistica", mes, sector);
+            Integer bod = DatosGraficos.DatosGraficosActual("Bodega Materiales", mes, sector);
+            Integer cc = DatosGraficos.DatosGraficosActual("Control de Calidad", mes, sector);
+            Integer tale = DatosGraficos.DatosGraficosActual("Taller Electrico", mes, sector);
+            Integer talm = DatosGraficos.DatosGraficosActual("Taller Mecanico", mes, sector);
+
+            Integer cor2 = DatosGraficos.DatosGraficosAnterior("Corte", mes, sector);
+            Integer lam2 = DatosGraficos.DatosGraficosAnterior("Laminado", mes, sector);
+            Integer hor2 = DatosGraficos.DatosGraficosAnterior("Horno", mes, sector);
+            Integer bot2 = DatosGraficos.DatosGraficosAnterior("Bottero", mes, sector);
+            Integer ser2 = DatosGraficos.DatosGraficosAnterior("Serigrafia", mes, sector);
+            Integer hort2 = DatosGraficos.DatosGraficosAnterior("Horno Templado", mes, sector);
+            Integer sal2 = DatosGraficos.DatosGraficosAnterior("Sala armado", mes, sector);
+            Integer bio2 = DatosGraficos.DatosGraficosAnterior("Bodega Bio-bio", mes, sector);
+            Integer log2 = DatosGraficos.DatosGraficosAnterior("Logistica", mes, sector);
+            Integer bod2 = DatosGraficos.DatosGraficosAnterior("Bodega Materiales", mes, sector);
+            Integer cc2 = DatosGraficos.DatosGraficosAnterior("Control de Calidad", mes, sector);
+            Integer tale2 = DatosGraficos.DatosGraficosAnterior("Taller Electrico", mes, sector);
+            Integer talm2 = DatosGraficos.DatosGraficosAnterior("Taller Mecanico", mes, sector);
+
+            Sector.addValue(cor, "Mes Seleccionado", "Corte");
+            Sector.addValue(lam, "Mes Seleccionado", "Lam.");
+            Sector.addValue(hor, "Mes Seleccionado", "Horno");
+            Sector.addValue(bot, "Mes Seleccionado", "Bott.");
+            Sector.addValue(ser, "Mes Seleccionado", "Serig.");
+            Sector.addValue(hort, "Mes Seleccionado", "H.Temp.");
+            Sector.addValue(sal, "Mes Seleccionado", "Sala A.");
+            Sector.addValue(bio, "Mes Seleccionado", "BBio");
+            Sector.addValue(log, "Mes Seleccionado", "Logi.");
+            Sector.addValue(bod, "Mes Seleccionado", "Bod.M.");
+            Sector.addValue(cc, "Mes Seleccionado", "C.Cal.");
+            Sector.addValue(tale, "Mes Seleccionado", "T.Elec.");
+            Sector.addValue(talm, "Mes Seleccionado", "T.Mec.");
+
+            Sector.addValue(cor2, "Mes Anterior", "Corte");
+            Sector.addValue(lam2, "Mes Anterior", "Lam.");
+            Sector.addValue(hor2, "Mes Anterior", "Horno");
+            Sector.addValue(bot2, "Mes Anterior", "Bott.");
+            Sector.addValue(ser2, "Mes Anterior", "Serig.");
+            Sector.addValue(hort2, "Mes Anterior", "H.Temp.");
+            Sector.addValue(sal2, "Mes Anterior", "Sala A.");
+            Sector.addValue(bio2, "Mes Anterior", "BBio");
+            Sector.addValue(log2, "Mes Anterior", "Logi.");
+            Sector.addValue(bod2, "Mes Anterior", "Bod.M.");
+            Sector.addValue(cc2, "Mes Anterior", "C.Cal.");
+            Sector.addValue(tale2, "Mes Anterior", "T.Elec.");
+            Sector.addValue(talm2, "Mes Anterior", "T.Mec.");
+
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias por Sector",
+                    "Sectores", "Cantidad Incidentes", Sector, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdArea.isSelected()) {
+            Integer bio = DatosGraficos.DatosGraficosActual("Bio-bio", mes, area);
+            Integer man = DatosGraficos.DatosGraficosActual("Mantencion", mes, area);
+            Integer adm = DatosGraficos.DatosGraficosActual("Administrativo", mes, area);
+            Integer mass = DatosGraficos.DatosGraficosActual("Mass", mes, area);
+            Integer pro = DatosGraficos.DatosGraficosActual("Produccion", mes, area);
+
+            Integer bio2 = DatosGraficos.DatosGraficosAnterior("Bio-bio", mes, area);
+            Integer man2 = DatosGraficos.DatosGraficosAnterior("Mantencion", mes, area);
+            Integer adm2 = DatosGraficos.DatosGraficosAnterior("Administrativo", mes, area);
+            Integer mass2 = DatosGraficos.DatosGraficosAnterior("Mass", mes, area);
+            Integer pro2 = DatosGraficos.DatosGraficosAnterior("Produccion", mes, area);
+
+            Area.addValue(bio, "Mes Seleccionado", "Bio Bio");
+            Area.addValue(man, "Mes Seleccionado", "Mantención");
+            Area.addValue(adm, "Mes Seleccionado", "Administrativo");
+            Area.addValue(mass, "Mes Seleccionado", "Mass");
+            Area.addValue(pro, "Mes Seleccionado", "Producción");
+
+            Area.addValue(bio2, "Mes Anterior", "Bio Bio");
+            Area.addValue(man2, "Mes Anterior", "Mantención");
+            Area.addValue(adm2, "Mes Anterior", "Administrativo");
+            Area.addValue(mass2, "Mes Anterior", "Mass");
+            Area.addValue(pro2, "Mes Anterior", "Producción");
+
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias por Sector",
+                    "Areas", "Cantidad Incidentes", Area, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdTipo.isSelected()) {
+            Integer lab = DatosGraficos.DatosGraficosActual("laboral", mes, tipo);
+            Integer tra = DatosGraficos.DatosGraficosActual("trayecto", mes, tipo);
+
+            Integer lab2 = DatosGraficos.DatosGraficosAnterior("laboral", mes, tipo);
+            Integer tra2 = DatosGraficos.DatosGraficosAnterior("trayecto", mes, tipo);
+
+            Tipo.addValue(lab, "Mes Seleccionado", "Laboral");
+            Tipo.addValue(tra, "Mes Seleccionado", "Trayecto");
+
+            Tipo.addValue(lab2, "Mes Anterior", "Laboral");
+            Tipo.addValue(tra2, "Mes Anterior", "Trayecto");
+
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias por Sector",
+                    "Tipo de Incidentes", "Cantidad Incidentes", Tipo, PlotOrientation.VERTICAL, true, true, false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Se deben seleccionar los filtros para mostrar graficos");
+        }
+
+        ChartPanel panel = new ChartPanel(GraficaMensual);
         panelGraficoMensual.setLayout(new java.awt.BorderLayout());
-        panelGraficoMensual.add(panel);   
+        panelGraficoMensual.add(panel);
         panelGraficoMensual.validate();
     }//GEN-LAST:event_btnGraficarMensualActionPerformed
 
@@ -559,67 +694,203 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void rdTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdTipoMouseClicked
-
-    private void rdAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAreaMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_rdAreaMouseClicked
-
-    private void rdAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAreaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdAreaActionPerformed
-
-    private void rdSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSectorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdSectorMouseClicked
-
-    private void rdExtremidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdExtremidadMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdExtremidadMouseClicked
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void rdExtremidad2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdExtremidad2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdExtremidad2MouseClicked
-
-    private void rdSector2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSector2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdSector2MouseClicked
-
-    private void rdArea2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdArea2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdArea2MouseClicked
-
-    private void rdArea2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdArea2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdArea2ActionPerformed
-
-    private void rdTipo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipo2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdTipo2MouseClicked
-
     private void btnGraficarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarAnualActionPerformed
         // TODO add your handling code here:
+        String año = (String) this.boxAnual.getSelectedItem();
+        String extremidad = "extremidad";
+        String tipo = "incidente";
+        String area = "area";
+        String sector = "sector";
+        
+        if (rdExtremidad2.isSelected()) {
+            Integer md = DatosGraficos.DatosGraficosAñoActual("Mano derecha", año, extremidad);
+            Integer mi = DatosGraficos.DatosGraficosAñoActual("Mano izquierda", año, extremidad);
+            Integer cab = DatosGraficos.DatosGraficosAñoActual("Cabeza", año, extremidad);
+            Integer cue = DatosGraficos.DatosGraficosAñoActual("Cuello", año, extremidad);
+            Integer bd = DatosGraficos.DatosGraficosAñoActual("Brazo derecho", año, extremidad);
+            Integer bi = DatosGraficos.DatosGraficosAñoActual("Brazo izquierdo", año, extremidad);
+            Integer tro = DatosGraficos.DatosGraficosAñoActual("Tronco", año, extremidad);
+            Integer abd = DatosGraficos.DatosGraficosAñoActual("Abdomen", año, extremidad);
+            Integer cox = DatosGraficos.DatosGraficosAñoActual("Coxis", año, extremidad);
+            Integer pd = DatosGraficos.DatosGraficosAñoActual("Pierna derecha", año, extremidad);
+            Integer pi = DatosGraficos.DatosGraficosAñoActual("Pierna izquierda", año, extremidad);
+            Integer pied = DatosGraficos.DatosGraficosAñoActual("Pie derecho", año, extremidad);
+            Integer piei = DatosGraficos.DatosGraficosAñoActual("Pie izquierdo", año, extremidad);
+
+            Integer md2 = DatosGraficos.DatosGraficosAñoAnterior("Mano derecha", año, extremidad);
+            Integer mi2 = DatosGraficos.DatosGraficosAñoAnterior("Mano izquierda", año, extremidad);
+            Integer cab2 = DatosGraficos.DatosGraficosAñoAnterior("Cabeza", año, extremidad);
+            Integer cue2 = DatosGraficos.DatosGraficosAñoAnterior("Cuello", año, extremidad);
+            Integer bd2 = DatosGraficos.DatosGraficosAñoAnterior("Brazo derecho", año, extremidad);
+            Integer bi2 = DatosGraficos.DatosGraficosAñoAnterior("Brazo izquierdo", año, extremidad);
+            Integer tro2 = DatosGraficos.DatosGraficosAñoAnterior("Tronco", año, extremidad);
+            Integer abd2 = DatosGraficos.DatosGraficosAñoAnterior("Abdomen", año, extremidad);
+            Integer cox2 = DatosGraficos.DatosGraficosAñoAnterior("Coxis", año, extremidad);
+            Integer pd2 = DatosGraficos.DatosGraficosAñoAnterior("Pierna derecha", año, extremidad);
+            Integer pi2 = DatosGraficos.DatosGraficosAñoAnterior("Pierna izquierda", año, extremidad);
+            Integer pied2 = DatosGraficos.DatosGraficosAñoAnterior("Pie derecho", año, extremidad);
+            Integer piei2 = DatosGraficos.DatosGraficosAñoAnterior("Pie izquierdo", año, extremidad);
+            
+            //Configuracion del gráfico        
+            AExtremidad.addValue(md, "Año Seleccionado", "M. der");
+            AExtremidad.addValue(mi, "Año Seleccionado", "M. izq");
+            AExtremidad.addValue(cab, "Año Seleccionado", "Cab");
+            AExtremidad.addValue(cue, "Año Seleccionado", "Cuello");
+            AExtremidad.addValue(bd, "Año Seleccionado", "Br. der");
+            AExtremidad.addValue(bi, "Año Seleccionado", "Br. izq");
+            AExtremidad.addValue(tro, "Año Seleccionado", "Tronco");
+            AExtremidad.addValue(abd, "Año Seleccionado", "Abd.");
+            AExtremidad.addValue(cox, "Año Seleccionado", "Coxis");
+            AExtremidad.addValue(pd, "Año Seleccionado", "P. der");
+            AExtremidad.addValue(pi, "Año Seleccionado", "P. izq");
+            AExtremidad.addValue(pied, "Año Seleccionado", "Pie der");
+            AExtremidad.addValue(piei, "Año Seleccionado", "Pie izq");
+
+            AExtremidad.addValue(md2, "Año Anterior", "M. der");
+            AExtremidad.addValue(mi2, "Año Anterior", "M. izq");
+            AExtremidad.addValue(cab2, "Año Anterior", "Cab");
+            AExtremidad.addValue(cue2, "Año Anterior", "Cuello");
+            AExtremidad.addValue(bd2, "Año Anterior", "Br. der");
+            AExtremidad.addValue(bi2, "Año Anterior", "Br. izq");
+            AExtremidad.addValue(tro2, "Año Anterior", "Tronco");
+            AExtremidad.addValue(abd2, "Año Anterior", "Abd.");
+            AExtremidad.addValue(cox2, "Año Anterior", "Coxis");
+            AExtremidad.addValue(pd2, "Año Anterior", "P. der");
+            AExtremidad.addValue(pi2, "Año Anterior", "P. izq");
+            AExtremidad.addValue(pied2, "Año Anterior", "Pie der");
+            AExtremidad.addValue(piei2, "Año Anterior", "Pie izq");
+            
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad",
+                    "Extremidades", "Cantidad Incidentes", AExtremidad, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdSector2.isSelected()) {
+            Integer cor = DatosGraficos.DatosGraficosAñoActual("Corte", año, sector);
+            Integer lam = DatosGraficos.DatosGraficosAñoActual("Laminado", año, sector);
+            Integer hor = DatosGraficos.DatosGraficosAñoActual("Horno", año, sector);
+            Integer bot = DatosGraficos.DatosGraficosAñoActual("Bottero", año, sector);
+            Integer ser = DatosGraficos.DatosGraficosAñoActual("Serigrafia", año, sector);
+            Integer hort = DatosGraficos.DatosGraficosAñoActual("Horno Templado", año, sector);
+            Integer sal = DatosGraficos.DatosGraficosAñoActual("Sala armado", año, sector);
+            Integer bio = DatosGraficos.DatosGraficosAñoActual("Bodega Bio-bio", año, sector);
+            Integer log = DatosGraficos.DatosGraficosAñoActual("Logistica", año, sector);
+            Integer bod = DatosGraficos.DatosGraficosAñoActual("Bodega Materiales", año, sector);
+            Integer cc = DatosGraficos.DatosGraficosAñoActual("Control de Calidad", año, sector);
+            Integer tale = DatosGraficos.DatosGraficosAñoActual("Taller Electrico", año, sector);
+            Integer talm = DatosGraficos.DatosGraficosAñoActual("Taller Mecanico", año, sector);
+
+            Integer cor2 = DatosGraficos.DatosGraficosAñoAnterior("Corte", año, sector);
+            Integer lam2 = DatosGraficos.DatosGraficosAñoAnterior("Laminado", año, sector);
+            Integer hor2 = DatosGraficos.DatosGraficosAñoAnterior("Horno", año, sector);
+            Integer bot2 = DatosGraficos.DatosGraficosAñoAnterior("Bottero", año, sector);
+            Integer ser2 = DatosGraficos.DatosGraficosAñoAnterior("Serigrafia", año, sector);
+            Integer hort2 = DatosGraficos.DatosGraficosAñoAnterior("Horno Templado", año, sector);
+            Integer sal2 = DatosGraficos.DatosGraficosAñoAnterior("Sala armado", año, sector);
+            Integer bio2 = DatosGraficos.DatosGraficosAñoAnterior("Bodega Bio-bio", año, sector);
+            Integer log2 = DatosGraficos.DatosGraficosAñoAnterior("Logistica", año, sector);
+            Integer bod2 = DatosGraficos.DatosGraficosAñoAnterior("Bodega Materiales", año, sector);
+            Integer cc2 = DatosGraficos.DatosGraficosAñoAnterior("Control de Calidad", año, sector);
+            Integer tale2 = DatosGraficos.DatosGraficosAñoAnterior("Taller Electrico", año, sector);
+            Integer talm2 = DatosGraficos.DatosGraficosAñoAnterior("Taller Mecanico", año, sector);
+
+            ASector.addValue(cor, "Año Seleccionado", "Corte");
+            ASector.addValue(lam, "Año Seleccionado", "Lam.");
+            ASector.addValue(hor, "Año Seleccionado", "Horno");
+            ASector.addValue(bot, "Año Seleccionado", "Bott.");
+            ASector.addValue(ser, "Año Seleccionado", "Serig.");
+            ASector.addValue(hort, "Año Seleccionado", "H.Temp.");
+            ASector.addValue(sal, "Año Seleccionado", "Sala A.");
+            ASector.addValue(bio, "Año Seleccionado", "BBio");
+            ASector.addValue(log, "Año Seleccionado", "Logi.");
+            ASector.addValue(bod, "Año Seleccionado", "Bod.M.");
+            ASector.addValue(cc, "Año Seleccionado", "C.Cal.");
+            ASector.addValue(tale, "Año Seleccionado", "T.Elec.");
+            ASector.addValue(talm, "Año Seleccionado", "T.Mec.");
+
+            ASector.addValue(cor2, "Año Anterior", "Corte");
+            ASector.addValue(lam2, "Año Anterior", "Lam.");
+            ASector.addValue(hor2, "Año Anterior", "Horno");
+            ASector.addValue(bot2, "Año Anterior", "Bott.");
+            ASector.addValue(ser2, "Año Anterior", "Serig.");
+            ASector.addValue(hort2, "Año Anterior", "H.Temp.");
+            ASector.addValue(sal2, "Año Anterior", "Sala A.");
+            ASector.addValue(bio2, "Año Anterior", "BBio");
+            ASector.addValue(log2, "Año Anterior", "Logi.");
+            ASector.addValue(bod2, "Año Anterior", "Bod.M.");
+            ASector.addValue(cc2, "Año Anterior", "C.Cal.");
+            ASector.addValue(tale2, "Año Anterior", "T.Elec.");
+            ASector.addValue(talm2, "Año Anterior", "T.Mec.");
+
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Sector",
+                    "Sectores", "Cantidad Incidentes", ASector, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdArea2.isSelected()) {
+            Integer bio = DatosGraficos.DatosGraficosAñoActual("Bio-bio", año, area);
+            Integer man = DatosGraficos.DatosGraficosAñoActual("Mantencion", año, area);
+            Integer adm = DatosGraficos.DatosGraficosAñoActual("Administrativo", año, area);
+            Integer mass = DatosGraficos.DatosGraficosAñoActual("Mass", año, area);
+            Integer pro = DatosGraficos.DatosGraficosAñoActual("Produccion", año, area);
+
+            Integer bio2 = DatosGraficos.DatosGraficosAñoAnterior("Bio-bio", año, area);
+            Integer man2 = DatosGraficos.DatosGraficosAñoAnterior("Mantencion", año, area);
+            Integer adm2 = DatosGraficos.DatosGraficosAñoAnterior("Administrativo", año, area);
+            Integer mass2 = DatosGraficos.DatosGraficosAñoAnterior("Mass", año, area);
+            Integer pro2 = DatosGraficos.DatosGraficosAñoAnterior("Produccion", año, area);
+
+            AArea.addValue(bio, "Año Seleccionado", "Bio Bio");
+            AArea.addValue(man, "Año Seleccionado", "Mantención");
+            AArea.addValue(adm, "Año Seleccionado", "Administrativo");
+            AArea.addValue(mass, "Año Seleccionado", "Mass");
+            AArea.addValue(pro, "Año Seleccionado", "Producción");
+
+            AArea.addValue(bio2, "Año Anterior", "Bio Bio");
+            AArea.addValue(man2, "Año Anterior", "Mantención");
+            AArea.addValue(adm2, "Año Anterior", "Administrativo");
+            AArea.addValue(mass2, "Año Anterior", "Mass");
+            AArea.addValue(pro2, "Año Anterior", "Producción");
+
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Area",
+                    "Areas", "Cantidad Incidentes", AArea, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdTipo2.isSelected()) {
+            Integer lab = DatosGraficos.DatosGraficosAñoActual("laboral", año, tipo);
+            Integer tra = DatosGraficos.DatosGraficosAñoActual("trayecto", año, tipo);
+
+            Integer lab2 = DatosGraficos.DatosGraficosAñoAnterior("laboral", año, tipo);
+            Integer tra2 = DatosGraficos.DatosGraficosAñoAnterior("trayecto", año, tipo);
+
+            ATipo.addValue(lab, "Año Seleccionado", "Laboral");
+            ATipo.addValue(tra, "Año Seleccionado", "Trayecto");
+
+            ATipo.addValue(lab2, "Año Anterior", "Laboral");
+            ATipo.addValue(tra2, "Año Anterior", "Trayecto");
+
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Tipo de Incidente",
+                    "Tipo de Incidentes", "Cantidad Incidentes", ATipo, PlotOrientation.VERTICAL, true, true, false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Se deben seleccionar los filtros para mostrar graficos");
+        }
+        
+        ChartPanel panel = new ChartPanel(GraficaAnual);
+        panelGraficoAnual.setLayout(new java.awt.BorderLayout());
+        panelGraficoAnual.add(panel);
+        panelGraficoAnual.validate();
     }//GEN-LAST:event_btnGraficarAnualActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox boxAnual;
+    private javax.swing.JComboBox boxMes;
     private javax.swing.JButton btnGraficarAnual;
     private javax.swing.JButton btnGraficarMensual;
+    private javax.swing.ButtonGroup grupoAnual;
+    private javax.swing.ButtonGroup grupoMensual;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelAnual;
     private javax.swing.JPanel panelFiltroAnual;

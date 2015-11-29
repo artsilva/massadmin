@@ -111,4 +111,43 @@ public class QuerysAnuales extends Conexion {
         }
         return rs;
     }
+    
+    //QUERYS GRAFICOS
+    //Query para armar el grafico Anual
+
+    public ResultSet graficoAnualActual(String variable, String ano, String where) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_anual\n"
+                    + "WHERE " + where + " = ? AND ano = ? ;");
+            pst.setString(1, variable);
+            pst.setString(2, ano);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
+
+    public ResultSet graficoAnualAnterior(String variable, String ano, String where) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_anual\n"
+                    + "WHERE " + where + " = ? AND ano = ? ;");
+            pst.setString(1, variable);
+            pst.setString(2, ano);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
 }
