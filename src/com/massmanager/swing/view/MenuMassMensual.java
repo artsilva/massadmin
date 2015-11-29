@@ -218,7 +218,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 .addComponent(rdExtremidad))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Documentos, datos\\lirquen-logo-top.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/lirquen-logo-top.png"))); // NOI18N
 
         panelGrillasMensuales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atenciones Mensuales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
         panelGrillasMensuales.setPreferredSize(new java.awt.Dimension(1140, 465));

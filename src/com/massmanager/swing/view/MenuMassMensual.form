@@ -292,7 +292,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Documentos, datos\lirquen-logo-top.png"/>
+              <Image iconType="3" name="/com/massmanager/swing/view/lirquen-logo-top.png"/>
             </Property>
           </Properties>
         </Component>

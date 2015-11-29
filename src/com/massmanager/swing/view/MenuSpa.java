@@ -443,7 +443,7 @@ public class MenuSpa extends javax.swing.JFrame {
         panelLogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelLogo.setPreferredSize(new java.awt.Dimension(386, 99));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon("D:\\Documentos, datos\\lirquen-logo-top.png")); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/lirquen-logo-top.png"))); // NOI18N
         jLabel20.setText("logo");
         jLabel20.setPreferredSize(new java.awt.Dimension(270, 100));
 
