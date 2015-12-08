@@ -45,6 +45,18 @@ public class DatosGraficos extends MassGraficos {
             variableAnterior = "NOVIEMBRE";
         } else if (variable.equals("2015")) {
             variableAnterior = "2014";
+        } else if (variable.equals("SEMESTRE 1")) {
+            variableAnterior = "SEMESTRE 2";
+        } else if (variable.equals("SEMESTRE 2")) {
+            variableAnterior = "SEMESTRE 1";
+        } else if (variable.equals("TRIMESTRE 1")) {
+            variableAnterior = "TRIMESTRE 4";
+        } else if (variable.equals("TRIMESTRE 2")) {
+            variableAnterior = "TRIMESTRE 1";
+        } else if (variable.equals("TRIMESTRE 3")) {
+            variableAnterior = "TRIMESTRE 2";
+        } else if (variable.equals("TRIMESTRE 4")) {
+            variableAnterior = "TRIMESTRE 3";
         }
         return variableAnterior;
     }
@@ -63,7 +75,7 @@ public class DatosGraficos extends MassGraficos {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return filtro;
     }
 
@@ -126,6 +138,41 @@ public class DatosGraficos extends MassGraficos {
         Integer filtro = null;
 
         rs = query.graficoAnualAnterior(ext, ObtieneVariableAnterior(variable), where);
+        try {
+            while (rs.next()) {
+                filtro = rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filtro;
+    }
+    
+    //Datos Periodicos
+    public static Integer DatosGraficosPeriodoActual(String variable, String periodo, String where, String semTrim) {
+
+        QuerysPeriodicas query = new QuerysPeriodicas();
+        ResultSet rs = null;
+        Integer filtro = null;
+
+        rs = query.graficoPeriodoActual(where, variable, semTrim, periodo);
+        try {
+            while (rs.next()) {
+                filtro = rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filtro;
+    }
+
+    public static Integer DatosGraficosPeriodoAnterior(String variable, String periodo,String where, String semTrim ) {
+
+        QuerysPeriodicas query = new QuerysPeriodicas();
+        ResultSet rs = null;
+        Integer filtro = null;
+
+        rs = query.graficoPeriodoAnterior(where, variable, semTrim, ObtieneVariableAnterior(periodo));
         try {
             while (rs.next()) {
                 filtro = rs.getInt("count");

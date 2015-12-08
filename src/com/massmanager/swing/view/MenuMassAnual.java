@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import com.massmanager.swing.model.AnchoColumnas;
+import com.massmanager.swing.model.PropiedadesColumnas;
 
 /**
  *
@@ -58,8 +58,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
         //Setea el ancho de las columnas con valores del Metodo de la Clase AnchoColumnas
-        AnchoColumnas ancho = new AnchoColumnas();
-        ancho.setAnchoColumnasAnual(grdAnual);
+        PropiedadesColumnas columna = new PropiedadesColumnas();
+        columna.setAnchoColumnasAnual(grdAnual);
+        columna.setPropiedadesCabeceras(grdAnual);
 
     }
     /**
@@ -172,6 +173,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         );
 
         panelGrillasAnuales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atenciones Anuales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
+        panelGrillasAnuales.setPreferredSize(new java.awt.Dimension(494, 475));
 
         grdAnual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,6 +192,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             }
         });
         grdAnual.setRowSelectionAllowed(false);
+        grdAnual.setSelectionForeground(new java.awt.Color(93, 130, 189));
         jScrollPane1.setViewportView(grdAnual);
         if (grdAnual.getColumnModel().getColumnCount() > 0) {
             grdAnual.getColumnModel().getColumn(0).setResizable(false);
@@ -211,8 +214,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         panelGrillasAnualesLayout.setVerticalGroup(
             panelGrillasAnualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrillasAnualesLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/lirquen-logo-top.png"))); // NOI18N
@@ -280,15 +284,13 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelGrillasAnuales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82))))
+                        .addGap(82, 82, 82))
+                    .addComponent(panelGrillasAnuales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,8 +303,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGrillasAnuales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(panelGrillasAnuales, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -316,8 +317,8 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -339,7 +340,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         QuerysAnuales query = new QuerysAnuales();
         grdAnual.setModel(new DefaultTableModel());
         DefaultTableModel dfm = new DefaultTableModel();
-        AnchoColumnas ancho = new AnchoColumnas();
+        PropiedadesColumnas ancho = new PropiedadesColumnas();
         
         //Borra el contenido de la tabla antes de cargar datos
         if (rdExtremidad.isSelected()) {

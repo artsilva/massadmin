@@ -5,7 +5,7 @@
  */
 package com.massmanager.swing.view;
 
-import com.massmanager.swing.model.AnchoColumnas;
+import com.massmanager.swing.model.PropiedadesColumnas;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.QuerysMensuales;
 import java.awt.Toolkit;
@@ -54,8 +54,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             
         }
         //Setea el ancho de las columnas con valores del Metodo de la Clase AnchoColumnas
-        AnchoColumnas columna = new AnchoColumnas();
+        PropiedadesColumnas columna = new PropiedadesColumnas();
         columna.setAnchoColumnasMensual(grdMensual);
+        columna.setPropiedadesCabeceras(grdMensual);
     }
 
     /**
@@ -221,7 +222,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/lirquen-logo-top.png"))); // NOI18N
 
         panelGrillasMensuales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atenciones Mensuales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
-        panelGrillasMensuales.setPreferredSize(new java.awt.Dimension(1140, 465));
+        panelGrillasMensuales.setPreferredSize(new java.awt.Dimension(1140, 475));
 
         grdMensual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,15 +254,15 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             panelGrillasMensualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrillasMensualesLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelGrillasMensualesLayout.setVerticalGroup(
             panelGrillasMensualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrillasMensualesLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -272,13 +273,13 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 1136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 1144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110))))
         );
@@ -292,8 +293,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jLayeredPane1.setLayer(panelTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -308,9 +309,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
         );
 
         pack();
@@ -329,7 +328,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         grdMensual.setModel(new DefaultTableModel());
         QuerysMensuales query = new QuerysMensuales();
         DefaultTableModel dfm = new DefaultTableModel();
-        AnchoColumnas columna = new AnchoColumnas();
+        PropiedadesColumnas columna = new PropiedadesColumnas();
         
         if (rdExtremidad.isSelected()) {
             ResultSet rsExtr = query.ExtraerAtencionMensualExtremidad(extremidad, mes);

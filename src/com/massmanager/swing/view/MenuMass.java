@@ -28,6 +28,7 @@ public class MenuMass extends javax.swing.JFrame {
         
         grupoPrimero.add(rdGraficos);
         grupoPrimero.add(rdReportes);
+        this.jLabel1.setText("Bienvenido a MassAdmin ");
     }
 
     /**
@@ -52,14 +53,10 @@ public class MenuMass extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
-        menuModelos = new javax.swing.JMenu();
-        menuGrilla = new javax.swing.JMenuItem();
-        menuGrafico = new javax.swing.JMenuItem();
         menuDatos = new javax.swing.JMenu();
         menuAtenciones = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1300, 720));
         setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(93, 130, 189));
@@ -114,6 +111,7 @@ public class MenuMass extends javax.swing.JFrame {
         );
 
         btnPeriodico.setText("Periodico");
+        btnPeriodico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPeriodico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPeriodicoActionPerformed(evt);
@@ -121,6 +119,7 @@ public class MenuMass extends javax.swing.JFrame {
         });
 
         btnMensual.setText("Mensual");
+        btnMensual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMensual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMensualActionPerformed(evt);
@@ -128,6 +127,7 @@ public class MenuMass extends javax.swing.JFrame {
         });
 
         btnHistorico.setText("Historico");
+        btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoricoActionPerformed(evt);
@@ -135,6 +135,7 @@ public class MenuMass extends javax.swing.JFrame {
         });
 
         btnAnual.setText("Anual");
+        btnAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnualActionPerformed(evt);
@@ -168,7 +169,7 @@ public class MenuMass extends javax.swing.JFrame {
                 .addComponent(btnPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
@@ -178,7 +179,6 @@ public class MenuMass extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Bienvenido a MassAdmin $user");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
 
@@ -193,7 +193,7 @@ public class MenuMass extends javax.swing.JFrame {
             .addGroup(desktopMassLayout.createSequentialGroup()
                 .addGap(405, 405, 405)
                 .addComponent(jLabel2)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         desktopMassLayout.setVerticalGroup(
             desktopMassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,44 +202,12 @@ public class MenuMass extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(116, 116, 116)
                 .addComponent(jLabel2)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         desktopMass.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktopMass.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(desktopMass, java.awt.BorderLayout.CENTER);
-
-        menuModelos.setText("Modelos");
-        menuModelos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        menuModelos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        menuModelos.setPreferredSize(new java.awt.Dimension(104, 19));
-        menuModelos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuModelosActionPerformed(evt);
-            }
-        });
-
-        menuGrilla.setIcon(new javax.swing.ImageIcon("D:\\Documentos, datos\\grid.png")); // NOI18N
-        menuGrilla.setText("Grillas");
-        menuGrilla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        menuGrilla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuGrillaActionPerformed(evt);
-            }
-        });
-        menuModelos.add(menuGrilla);
-
-        menuGrafico.setIcon(new javax.swing.ImageIcon("D:\\Documentos, datos\\grafico barra.jpg")); // NOI18N
-        menuGrafico.setText("Gráficos");
-        menuGrafico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        menuGrafico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuGraficoActionPerformed(evt);
-            }
-        });
-        menuModelos.add(menuGrafico);
-
-        jMenuBar2.add(menuModelos);
 
         menuDatos.setText("Datos");
         menuDatos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -265,10 +233,6 @@ public class MenuMass extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void menuGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGraficoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuGraficoActionPerformed
 
     private void btnMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensualActionPerformed
         // TODO add your handling code here:
@@ -324,14 +288,6 @@ public class MenuMass extends javax.swing.JFrame {
         }
         a.setVisible(true);
     }//GEN-LAST:event_menuAtencionesActionPerformed
-
-    private void menuModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuModelosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuModelosActionPerformed
-
-    private void menuGrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGrillaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuGrillaActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
@@ -399,9 +355,6 @@ public class MenuMass extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JMenuItem menuAtenciones;
     private javax.swing.JMenu menuDatos;
-    private javax.swing.JMenuItem menuGrafico;
-    private javax.swing.JMenuItem menuGrilla;
-    private javax.swing.JMenu menuModelos;
     private javax.swing.JRadioButton rdGraficos;
     private javax.swing.JRadioButton rdReportes;
     // End of variables declaration//GEN-END:variables

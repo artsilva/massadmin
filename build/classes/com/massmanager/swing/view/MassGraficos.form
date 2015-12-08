@@ -85,8 +85,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="% Incidencias Mensuales">
-                <Property name="tabTitle" type="java.lang.String" value="% Incidencias Mensuales"/>
+              <JTabbedPaneConstraints tabName="Incidencias Mensuales">
+                <Property name="tabTitle" type="java.lang.String" value="Incidencias Mensuales"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -358,8 +358,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="% Incidencias Anuales">
-                <Property name="tabTitle" type="java.lang.String" value="% Incidencias Anuales"/>
+              <JTabbedPaneConstraints tabName="Incidencias Anuales">
+                <Property name="tabTitle" type="java.lang.String" value="Incidencias Anuales"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -512,15 +512,11 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="rdExtremidad2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="rdTipo2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rdSector2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rdArea2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="rdTipo2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdSector2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdArea2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="rdLesion2" min="-2" pref="95" max="-2" attributes="0"/>
@@ -643,8 +639,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="% Incidencias Peri&#xf3;dicas">
-                <Property name="tabTitle" type="java.lang.String" value="% Incidencias Peri&#xf3;dicas"/>
+              <JTabbedPaneConstraints tabName="Incidencias Peri&#xf3;dicas">
+                <Property name="tabTitle" type="java.lang.String" value="Incidencias Peri&#xf3;dicas"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -724,8 +720,8 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="boxPeriodico" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="boxPeriodico" min="-2" pref="101" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

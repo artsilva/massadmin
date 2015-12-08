@@ -436,5 +436,44 @@ public class QuerysPeriodicas extends Conexion {
         }
         return rs;
     }
+    
+    //QUERYS GRAFICOS
+    //Query para armar el grafico periodico
+
+    public ResultSet graficoPeriodoActual(String where, String variable, String semTrim, String periodo) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_periodico\n"
+                    + "WHERE " + where + " = ? AND "+ semTrim +" = ? AND fecha::TEXT LIKE '2015%'");
+            pst.setString(1, variable);
+            pst.setString(2, periodo);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
+
+    public ResultSet graficoPeriodoAnterior(String where, String variable, String semTrim, String periodo ) {
+        Connection cn;
+        PreparedStatement pst;
+        ResultSet rs = null;
+        try {
+            cn = Conectar();
+            pst = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+                    + "FROM mass_dim.dim_rep_periodico\n"
+                    + "WHERE " + where + " = ? AND " + semTrim + " = ? AND fecha::TEXT LIKE '2014%'");
+            pst.setString(1, variable);
+            pst.setString(2, periodo);
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
+        return rs;
+    }
 
 }

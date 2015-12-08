@@ -25,6 +25,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     //JFreeChart Grafica;
     JFreeChart GraficaMensual;
     JFreeChart GraficaAnual;
+    JFreeChart GraficaPeriodica;
     //Mensual
     DefaultCategoryDataset Sector = new DefaultCategoryDataset();
     DefaultCategoryDataset Extremidad = new DefaultCategoryDataset();
@@ -272,7 +273,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("% Incidencias Mensuales", panelMensual);
+        jTabbedPane1.addTab("Incidencias Mensuales", panelMensual);
 
         panelAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -347,12 +348,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rdExtremidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelIncidenciaAnualLayout.createSequentialGroup()
-                                .addGroup(panelIncidenciaAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rdTipo2)
-                                    .addComponent(rdSector2)
-                                    .addComponent(rdArea2))
-                                .addGap(70, 70, 70))))
+                            .addComponent(rdTipo2)
+                            .addComponent(rdSector2)
+                            .addComponent(rdArea2))
+                        .addGap(32, 32, 32))
                     .addGroup(panelIncidenciaAnualLayout.createSequentialGroup()
                         .addComponent(rdLesion2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -423,7 +422,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     .addContainerGap()))
         );
 
-        jTabbedPane1.addTab("% Incidencias Anuales", panelAnual);
+        jTabbedPane1.addTab("Incidencias Anuales", panelAnual);
 
         panelPeriodico.setBackground(new java.awt.Color(255, 255, 255));
         panelPeriodico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -466,8 +465,8 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltroPeriodicoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boxPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(boxPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         panelFiltroPeriodicoLayout.setVerticalGroup(
             panelFiltroPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,7 +581,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("% Incidencias Periódicas", panelPeriodico);
+        jTabbedPane1.addTab("Incidencias Periódicas", panelPeriodico);
 
         panelTorta.setBackground(new java.awt.Color(255, 255, 255));
         panelTorta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1093,6 +1092,81 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
     private void btnGraficarPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarPeriodicoActionPerformed
         // TODO add your handling code here:
+        String periodo = (String) this.boxPeriodico.getSelectedItem();
+        String semTrim = "";
+        if (this.rdSemestre.isSelected()) {
+            semTrim = "semestre";
+        } else if (this.rdTrimestre.isSelected()) {
+            semTrim = "trimestre";
+        }
+        System.out.println("  ..  " + semTrim);
+        String extremidad = "extremidad";
+        String tipo = "incidente";
+        String area = "area";
+        String sector = "sector";
+        String lesion = "lesion";
+        
+        if (rdExtremidad3.isSelected()) {
+            Integer md = DatosGraficos.DatosGraficosPeriodoActual("Mano derecha", periodo, extremidad, semTrim);
+            Integer mi = DatosGraficos.DatosGraficosPeriodoActual("Mano izquierda", periodo, extremidad, semTrim);
+            Integer cab = DatosGraficos.DatosGraficosPeriodoActual("Cabeza", periodo, extremidad, semTrim);
+            Integer cue = DatosGraficos.DatosGraficosPeriodoActual("Cuello", periodo, extremidad, semTrim);
+            Integer bd = DatosGraficos.DatosGraficosPeriodoActual("Brazo derecho", periodo, extremidad, semTrim);
+            Integer bi = DatosGraficos.DatosGraficosPeriodoActual("Brazo izquierdo", periodo, extremidad, semTrim);
+            Integer tro = DatosGraficos.DatosGraficosPeriodoActual("Tronco", periodo, extremidad, semTrim);
+            Integer abd = DatosGraficos.DatosGraficosPeriodoActual("Abdomen", periodo, extremidad, semTrim);
+            Integer cox = DatosGraficos.DatosGraficosPeriodoActual("Coxis", periodo, extremidad, semTrim);
+            Integer pd = DatosGraficos.DatosGraficosPeriodoActual("Pierna derecha", periodo, extremidad, semTrim);
+            Integer pi = DatosGraficos.DatosGraficosPeriodoActual("Pierna izquierda", periodo, extremidad, semTrim);
+            Integer pied = DatosGraficos.DatosGraficosPeriodoActual("Pie derecho", periodo, extremidad, semTrim);
+            Integer piei = DatosGraficos.DatosGraficosPeriodoActual("Pie izquierdo", periodo, extremidad, semTrim);
+
+            Integer md2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mano derecha", periodo, extremidad, semTrim);
+            Integer mi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mano izquierda", periodo, extremidad, semTrim);
+            Integer cab2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cabeza", periodo, extremidad, semTrim);
+            Integer cue2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cuello", periodo, extremidad, semTrim);
+            Integer bd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazo derecho", periodo, extremidad, semTrim);
+            Integer bi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazo izquierdo", periodo, extremidad, semTrim);
+            Integer tro2 = DatosGraficos.DatosGraficosPeriodoAnterior("Tronco", periodo, extremidad, semTrim);
+            Integer abd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Abdomen", periodo, extremidad, semTrim);
+            Integer cox2 = DatosGraficos.DatosGraficosPeriodoAnterior("Coxis", periodo, extremidad, semTrim);
+            Integer pd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pierna derecha", periodo, extremidad, semTrim);
+            Integer pi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pierna izquierda", periodo, extremidad, semTrim);
+            Integer pied2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pie derecho", periodo, extremidad, semTrim);
+            Integer piei2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pie izquierdo", periodo, extremidad, semTrim);
+            
+            //Configuracion del gráfico        
+            PExtremidad.addValue(md, "Periodo Seleccionado", "M. der");
+            PExtremidad.addValue(mi, "Periodo Seleccionado", "M. izq");
+            PExtremidad.addValue(cab, "Periodo Seleccionado", "Cab");
+            PExtremidad.addValue(cue, "Periodo Seleccionado", "Cuello");
+            PExtremidad.addValue(bd, "Periodo Seleccionado", "Br. der");
+            PExtremidad.addValue(bi, "Periodo Seleccionado", "Br. izq");
+            PExtremidad.addValue(tro, "Periodo Seleccionado", "Tronco");
+            PExtremidad.addValue(abd, "Periodo Seleccionado", "Abd.");
+            PExtremidad.addValue(cox, "Periodo Seleccionado", "Coxis");
+            PExtremidad.addValue(pd, "Periodo Seleccionado", "P. der");
+            PExtremidad.addValue(pi, "Periodo Seleccionado", "P. izq");
+            PExtremidad.addValue(pied, "Periodo Seleccionado", "Pie der");
+            PExtremidad.addValue(piei, "Periodo Seleccionado", "Pie izq");
+
+            PExtremidad.addValue(md2, "Periodo Anterior", "M. der");
+            PExtremidad.addValue(mi2, "Periodo Anterior", "M. izq");
+            PExtremidad.addValue(cab2, "Periodo Anterior", "Cab");
+            PExtremidad.addValue(cue2, "Periodo Anterior", "Cuello");
+            PExtremidad.addValue(bd2, "Periodo Anterior", "Br. der");
+            PExtremidad.addValue(bi2, "Periodo Anterior", "Br. izq");
+            PExtremidad.addValue(tro2, "Periodo Anterior", "Tronco");
+            PExtremidad.addValue(abd2, "Periodo Anterior", "Abd.");
+            PExtremidad.addValue(cox2, "Periodo Anterior", "Coxis");
+            PExtremidad.addValue(pd2, "Periodo Anterior", "P. der");
+            PExtremidad.addValue(pi2, "Periodo Anterior", "P. izq");
+            PExtremidad.addValue(pied2, "Periodo Anterior", "Pie der");
+            PExtremidad.addValue(piei2, "Periodo Anterior", "Pie izq");
+            
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Extremidad",
+                    "Extremidades", "Cantidad Incidentes", PExtremidad, PlotOrientation.VERTICAL, true, true, false);
+        }
     }//GEN-LAST:event_btnGraficarPeriodicoActionPerformed
 
     private void rdSemestreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSemestreMouseClicked
