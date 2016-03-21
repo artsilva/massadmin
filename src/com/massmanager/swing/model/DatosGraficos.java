@@ -19,44 +19,44 @@ public class DatosGraficos extends MassGraficos {
 
     public static String ObtieneVariableAnterior(String variable) {
         String variableAnterior = "";
-        if (variable.equals("ENERO")) {
-            variableAnterior = "DICIEMBRE";
-        } else if (variable.equals("FEBRERO")) {
-            variableAnterior = "ENERO";
-        } else if (variable.equals("MARZO")) {
-            variableAnterior = "FEBRERO";
-        } else if (variable.equals("ABRIL")) {
-            variableAnterior = "MARZO";
-        } else if (variable.equals("MAYO")) {
-            variableAnterior = "ABRIL";
-        } else if (variable.equals("JUNIO")) {
-            variableAnterior = "MAYO";
-        } else if (variable.equals("JULIO")) {
-            variableAnterior = "JUNIO";
-        } else if (variable.equals("AGOSTO")) {
-            variableAnterior = "JULIO";
-        } else if (variable.equals("SEPTIEMBRE")) {
-            variableAnterior = "AGOSTO";
-        } else if (variable.equals("OCTUBRE")) {
-            variableAnterior = "SEPTIEMBRE";
-        } else if (variable.equals("NOVIEMBRE")) {
-            variableAnterior = "OCTUBRE";
-        } else if (variable.equals("DICIEMBRE")) {
-            variableAnterior = "NOVIEMBRE";
+        if (variable.equals("Enero")) {
+            variableAnterior = "Diciembre";
+        } else if (variable.equals("Febrero")) {
+            variableAnterior = "Enero";
+        } else if (variable.equals("Marzo")) {
+            variableAnterior = "Febrero";
+        } else if (variable.equals("Abril")) {
+            variableAnterior = "Marzo";
+        } else if (variable.equals("Mayo")) {
+            variableAnterior = "Abril";
+        } else if (variable.equals("Junio")) {
+            variableAnterior = "Mayo";
+        } else if (variable.equals("Julio")) {
+            variableAnterior = "Junio";
+        } else if (variable.equals("Agosto")) {
+            variableAnterior = "Julio";
+        } else if (variable.equals("Septiembre")) {
+            variableAnterior = "Agosto";
+        } else if (variable.equals("Octubre")) {
+            variableAnterior = "Septiembre";
+        } else if (variable.equals("Noviembre")) {
+            variableAnterior = "Octubre";
+        } else if (variable.equals("Diciembre")) {
+            variableAnterior = "Noviembre";
         } else if (variable.equals("2015")) {
             variableAnterior = "2014";
-        } else if (variable.equals("SEMESTRE 1")) {
-            variableAnterior = "SEMESTRE 2";
-        } else if (variable.equals("SEMESTRE 2")) {
-            variableAnterior = "SEMESTRE 1";
-        } else if (variable.equals("TRIMESTRE 1")) {
-            variableAnterior = "TRIMESTRE 4";
-        } else if (variable.equals("TRIMESTRE 2")) {
-            variableAnterior = "TRIMESTRE 1";
-        } else if (variable.equals("TRIMESTRE 3")) {
-            variableAnterior = "TRIMESTRE 2";
-        } else if (variable.equals("TRIMESTRE 4")) {
-            variableAnterior = "TRIMESTRE 3";
+        } else if (variable.equals("Semestre 1")) {
+            variableAnterior = "Semestre 2";
+        } else if (variable.equals("Semestre 2")) {
+            variableAnterior = "Semestre 1";
+        } else if (variable.equals("Trimestre 1")) {
+            variableAnterior = "Trimestre 4";
+        } else if (variable.equals("Trimestre 2")) {
+            variableAnterior = "Trimestre 1";
+        } else if (variable.equals("Trimestre 3")) {
+            variableAnterior = "Trimestre 2";
+        } else if (variable.equals("Trimestre 4")) {
+            variableAnterior = "Trimestre 3";
         }
         return variableAnterior;
     }
@@ -83,7 +83,7 @@ public class DatosGraficos extends MassGraficos {
 
         QuerysMensuales query = new QuerysMensuales();
 
-        if (variable.equals("ENERO")) {
+        if (variable.equals("Enero")) {
             ResultSet rs = null;
             Integer filtro = null;
 
@@ -155,14 +155,14 @@ public class DatosGraficos extends MassGraficos {
         ResultSet rs = null;
         Integer filtro = null;
 
-        rs = query.graficoPeriodoActual(where, variable, semTrim, periodo);
+        rs = query.graficoPeriodoActual(variable, periodo, where, semTrim);
         try {
             while (rs.next()) {
                 filtro = rs.getInt("count");
             }
         } catch (SQLException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return filtro;
     }
 
@@ -172,7 +172,7 @@ public class DatosGraficos extends MassGraficos {
         ResultSet rs = null;
         Integer filtro = null;
 
-        rs = query.graficoPeriodoAnterior(where, variable, semTrim, ObtieneVariableAnterior(periodo));
+        rs = query.graficoPeriodoAnterior(variable, ObtieneVariableAnterior(periodo), where, semTrim);
         try {
             while (rs.next()) {
                 filtro = rs.getInt("count");

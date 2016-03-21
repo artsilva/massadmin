@@ -8,7 +8,9 @@ package com.massmanager.swing.view;
 import com.massmanager.swing.model.PropiedadesColumnas;
 import com.massmanager.swing.model.QuerysPeriodicas;
 import com.massmanager.swing.model.Conexion;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,13 +46,18 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         grid = this.grdPeriodico;
         grid.setModel(dfm);
         
-        dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Semestre", "Lugar", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+        dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", 
+            "Semestre", "Lugar", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
         
         QuerysPeriodicas query = new QuerysPeriodicas();
         rs = query.ExtraerAtencionesPeriodico();
         try {
             while (rs.next()) {
-                dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getDate("fecha"), rs.getString("periodo_del_anio"), rs.getString("periodo_del_mes"), rs.getString("trimestre"), rs.getString("semestre"), rs.getString("lugarincidente"), rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
+                dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), 
+                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getDate("fecha"), rs.getString("periodo_del_anio"), 
+                    rs.getString("periodo_del_mes"), rs.getString("trimestre"), rs.getString("semestre"), rs.getString("lugarincidente"), 
+                    rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), 
+                    rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -392,17 +399,22 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Metodo local para mostrar mensajes
+    private void showMessage(String msg) {
+        Toolkit.getDefaultToolkit().beep();
+        JOptionPane.showMessageDialog(null, msg);
+    }
+    
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         
         Boolean checkSemana;
-        if (chkSemana.isSelected()){
+        if (chkSemana.isSelected()) {
             checkSemana = true;
-        }
-        else {
+        } else {
             checkSemana = false;
         }
-        
+
         String extremidad = (String) this.boxOpcion.getSelectedItem();
         String tipo = (String) this.boxOpcion.getSelectedItem();
         String area = (String) this.boxOpcion.getSelectedItem();
@@ -410,246 +422,362 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         String semana = (String) this.boxSemana.getSelectedItem();
         String semestre = (String) this.boxSemTrim.getSelectedItem();
         String trimestre = (String) this.boxSemTrim.getSelectedItem();
-        
+        String semTrim = "";
+        String where = "";
+
         QuerysPeriodicas query = new QuerysPeriodicas();
         grdPeriodico.setModel(new DefaultTableModel());
         DefaultTableModel dfm = new DefaultTableModel();
         PropiedadesColumnas columna = new PropiedadesColumnas();
-       
+
         //SEMESTRAL
         //Semestrales Sin Filtro Semana
         if (rdExtremidad.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
+            where = "extremidad";
+            semTrim = "semestre";
             ResultSet rsExtr;
-            rsExtr = query.ExtraerAtencionSemestreExtremidad(extremidad, semestre);
+            rsExtr = query.ExtraerAtencionPeriodicaVariable(extremidad, semestre, where, semTrim);
             this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), 
+                        rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), 
+                        rsExtr.getDate("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"), 
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }    
+        } 
         else if (rdTipo.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
+            where = "incidente";
+            semTrim = "semestre";
             ResultSet rsTip;
-            rsTip = query.ExtraerAtencionSemestreTipo(tipo, semestre);
+            rsTip = query.ExtraerAtencionPeriodicaVariable(tipo, semestre, where, semTrim);
             this.grdPeriodico.removeAll();
             this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
-            ResultSet rsArea;
-            rsArea = query.ExtraerAtencionSemestreArea(area, semestre);
-            this.grdPeriodico.removeAll();
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"), rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"), rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"), rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"), rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
-            ResultSet rsSec;
-            rsSec = query.ExtraerAtencionSemestreSector(sector, semestre);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"), rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"), rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"), rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"), rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        //Semestrales Con Filtro semana
-        else if (rdExtremidad.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
-            ResultSet rsExt;
-            rsExt = query.ExtraerAtencionSemestreSemanaExtremidad(extremidad, semestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsExt.next()) {
-                    dfm.addRow(new Object[]{rsExt.getInt("id_atencion"), rsExt.getString("nombre"), rsExt.getString("apellido"), rsExt.getInt("rut"), rsExt.getString("sector"), rsExt.getString("area"), rsExt.getString("jefe_area"), rsExt.getDate("fecha"), rsExt.getString("periodo_del_anio"), rsExt.getString("periodo_del_mes"), rsExt.getString("semestre"), rsExt.getString("lugarincidente"), rsExt.getString("detalles"), rsExt.getString("lesion"), rsExt.getString("incidente"), rsExt.getString("extremidad"), rsExt.getString("paramedico"), rsExt.getString("tratamiento"), rsExt.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdTipo.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
-            ResultSet rsTip;
-            rsTip = query.ExtraerAtencionSemestreSemanaTipo(tipo, semestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
-            ResultSet rsArea;
-            rsArea = query.ExtraerAtencionSemestreSemanaArea(area, semestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"), rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"), rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"), rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"), rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
-            ResultSet rsSec;
-            rsSec = query.ExtraerAtencionSemestreSemanaSector(sector, semestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"), rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"), rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"), rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"), rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        
-        //TRIMESTRALES
-        //Trimestrales Sin Filtro Semana
-        else if (rdExtremidad.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
-            ResultSet rsExt2;
-            rsExt2 = query.ExtraerAtencionTrimestreExtremidad(extremidad, trimestre);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsExt2.next()) {
-                    dfm.addRow(new Object[]{rsExt2.getInt("id_atencion"), rsExt2.getString("nombre"), rsExt2.getString("apellido"), rsExt2.getInt("rut"), rsExt2.getString("sector"), rsExt2.getString("area"), rsExt2.getString("jefe_area"), rsExt2.getDate("fecha"), rsExt2.getString("periodo_del_anio"), rsExt2.getString("periodo_del_mes"), rsExt2.getString("trimestre"), rsExt2.getString("lugarincidente"), rsExt2.getString("detalles"), rsExt2.getString("lesion"), rsExt2.getString("incidente"), rsExt2.getString("extremidad"), rsExt2.getString("paramedico"), rsExt2.getString("tratamiento"), rsExt2.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
-            ResultSet rsTip;
-            rsTip = query.ExtraerAtencionTrimestreTipo(tipo, trimestre);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"), rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
-            ResultSet rsArea;
-            rsArea = query.ExtraerAtencionTrimestreArea(area, trimestre);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"), rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"), rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"), rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"), rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
-            ResultSet rsSec;
-            rsSec = query.ExtraerAtencionTrimestreSector(sector, trimestre);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"), rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"), rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"), rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"), rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        //Trimestrales Con Filtro semana
-        else if (rdExtremidad.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
-            ResultSet rsExt3;
-            rsExt3 = query.ExtraerAtencionTrimestreSemanaExtremidad(extremidad, trimestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsExt3.next()) {
-                    dfm.addRow(new Object[]{rsExt3.getInt("id_atencion"), rsExt3.getString("nombre"), rsExt3.getString("apellido"), rsExt3.getInt("rut"), rsExt3.getString("sector"), rsExt3.getString("area"), rsExt3.getString("jefe_area"), rsExt3.getDate("fecha"), rsExt3.getString("periodo_del_anio"), rsExt3.getString("periodo_del_mes"), rsExt3.getString("trimestre"), rsExt3.getString("lugarincidente"), rsExt3.getString("detalles"), rsExt3.getString("lesion"), rsExt3.getString("incidente"), rsExt3.getString("extremidad"), rsExt3.getString("paramedico"), rsExt3.getString("tratamiento"), rsExt3.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
-            ResultSet rsTip;
-            rsTip = query.ExtraerAtencionTrimestreSemanaTipo(tipo, trimestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"), rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
-            ResultSet rsArea;
-            rsArea = query.ExtraerAtencionTrimestreSemanaArea(area, trimestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"), rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"), rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"), rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"), rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            columna.setAnchoColumnasPeriodico(grdPeriodico);
-        }
-        else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
-            ResultSet rsSec;
-            rsSec = query.ExtraerAtencionTrimestreSemanaSector(sector, trimestre, semana);
-            this.grdPeriodico.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            try {
-                while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"), rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"), rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"), rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"), rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
+                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), 
+                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), 
+                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), 
+                        rsTip.getString("lugarincidente"),rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), 
+                        rsTip.getString("extremidad"), rsTip.getString("paramedico"),rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
         } 
+        else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
+            where = "area";
+            semTrim = "semestre";
+            ResultSet rsArea;
+            rsArea = query.ExtraerAtencionPeriodicaVariable(area, semestre, where, semTrim);
+            this.grdPeriodico.removeAll();
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsArea.next()) {
+                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                        rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
+                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
+                        rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
+                        rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana == false) {
+            where = "sector";
+            semTrim = "semestre";
+            ResultSet rsSec;
+            rsSec = query.ExtraerAtencionPeriodicaVariable(sector, semestre, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsSec.next()) {
+                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                        rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
+                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
+                        rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
+                        rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } //Semestrales Con Filtro semana
+        else if (rdExtremidad.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
+            where = "extremidad";
+            semTrim = "semestre";
+            ResultSet rsExt;
+            rsExt = query.ExtraerAtencionPeriodicaSemanaVariable(extremidad, semestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsExt.next()) {
+                    dfm.addRow(new Object[]{rsExt.getInt("id_atencion"), rsExt.getString("nombre"), rsExt.getString("apellido"),
+                        rsExt.getInt("rut"), rsExt.getString("sector"), rsExt.getString("area"), rsExt.getString("jefe_area"),
+                        rsExt.getDate("fecha"), rsExt.getString("periodo_del_anio"), rsExt.getString("periodo_del_mes"), rsExt.getString("semestre"),
+                        rsExt.getString("lugarincidente"), rsExt.getString("detalles"), rsExt.getString("lesion"), rsExt.getString("incidente"),
+                        rsExt.getString("extremidad"), rsExt.getString("paramedico"), rsExt.getString("tratamiento"), rsExt.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdTipo.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
+            where = "incidente";
+            semTrim = "semestre";
+            ResultSet rsTip;
+            rsTip = query.ExtraerAtencionPeriodicaSemanaVariable(tipo, semestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsTip.next()) {
+                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
+                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"),
+                        rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
+                        rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
+            where = "area";
+            semTrim = "semestre";
+            ResultSet rsArea;
+            rsArea = query.ExtraerAtencionPeriodicaSemanaVariable(area, semestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha",
+                "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsArea.next()) {
+                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                        rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
+                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
+                        rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
+                        rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana == true) {
+            where = "sector";
+            semTrim = "semestre";
+            ResultSet rsSec;
+            rsSec = query.ExtraerAtencionPeriodicaSemanaVariable(sector, semestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsSec.next()) {
+                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                        rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
+                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
+                        rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
+                        rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } //TRIMESTRALES
+        //Trimestrales Sin Filtro Semana
+        else if (rdExtremidad.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
+            semTrim = "trimestre";
+            where = "extremidad";
+            ResultSet rsExt2;
+            rsExt2 = query.ExtraerAtencionPeriodicaVariable(extremidad, trimestre, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsExt2.next()) {
+                    dfm.addRow(new Object[]{rsExt2.getInt("id_atencion"), rsExt2.getString("nombre"), rsExt2.getString("apellido"),
+                        rsExt2.getInt("rut"), rsExt2.getString("sector"), rsExt2.getString("area"), rsExt2.getString("jefe_area"),
+                        rsExt2.getDate("fecha"), rsExt2.getString("periodo_del_anio"), rsExt2.getString("periodo_del_mes"), rsExt2.getString("trimestre"),
+                        rsExt2.getString("lugarincidente"), rsExt2.getString("detalles"), rsExt2.getString("lesion"), rsExt2.getString("incidente"),
+                        rsExt2.getString("extremidad"), rsExt2.getString("paramedico"), rsExt2.getString("tratamiento"), rsExt2.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
+            semTrim = "trimestre";
+            where = "incidente";
+            ResultSet rsTip;
+            rsTip = query.ExtraerAtencionPeriodicaVariable(tipo, trimestre, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsTip.next()) {
+                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
+                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
+                        rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
+                        rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
+            semTrim = "trimestre";
+            where = "area";
+            ResultSet rsArea;
+            rsArea = query.ExtraerAtencionPeriodicaVariable(area, trimestre, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsArea.next()) {
+                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                        rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
+                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
+                        rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
+                        rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana == false) {
+            semTrim = "trimestre";
+            where = "sector";
+            ResultSet rsSec;
+            rsSec = query.ExtraerAtencionPeriodicaVariable(sector, trimestre, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsSec.next()) {
+                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                        rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
+                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
+                        rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
+                        rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } //Trimestrales Con Filtro semana
+        else if (rdExtremidad.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
+            semTrim = "trimestre";
+            where = "extremidad";
+            ResultSet rsExt3;
+            rsExt3 = query.ExtraerAtencionPeriodicaSemanaVariable(extremidad, trimestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsExt3.next()) {
+                    dfm.addRow(new Object[]{rsExt3.getInt("id_atencion"), rsExt3.getString("nombre"), rsExt3.getString("apellido"),
+                        rsExt3.getInt("rut"), rsExt3.getString("sector"), rsExt3.getString("area"), rsExt3.getString("jefe_area"),
+                        rsExt3.getDate("fecha"), rsExt3.getString("periodo_del_anio"), rsExt3.getString("periodo_del_mes"), rsExt3.getString("trimestre"),
+                        rsExt3.getString("lugarincidente"), rsExt3.getString("detalles"), rsExt3.getString("lesion"), rsExt3.getString("incidente"),
+                        rsExt3.getString("extremidad"), rsExt3.getString("paramedico"), rsExt3.getString("tratamiento"), rsExt3.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
+            semTrim = "trimestre";
+            where = "extremidad";
+            ResultSet rsTip;
+            rsTip = query.ExtraerAtencionPeriodicaSemanaVariable(tipo, trimestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsTip.next()) {
+                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
+                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
+                        rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
+                        rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
+            semTrim = "trimestre";
+            where = "extremidad";
+            ResultSet rsArea;
+            rsArea = query.ExtraerAtencionPeriodicaSemanaVariable(area, trimestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsArea.next()) {
+                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                        rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
+                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
+                        rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
+                        rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana == true) {
+            semTrim = "trimestre";
+            where = "extremidad";
+            ResultSet rsSec;
+            rsSec = query.ExtraerAtencionPeriodicaSemanaVariable(sector, trimestre, semana, where, semTrim);
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            try {
+                while (rsSec.next()) {
+                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                        rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
+                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
+                        rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
+                        rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            columna.setAnchoColumnasPeriodico(grdPeriodico);
+        } 
+        else {
+            this.grdPeriodico.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
+                "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
+        }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed

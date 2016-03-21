@@ -69,7 +69,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     //Metodo local para mostrar mensajes
     private void showMessage(String msg) {
         Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(grid, msg);
+        JOptionPane.showMessageDialog(null, msg);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -324,6 +324,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         String tipo = (String) this.boxOpcion.getSelectedItem();
         String area = (String) this.boxOpcion.getSelectedItem();
         String sector = (String) this.boxOpcion.getSelectedItem();
+        String where = "";
         
         grdMensual.setModel(new DefaultTableModel());
         QuerysMensuales query = new QuerysMensuales();
@@ -331,7 +332,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         PropiedadesColumnas columna = new PropiedadesColumnas();
         
         if (rdExtremidad.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionMensualExtremidad(extremidad, mes);
+            where = "extremidad";
+            ResultSet rsExtr = query.ExtraerAtencionMensualVariable(extremidad, mes, where);
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -343,8 +345,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             }
             columna.setAnchoColumnasMensual(grdMensual);
         }
-        if (rdTipo.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionMensualTipo(tipo, mes);
+        else if (rdTipo.isSelected()) {
+            where = "incidente";
+            ResultSet rsExtr = query.ExtraerAtencionMensualVariable(tipo, mes, where);
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -356,8 +359,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             }
             columna.setAnchoColumnasMensual(grdMensual);
         }
-        if (rdArea.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionMensualArea(area, mes);
+        else if (rdArea.isSelected()) {
+            where = "area";
+            ResultSet rsExtr = query.ExtraerAtencionMensualVariable(area, mes, where);
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -369,8 +373,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             }
             columna.setAnchoColumnasMensual(grdMensual);
         }
-        if (rdSector.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionMensualSector(sector, mes);
+        else if (rdSector.isSelected()) {
+            where = "sector";
+            ResultSet rsExtr = query.ExtraerAtencionMensualVariable(sector, mes, where);
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -381,6 +386,11 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasMensual(grdMensual);
+        }
+        else {
+            this.grdMensual.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
         }
         
     }//GEN-LAST:event_btnFiltrarActionPerformed

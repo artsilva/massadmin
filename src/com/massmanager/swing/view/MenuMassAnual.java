@@ -61,7 +61,6 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         PropiedadesColumnas columna = new PropiedadesColumnas();
         columna.setAnchoColumnasAnual(grdAnual);
         columna.setPropiedadesCabeceras(grdAnual);
-
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +72,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
     //Metodo local para mostrar mensajes
     private void showMessage(String msg) {
         Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(grid, msg);
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -331,7 +330,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         //Setea variables de la Query con el contenido del ComboBox
-        String ano = (String) this.boxAno.getSelectedItem();
+        String anio = (String) this.boxAno.getSelectedItem();
         String extremidad = (String) this.boxOpcion.getSelectedItem();
         String incidente = (String) this.boxOpcion.getSelectedItem();
         String area = (String) this.boxOpcion.getSelectedItem();
@@ -344,7 +343,8 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         
         //Borra el contenido de la tabla antes de cargar datos
         if (rdExtremidad.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionAnualExtremidad(extremidad, ano);
+            String where = "extremidad"; 
+            ResultSet rsExtr = query.ExtraerAtencionAnualVariable(extremidad, anio, where);
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -356,8 +356,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         }
-        if (rdTipo.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionAnualTipo(incidente, ano);
+        else if (rdTipo.isSelected()) {
+            String where = "incidente";
+            ResultSet rsExtr = query.ExtraerAtencionAnualVariable(incidente, anio, where);
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -369,8 +370,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         }
-        if (rdArea.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionAnualArea(area, ano);
+        else if (rdArea.isSelected()) {
+            String where = "area";
+            ResultSet rsExtr = query.ExtraerAtencionAnualVariable(area, anio, where);
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -382,8 +384,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         }
-        if (rdSector.isSelected()) {
-            ResultSet rsExtr = query.ExtraerAtencionAnualSector(sector, ano);
+        else if (rdSector.isSelected()) {
+            String where = "sector";
+            ResultSet rsExtr = query.ExtraerAtencionAnualVariable(sector, anio, where);
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
@@ -394,12 +397,16 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             ancho.setAnchoColumnasAnual(grdAnual);
+        }
+        else {
+            this.grdAnual.setModel(dfm);
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void rdTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTipoActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_rdTipoActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
@@ -427,6 +434,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxAno.addItem(rs6.getString("ano"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdTipoMouseClicked
 
@@ -442,6 +450,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs3.getString("nombre_area"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         //Setea el Mes en el COmboBox de MES cuando se selecciona un radioButton
         ResultSet rs6;
@@ -451,6 +460,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxAno.addItem(rs6.getString("ano"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdAreaMouseClicked
 
@@ -466,6 +476,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs4.getString("nombre_sector"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         //Setea el Mes en el COmboBox de MES cuando se selecciona un radioButton
         ResultSet rs6;
@@ -475,6 +486,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxAno.addItem(rs6.getString("ano"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdSectorMouseClicked
 
@@ -490,6 +502,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs5.getString("nombre"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         //Setea el Mes en el COmboBox de MES cuando se selecciona un radioButton
         ResultSet rs6;
@@ -499,6 +512,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 this.boxAno.addItem(rs6.getString("ano"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdExtremidadMouseClicked
 

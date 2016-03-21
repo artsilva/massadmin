@@ -16,7 +16,7 @@ import java.util.*;
 public class EnviadorMail {
 
     final String miCorreo = "arturosk8silva@gmail.com";
-    final String miContraseña = "sleqamweyndwrscp";
+    final String miContraseña = "ncofqoivzzbtgqop";
     final String servidorSMTP = "smtp.gmail.com";
     final String puertoEnvio = "465";
     String mailReceptor = null;
@@ -50,6 +50,7 @@ public class EnviadorMail {
             MimeMessage msg = new MimeMessage(session);
             msg.setText(cuerpo);
             msg.setSubject(asunto);
+            msg.setContent(cuerpo, "text/html; charset=utf-8");
             msg.setFrom(new InternetAddress(miCorreo));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     mailReceptor));

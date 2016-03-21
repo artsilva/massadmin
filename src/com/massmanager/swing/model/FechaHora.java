@@ -14,44 +14,97 @@ import java.util.Date;
  *
  * @author Artsk
  */
-public class FechaHora { 
+public final class FechaHora { 
     
     /**
      *
      */
+    private Integer Anio;
+    private Integer Mes;
+    private Integer Dia;
+    private String Hora;
+    private String Fecha;
+    
     public FechaHora(){
-  
-        //Fecha actual en formato completo:
-        //Tue Sep 23 01:18:48 CEST 2014
         Date fechaActual = new Date();
-        System.out.println(fechaActual);
-        System.out.println("---------------------------------------------");
-        
-        //Formateando la fecha:
+        Calendar date = Calendar.getInstance();
         DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-        DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("Son las: "+formatoHora.format(fechaActual)+" de fecha: "+formatoFecha.format(fechaActual));
+        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         
-        //Fecha actual desglosada:
-        Calendar fecha = Calendar.getInstance();
-        int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH) + 1;
-        int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        int hora = fecha.get(Calendar.HOUR_OF_DAY);
-        int minuto = fecha.get(Calendar.MINUTE);
-        int segundo = fecha.get(Calendar.SECOND);
- 
-        System.out.println("Fecha Actual: "+ dia + "/" + (mes) + "/" + año);
-        System.out.printf("Hora Actual: %02d:%02d:%02d %n", hora, minuto, segundo);
-        System.out.println("-------------Fecha desglosada----------------");
-        System.out.println("El año es: "+ año);
-        System.out.println("El mes es: "+ mes);
-        System.out.println("El día es: "+ dia);
-        System.out.printf("La hora es: %02d %n", hora);
-        System.out.printf("El minuto es: %02d %n", minuto);
-        System.out.printf("El segundo es: %02d %n", segundo);
+        setDia(date.get(Calendar.DAY_OF_MONTH));
+        setMes(date.get(Calendar.MONTH)+1);
+        setAnio(date.get(Calendar.YEAR));
+        setFecha(formatoFecha.format(fechaActual));
+        setHora(formatoHora.format(fechaActual));
     }
-                
-}
- 
+    
+    public String obtenerMes(Integer mes) {
+        String mesResult = "";
+        if (mes == 1) {
+            mesResult = "Enero";
+        } else if (mes == 2) {
+            mesResult = "Febrero";
+        } else if (mes == 3) {
+            mesResult = "Marzo";
+        } else if (mes == 4) {
+            mesResult = "Abril";
+        } else if (mes == 5) {
+            mesResult = "Mayo";
+        } else if (mes == 6) {
+            mesResult = "Junio";
+        } else if (mes == 7) {
+            mesResult = "Julio";
+        } else if (mes == 8) {
+            mesResult = "Agosto";
+        } else if (mes == 9) {
+            mesResult = "Septiembre";
+        } else if (mes == 10) {
+            mesResult = "Octubre";
+        } else if (mes == 11) {
+            mesResult = "Noviembre";
+        } else if (mes == 12) {
+            mesResult = "Diciembre";
+        }
+        return mesResult;
+    }
+    
+    public Integer getAnio() {
+        return Anio;
+    }
 
+    public void setAnio(Integer Anio) {
+        this.Anio = Anio;
+    }
+
+    public Integer getMes() {
+        return Mes;
+    }
+
+    public void setMes(Integer Mes) {
+        this.Mes = Mes;
+    }
+
+    public Integer getDia() {
+        return Dia;
+    }
+
+    public void setDia(Integer Dia) {
+        this.Dia = Dia;
+    }  
+
+    public String getHora() {
+        return Hora;
+    }
+
+    public void setHora(String hora) {
+        this.Hora = hora;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
+}

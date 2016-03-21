@@ -6,9 +6,7 @@
 package com.massmanager.controller;
 
 import com.massmanager.swing.model.LoginModel;
-import com.massmanager.swing.model.MenuSpaModel;
 import com.massmanager.swing.view.LoginView;
-import com.massmanager.swing.view.MenuSpa;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -30,7 +28,7 @@ public class Principal {
                 System.exit(0);
             }
         });
-
+        
         view.pack();
         view.setLocationRelativeTo(null);
         view.setVisible(true);

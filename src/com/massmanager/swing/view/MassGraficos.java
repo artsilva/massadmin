@@ -6,15 +6,26 @@
 package com.massmanager.swing.view;
 
 import com.massmanager.swing.model.DatosGraficos;
+import com.massmanager.swing.model.GestionArchivos;
 import com.massmanager.swing.model.QuerysPeriodicas;
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -22,10 +33,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class MassGraficos extends javax.swing.JInternalFrame {
 
+    //Guarda imagenes, archivos
+    JFileChooser seleccionado = new JFileChooser();
+    File archivo;
+    byte[] bytesImg;
+    GestionArchivos gestion = new GestionArchivos();
+    
     //JFreeChart Grafica;
     JFreeChart GraficaMensual;
     JFreeChart GraficaAnual;
     JFreeChart GraficaPeriodica;
+    JFreeChart GraficaTorta;
     //Mensual
     DefaultCategoryDataset Sector = new DefaultCategoryDataset();
     DefaultCategoryDataset Extremidad = new DefaultCategoryDataset();
@@ -44,6 +62,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     DefaultCategoryDataset PArea = new DefaultCategoryDataset();
     DefaultCategoryDataset PTipo = new DefaultCategoryDataset();
     DefaultCategoryDataset PLesion = new DefaultCategoryDataset();
+    //Torta
+    DefaultPieDataset Torta = new DefaultPieDataset();
+    DefaultPieDataset Torta2 = new DefaultPieDataset();
     
     /**
      * Creates new form PruebaMass
@@ -98,6 +119,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdArea = new javax.swing.JRadioButton();
         rdTipo = new javax.swing.JRadioButton();
         rdLesion = new javax.swing.JRadioButton();
+        btnGuardarMensual = new javax.swing.JButton();
         panelAnual = new javax.swing.JPanel();
         btnGraficarAnual = new javax.swing.JButton();
         panelFiltroAnual = new javax.swing.JPanel();
@@ -110,6 +132,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdTipo2 = new javax.swing.JRadioButton();
         rdLesion2 = new javax.swing.JRadioButton();
         panelGraficoAnual = new javax.swing.JPanel();
+        btnGuardarAnual = new javax.swing.JButton();
         panelPeriodico = new javax.swing.JPanel();
         btnGraficarPeriodico = new javax.swing.JButton();
         panelFiltroPeriodico = new javax.swing.JPanel();
@@ -123,9 +146,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdTipo3 = new javax.swing.JRadioButton();
         rdLesion3 = new javax.swing.JRadioButton();
         panelGraficoPeriodico = new javax.swing.JPanel();
+        btnGuardarPeriodico = new javax.swing.JButton();
         panelTorta = new javax.swing.JPanel();
         panelGraficoTorta = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnGraficarTorta = new javax.swing.JButton();
+        btnGuardaTorta = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(93, 130, 189));
         setClosable(true);
@@ -167,7 +192,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         jLabel1.setText("Mes a Graficar:");
 
         boxMes.setBackground(new java.awt.Color(250, 250, 250));
-        boxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" }));
+        boxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         javax.swing.GroupLayout panelFiltroMensualLayout = new javax.swing.GroupLayout(panelFiltroMensual);
         panelFiltroMensual.setLayout(panelFiltroMensualLayout);
@@ -191,7 +216,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaMensual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad.setText("Extremidad");
@@ -243,6 +268,13 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        btnGuardarMensual.setText("Guardar");
+        btnGuardarMensual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarMensualActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMensualLayout = new javax.swing.GroupLayout(panelMensual);
         panelMensual.setLayout(panelMensualLayout);
         panelMensualLayout.setHorizontalGroup(
@@ -252,7 +284,8 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(btnGraficarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE))
+                    .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(btnGuardarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -266,9 +299,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                         .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGraficarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 168, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 132, Short.MAX_VALUE))
                     .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -315,7 +350,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaAnual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad2.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad2.setText("Extremidad");
@@ -385,14 +420,23 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        btnGuardarAnual.setText("Guardar");
+        btnGuardarAnual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAnualActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAnualLayout = new javax.swing.GroupLayout(panelAnual);
         panelAnual.setLayout(panelAnualLayout);
         panelAnualLayout.setHorizontalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1022, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1020, Short.MAX_VALUE))
             .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAnualLayout.createSequentialGroup()
                     .addContainerGap()
@@ -405,10 +449,12 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
         panelAnualLayout.setVerticalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAnualLayout.createSequentialGroup()
-                .addContainerGap(382, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAnualLayout.createSequentialGroup()
+                .addContainerGap(378, Short.MAX_VALUE)
                 .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
             .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAnualLayout.createSequentialGroup()
                     .addContainerGap()
@@ -481,7 +527,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaPeriodico.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad3.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad3.setText("Extremidad");
@@ -551,6 +597,13 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        btnGuardarPeriodico.setText("Guardar");
+        btnGuardarPeriodico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPeriodicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPeriodicoLayout = new javax.swing.GroupLayout(panelPeriodico);
         panelPeriodico.setLayout(panelPeriodicoLayout);
         panelPeriodicoLayout.setHorizontalGroup(
@@ -561,7 +614,8 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     .addGroup(panelPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(panelIncidenciaPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(panelFiltroPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoPeriodico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -575,8 +629,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                         .addComponent(panelFiltroPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelIncidenciaPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 118, Short.MAX_VALUE))
                     .addComponent(panelGraficoPeriodico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -592,17 +649,24 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoTorta.setLayout(panelGraficoTortaLayout);
         panelGraficoTortaLayout.setHorizontalGroup(
             panelGraficoTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1473, Short.MAX_VALUE)
+            .addGap(0, 989, Short.MAX_VALUE)
         );
         panelGraficoTortaLayout.setVerticalGroup(
             panelGraficoTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
-        jButton4.setText("Graficar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficarTorta.setText("Graficar");
+        btnGraficarTorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnGraficarTortaActionPerformed(evt);
+            }
+        });
+
+        btnGuardaTorta.setText("Guardar");
+        btnGuardaTorta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardaTortaActionPerformed(evt);
             }
         });
 
@@ -612,9 +676,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             panelTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTortaLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(panelGraficoTorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnGraficarTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardaTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(panelGraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelTortaLayout.setVerticalGroup(
@@ -624,9 +690,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addComponent(panelGraficoTorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTortaLayout.createSequentialGroup()
-                .addContainerGap(540, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGraficarTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardaTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         jTabbedPane1.addTab("% Incidencias Totales por Categoria", panelTorta);
@@ -635,7 +703,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1164, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,62 +726,46 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         String lesion = "lesion";
 
         if (rdExtremidad.isSelected()) {
-            Integer md = DatosGraficos.DatosGraficosActual("Mano derecha", mes, extremidad);
-            Integer mi = DatosGraficos.DatosGraficosActual("Mano izquierda", mes, extremidad);
+            Integer man = DatosGraficos.DatosGraficosActual("Manos", mes, extremidad);
             Integer cab = DatosGraficos.DatosGraficosActual("Cabeza", mes, extremidad);
             Integer cue = DatosGraficos.DatosGraficosActual("Cuello", mes, extremidad);
-            Integer bd = DatosGraficos.DatosGraficosActual("Brazo derecho", mes, extremidad);
-            Integer bi = DatosGraficos.DatosGraficosActual("Brazo izquierdo", mes, extremidad);
+            Integer bra = DatosGraficos.DatosGraficosActual("Brazos", mes, extremidad);
             Integer tro = DatosGraficos.DatosGraficosActual("Tronco", mes, extremidad);
             Integer abd = DatosGraficos.DatosGraficosActual("Abdomen", mes, extremidad);
             Integer cox = DatosGraficos.DatosGraficosActual("Coxis", mes, extremidad);
-            Integer pd = DatosGraficos.DatosGraficosActual("Pierna derecha", mes, extremidad);
-            Integer pi = DatosGraficos.DatosGraficosActual("Pierna izquierda", mes, extremidad);
-            Integer pied = DatosGraficos.DatosGraficosActual("Pie derecho", mes, extremidad);
-            Integer piei = DatosGraficos.DatosGraficosActual("Pie izquierdo", mes, extremidad);
+            Integer pi = DatosGraficos.DatosGraficosActual("Piernas", mes, extremidad);
+            Integer pie = DatosGraficos.DatosGraficosActual("Pies", mes, extremidad);
 
-            Integer md2 = DatosGraficos.DatosGraficosAnterior("Mano derecha", mes, extremidad);
-            Integer mi2 = DatosGraficos.DatosGraficosAnterior("Mano izquierda", mes, extremidad);
+            Integer man2 = DatosGraficos.DatosGraficosAnterior("Manos", mes, extremidad);
             Integer cab2 = DatosGraficos.DatosGraficosAnterior("Cabeza", mes, extremidad);
             Integer cue2 = DatosGraficos.DatosGraficosAnterior("Cuello", mes, extremidad);
-            Integer bd2 = DatosGraficos.DatosGraficosAnterior("Brazo derecho", mes, extremidad);
-            Integer bi2 = DatosGraficos.DatosGraficosAnterior("Brazo izquierdo", mes, extremidad);
+            Integer bra2 = DatosGraficos.DatosGraficosAnterior("Brazos", mes, extremidad);
             Integer tro2 = DatosGraficos.DatosGraficosAnterior("Tronco", mes, extremidad);
             Integer abd2 = DatosGraficos.DatosGraficosAnterior("Abdomen", mes, extremidad);
             Integer cox2 = DatosGraficos.DatosGraficosAnterior("Coxis", mes, extremidad);
-            Integer pd2 = DatosGraficos.DatosGraficosAnterior("Pierna derecha", mes, extremidad);
-            Integer pi2 = DatosGraficos.DatosGraficosAnterior("Pierna izquierda", mes, extremidad);
-            Integer pied2 = DatosGraficos.DatosGraficosAnterior("Pie derecho", mes, extremidad);
-            Integer piei2 = DatosGraficos.DatosGraficosAnterior("Pie izquierdo", mes, extremidad);
+            Integer pi2 = DatosGraficos.DatosGraficosAnterior("Piernas", mes, extremidad);
+            Integer pie2 = DatosGraficos.DatosGraficosAnterior("Pies", mes, extremidad);
 
             //Configuracion del gráfico        
-            Extremidad.addValue(md, "Mes Seleccionado", "M. der");
-            Extremidad.addValue(mi, "Mes Seleccionado", "M. izq");
+            Extremidad.addValue(man, "Mes Seleccionado", "Manos");
             Extremidad.addValue(cab, "Mes Seleccionado", "Cab");
             Extremidad.addValue(cue, "Mes Seleccionado", "Cuello");
-            Extremidad.addValue(bd, "Mes Seleccionado", "Br. der");
-            Extremidad.addValue(bi, "Mes Seleccionado", "Br. izq");
+            Extremidad.addValue(bra, "Mes Seleccionado", "Brazos");
             Extremidad.addValue(tro, "Mes Seleccionado", "Tronco");
             Extremidad.addValue(abd, "Mes Seleccionado", "Abd.");
             Extremidad.addValue(cox, "Mes Seleccionado", "Coxis");
-            Extremidad.addValue(pd, "Mes Seleccionado", "P. der");
-            Extremidad.addValue(pi, "Mes Seleccionado", "P. izq");
-            Extremidad.addValue(pied, "Mes Seleccionado", "Pie der");
-            Extremidad.addValue(piei, "Mes Seleccionado", "Pie izq");
+            Extremidad.addValue(pi, "Mes Seleccionado", "Piernas");
+            Extremidad.addValue(pie, "Mes Seleccionado", "Pies");
 
-            Extremidad.addValue(md2, "Mes Anterior", "M. der");
-            Extremidad.addValue(mi2, "Mes Anterior", "M. izq");
+            Extremidad.addValue(man2, "Mes Anterior", "Manos");
             Extremidad.addValue(cab2, "Mes Anterior", "Cab");
             Extremidad.addValue(cue2, "Mes Anterior", "Cuello");
-            Extremidad.addValue(bd2, "Mes Anterior", "Br. der");
-            Extremidad.addValue(bi2, "Mes Anterior", "Br. izq");
+            Extremidad.addValue(bra2, "Mes Anterior", "Brazos");
             Extremidad.addValue(tro2, "Mes Anterior", "Tronco");
             Extremidad.addValue(abd2, "Mes Anterior", "Abd.");
             Extremidad.addValue(cox2, "Mes Anterior", "Coxis");
-            Extremidad.addValue(pd2, "Mes Anterior", "P. der");
-            Extremidad.addValue(pi2, "Mes Anterior", "P. izq");
-            Extremidad.addValue(pied2, "Mes Anterior", "Pie der");
-            Extremidad.addValue(piei2, "Mes Anterior", "Pie izq");
+            Extremidad.addValue(pi2, "Mes Anterior", "Piernas");
+            Extremidad.addValue(pie2, "Mes Anterior", "Pies");
 
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Extremidad",
                     "Extremidades", "Cantidad Incidentes", Extremidad, PlotOrientation.VERTICAL, true, true, false);
@@ -804,11 +856,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Area",
                     "Areas", "Cantidad Incidentes", Area, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdTipo.isSelected()) {
-            Integer lab = DatosGraficos.DatosGraficosActual("laboral", mes, tipo);
-            Integer tra = DatosGraficos.DatosGraficosActual("trayecto", mes, tipo);
+            Integer lab = DatosGraficos.DatosGraficosActual("Laboral", mes, tipo);
+            Integer tra = DatosGraficos.DatosGraficosActual("Tayecto", mes, tipo);
 
-            Integer lab2 = DatosGraficos.DatosGraficosAnterior("laboral", mes, tipo);
-            Integer tra2 = DatosGraficos.DatosGraficosAnterior("trayecto", mes, tipo);
+            Integer lab2 = DatosGraficos.DatosGraficosAnterior("Laboral", mes, tipo);
+            Integer tra2 = DatosGraficos.DatosGraficosAnterior("Trayecto", mes, tipo);
 
             Tipo.addValue(lab, "Mes Seleccionado", "Laboral");
             Tipo.addValue(tra, "Mes Seleccionado", "Trayecto");
@@ -819,23 +871,23 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Tipo de Incidente",
                     "Tipo de Incidentes", "Cantidad Incidentes", Tipo, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdLesion.isSelected()) {
-            Integer cor = DatosGraficos.DatosGraficosActual("corte", mes, lesion);
-            Integer hep = DatosGraficos.DatosGraficosActual("herida punzante", mes, lesion);
-            Integer hec = DatosGraficos.DatosGraficosActual("herida colgajo", mes, lesion);
-            Integer hea = DatosGraficos.DatosGraficosActual("herida por abrasion", mes, lesion);
-            Integer con = DatosGraficos.DatosGraficosActual("contusion", mes, lesion);
-            Integer fra = DatosGraficos.DatosGraficosActual("fractura", mes, lesion);
-            Integer que = DatosGraficos.DatosGraficosActual("quemadura", mes, lesion);
-            Integer mus = DatosGraficos.DatosGraficosActual("muscular", mes, lesion);
+            Integer cor = DatosGraficos.DatosGraficosActual("Corte", mes, lesion);
+            Integer hep = DatosGraficos.DatosGraficosActual("Herida punzante", mes, lesion);
+            Integer hec = DatosGraficos.DatosGraficosActual("Herida colgajo", mes, lesion);
+            Integer hea = DatosGraficos.DatosGraficosActual("Herida por abrasion", mes, lesion);
+            Integer con = DatosGraficos.DatosGraficosActual("Contusion", mes, lesion);
+            Integer fra = DatosGraficos.DatosGraficosActual("Fractura", mes, lesion);
+            Integer que = DatosGraficos.DatosGraficosActual("Quemadura", mes, lesion);
+            Integer mus = DatosGraficos.DatosGraficosActual("Muscular", mes, lesion);
             
-            Integer cor2 = DatosGraficos.DatosGraficosAnterior("corte", mes, lesion);
-            Integer hep2= DatosGraficos.DatosGraficosAnterior("herida punzante", mes, lesion);
-            Integer hec2 = DatosGraficos.DatosGraficosAnterior("herida colgajo", mes, lesion);
-            Integer hea2 = DatosGraficos.DatosGraficosAnterior("herida por abrasion", mes, lesion);
-            Integer con2 = DatosGraficos.DatosGraficosAnterior("contusion", mes, lesion);
-            Integer fra2 = DatosGraficos.DatosGraficosAnterior("fractura", mes, lesion);
-            Integer que2 = DatosGraficos.DatosGraficosAnterior("quemadura", mes, lesion);
-            Integer mus2 = DatosGraficos.DatosGraficosAnterior("muscular", mes, lesion);
+            Integer cor2 = DatosGraficos.DatosGraficosAnterior("Corte", mes, lesion);
+            Integer hep2= DatosGraficos.DatosGraficosAnterior("Herida punzante", mes, lesion);
+            Integer hec2 = DatosGraficos.DatosGraficosAnterior("Herida colgajo", mes, lesion);
+            Integer hea2 = DatosGraficos.DatosGraficosAnterior("Herida por abrasion", mes, lesion);
+            Integer con2 = DatosGraficos.DatosGraficosAnterior("Contusion", mes, lesion);
+            Integer fra2 = DatosGraficos.DatosGraficosAnterior("Fractura", mes, lesion);
+            Integer que2 = DatosGraficos.DatosGraficosAnterior("Quemadura", mes, lesion);
+            Integer mus2 = DatosGraficos.DatosGraficosAnterior("Muscular", mes, lesion);
             
             Lesion.addValue(cor, "Mes Seleccionado", "Corte");
             Lesion.addValue(hep, "Mes Seleccionado", "H. Punzante");
@@ -861,15 +913,38 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Se deben seleccionar los filtros para mostrar graficos");
         }
 
-        ChartPanel panel = new ChartPanel(GraficaMensual);
+        ChartPanel panelMensual = new ChartPanel(GraficaMensual);
         panelGraficoMensual.setLayout(new java.awt.BorderLayout());
-        panelGraficoMensual.add(panel);
+        panelGraficoMensual.add(panelMensual);
         panelGraficoMensual.validate();
+        /*
+        try {
+            ChartUtilities.saveChartAsJPEG(new File("grafico.jpg"), GraficaMensual, 1024, 768);
+        } catch (IOException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }//GEN-LAST:event_btnGraficarMensualActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnGraficarTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarTortaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        
+        Torta.setValue("C", 10);
+        Torta.setValue("JAVA", 10);
+        Torta.setValue(".NET", 10);
+        Torta.setValue(".NJ", 15);
+        
+        GraficaTorta = ChartFactory.createPieChart("Grafico variable",
+                Torta,false,true,false);
+        
+        GraficaTorta.setBackgroundPaint(new Color(222, 222, 255));
+        final PiePlot plot = (PiePlot) GraficaTorta.getPlot();
+        plot.setBackgroundPaint(Color.white);
+
+        ChartPanel panelTorta = new ChartPanel(GraficaTorta);
+        panelGraficoTorta.setLayout(new java.awt.BorderLayout());
+        panelGraficoTorta.add(panelTorta);
+        panelGraficoTorta.validate(); 
+    }//GEN-LAST:event_btnGraficarTortaActionPerformed
 
     private void btnGraficarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarAnualActionPerformed
         // TODO add your handling code here:
@@ -881,62 +956,46 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         String lesion = "lesion";
         
         if (rdExtremidad2.isSelected()) {
-            Integer md = DatosGraficos.DatosGraficosAñoActual("Mano derecha", año, extremidad);
-            Integer mi = DatosGraficos.DatosGraficosAñoActual("Mano izquierda", año, extremidad);
+            Integer man = DatosGraficos.DatosGraficosAñoActual("Manos", año, extremidad);
             Integer cab = DatosGraficos.DatosGraficosAñoActual("Cabeza", año, extremidad);
             Integer cue = DatosGraficos.DatosGraficosAñoActual("Cuello", año, extremidad);
-            Integer bd = DatosGraficos.DatosGraficosAñoActual("Brazo derecho", año, extremidad);
-            Integer bi = DatosGraficos.DatosGraficosAñoActual("Brazo izquierdo", año, extremidad);
+            Integer bra = DatosGraficos.DatosGraficosAñoActual("Brazos", año, extremidad);
             Integer tro = DatosGraficos.DatosGraficosAñoActual("Tronco", año, extremidad);
             Integer abd = DatosGraficos.DatosGraficosAñoActual("Abdomen", año, extremidad);
             Integer cox = DatosGraficos.DatosGraficosAñoActual("Coxis", año, extremidad);
-            Integer pd = DatosGraficos.DatosGraficosAñoActual("Pierna derecha", año, extremidad);
-            Integer pi = DatosGraficos.DatosGraficosAñoActual("Pierna izquierda", año, extremidad);
-            Integer pied = DatosGraficos.DatosGraficosAñoActual("Pie derecho", año, extremidad);
-            Integer piei = DatosGraficos.DatosGraficosAñoActual("Pie izquierdo", año, extremidad);
+            Integer pi = DatosGraficos.DatosGraficosAñoActual("Piernas", año, extremidad);
+            Integer pie = DatosGraficos.DatosGraficosAñoActual("Pies", año, extremidad);
 
-            Integer md2 = DatosGraficos.DatosGraficosAñoAnterior("Mano derecha", año, extremidad);
-            Integer mi2 = DatosGraficos.DatosGraficosAñoAnterior("Mano izquierda", año, extremidad);
+            Integer man2 = DatosGraficos.DatosGraficosAñoAnterior("Manos", año, extremidad);
             Integer cab2 = DatosGraficos.DatosGraficosAñoAnterior("Cabeza", año, extremidad);
             Integer cue2 = DatosGraficos.DatosGraficosAñoAnterior("Cuello", año, extremidad);
-            Integer bd2 = DatosGraficos.DatosGraficosAñoAnterior("Brazo derecho", año, extremidad);
-            Integer bi2 = DatosGraficos.DatosGraficosAñoAnterior("Brazo izquierdo", año, extremidad);
+            Integer bra2 = DatosGraficos.DatosGraficosAñoAnterior("Brazos", año, extremidad);
             Integer tro2 = DatosGraficos.DatosGraficosAñoAnterior("Tronco", año, extremidad);
             Integer abd2 = DatosGraficos.DatosGraficosAñoAnterior("Abdomen", año, extremidad);
             Integer cox2 = DatosGraficos.DatosGraficosAñoAnterior("Coxis", año, extremidad);
-            Integer pd2 = DatosGraficos.DatosGraficosAñoAnterior("Pierna derecha", año, extremidad);
-            Integer pi2 = DatosGraficos.DatosGraficosAñoAnterior("Pierna izquierda", año, extremidad);
-            Integer pied2 = DatosGraficos.DatosGraficosAñoAnterior("Pie derecho", año, extremidad);
-            Integer piei2 = DatosGraficos.DatosGraficosAñoAnterior("Pie izquierdo", año, extremidad);
+            Integer pi2 = DatosGraficos.DatosGraficosAñoAnterior("Piernas", año, extremidad);
+            Integer pie2 = DatosGraficos.DatosGraficosAñoAnterior("Pies", año, extremidad);
             
             //Configuracion del gráfico        
-            AExtremidad.addValue(md, "Año Seleccionado", "M. der");
-            AExtremidad.addValue(mi, "Año Seleccionado", "M. izq");
-            AExtremidad.addValue(cab, "Año Seleccionado", "Cab");
-            AExtremidad.addValue(cue, "Año Seleccionado", "Cuello");
-            AExtremidad.addValue(bd, "Año Seleccionado", "Br. der");
-            AExtremidad.addValue(bi, "Año Seleccionado", "Br. izq");
-            AExtremidad.addValue(tro, "Año Seleccionado", "Tronco");
-            AExtremidad.addValue(abd, "Año Seleccionado", "Abd.");
-            AExtremidad.addValue(cox, "Año Seleccionado", "Coxis");
-            AExtremidad.addValue(pd, "Año Seleccionado", "P. der");
-            AExtremidad.addValue(pi, "Año Seleccionado", "P. izq");
-            AExtremidad.addValue(pied, "Año Seleccionado", "Pie der");
-            AExtremidad.addValue(piei, "Año Seleccionado", "Pie izq");
+            AExtremidad.addValue(man, "año Seleccionado", "Manos");
+            AExtremidad.addValue(cab, "año Seleccionado", "Cab");
+            AExtremidad.addValue(cue, "año Seleccionado", "Cuello");
+            AExtremidad.addValue(bra, "año Seleccionado", "Brazos");
+            AExtremidad.addValue(tro, "año Seleccionado", "Tronco");
+            AExtremidad.addValue(abd, "año Seleccionado", "Abd.");
+            AExtremidad.addValue(cox, "año Seleccionado", "Coxis");
+            AExtremidad.addValue(pi, "año Seleccionado", "Piernas");
+            AExtremidad.addValue(pie, "año Seleccionado", "Pies");
 
-            AExtremidad.addValue(md2, "Año Anterior", "M. der");
-            AExtremidad.addValue(mi2, "Año Anterior", "M. izq");
-            AExtremidad.addValue(cab2, "Año Anterior", "Cab");
-            AExtremidad.addValue(cue2, "Año Anterior", "Cuello");
-            AExtremidad.addValue(bd2, "Año Anterior", "Br. der");
-            AExtremidad.addValue(bi2, "Año Anterior", "Br. izq");
-            AExtremidad.addValue(tro2, "Año Anterior", "Tronco");
-            AExtremidad.addValue(abd2, "Año Anterior", "Abd.");
-            AExtremidad.addValue(cox2, "Año Anterior", "Coxis");
-            AExtremidad.addValue(pd2, "Año Anterior", "P. der");
-            AExtremidad.addValue(pi2, "Año Anterior", "P. izq");
-            AExtremidad.addValue(pied2, "Año Anterior", "Pie der");
-            AExtremidad.addValue(piei2, "Año Anterior", "Pie izq");
+            AExtremidad.addValue(man2, "año Anterior", "Manos");
+            AExtremidad.addValue(cab2, "año Anterior", "Cab");
+            AExtremidad.addValue(cue2, "año Anterior", "Cuello");
+            AExtremidad.addValue(bra2, "año Anterior", "Brazos");
+            AExtremidad.addValue(tro2, "año Anterior", "Tronco");
+            AExtremidad.addValue(abd2, "año Anterior", "Abd.");
+            AExtremidad.addValue(cox2, "año Anterior", "Coxis");
+            AExtremidad.addValue(pi2, "año Anterior", "Piernas");
+            AExtremidad.addValue(pie2, "año Anterior", "Pies");
             
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad",
                     "Extremidades", "Cantidad Incidentes", AExtremidad, PlotOrientation.VERTICAL, true, true, false);
@@ -1027,11 +1086,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Area",
                     "Areas", "Cantidad Incidentes", AArea, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdTipo2.isSelected()) {
-            Integer lab = DatosGraficos.DatosGraficosAñoActual("laboral", año, tipo);
-            Integer tra = DatosGraficos.DatosGraficosAñoActual("trayecto", año, tipo);
+            Integer lab = DatosGraficos.DatosGraficosAñoActual("Laboral", año, tipo);
+            Integer tra = DatosGraficos.DatosGraficosAñoActual("Trayecto", año, tipo);
 
-            Integer lab2 = DatosGraficos.DatosGraficosAñoAnterior("laboral", año, tipo);
-            Integer tra2 = DatosGraficos.DatosGraficosAñoAnterior("trayecto", año, tipo);
+            Integer lab2 = DatosGraficos.DatosGraficosAñoAnterior("Laboral", año, tipo);
+            Integer tra2 = DatosGraficos.DatosGraficosAñoAnterior("Trayecto", año, tipo);
 
             ATipo.addValue(lab, "Año Seleccionado", "Laboral");
             ATipo.addValue(tra, "Año Seleccionado", "Trayecto");
@@ -1042,23 +1101,23 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Tipo de Incidente",
                     "Tipo de Incidentes", "Cantidad Incidentes", ATipo, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdLesion2.isSelected()) {
-            Integer cor = DatosGraficos.DatosGraficosAñoActual("corte", año, lesion);
-            Integer hep = DatosGraficos.DatosGraficosAñoActual("herida punzante", año, lesion);
-            Integer hec = DatosGraficos.DatosGraficosAñoActual("herida colgajo", año, lesion);
-            Integer hea = DatosGraficos.DatosGraficosAñoActual("herida por abrasion", año, lesion);
-            Integer con = DatosGraficos.DatosGraficosAñoActual("contusion", año, lesion);
-            Integer fra = DatosGraficos.DatosGraficosAñoActual("fractura", año, lesion);
-            Integer que = DatosGraficos.DatosGraficosAñoActual("quemadura", año, lesion);
-            Integer mus = DatosGraficos.DatosGraficosAñoActual("muscular", año, lesion);
+            Integer cor = DatosGraficos.DatosGraficosAñoActual("Corte", año, lesion);
+            Integer hep = DatosGraficos.DatosGraficosAñoActual("Herida punzante", año, lesion);
+            Integer hec = DatosGraficos.DatosGraficosAñoActual("Herida colgajo", año, lesion);
+            Integer hea = DatosGraficos.DatosGraficosAñoActual("Herida por abrasion", año, lesion);
+            Integer con = DatosGraficos.DatosGraficosAñoActual("Contusion", año, lesion);
+            Integer fra = DatosGraficos.DatosGraficosAñoActual("Fractura", año, lesion);
+            Integer que = DatosGraficos.DatosGraficosAñoActual("Quemadura", año, lesion);
+            Integer mus = DatosGraficos.DatosGraficosAñoActual("Muscular", año, lesion);
             
-            Integer cor2 = DatosGraficos.DatosGraficosAñoAnterior("corte", año, lesion);
-            Integer hep2= DatosGraficos.DatosGraficosAñoAnterior("herida punzante", año, lesion);
-            Integer hec2 = DatosGraficos.DatosGraficosAñoAnterior("herida colgajo", año, lesion);
-            Integer hea2 = DatosGraficos.DatosGraficosAñoAnterior("herida por abrasion", año, lesion);
-            Integer con2 = DatosGraficos.DatosGraficosAñoAnterior("contusion", año, lesion);
-            Integer fra2 = DatosGraficos.DatosGraficosAñoAnterior("fractura", año, lesion);
-            Integer que2 = DatosGraficos.DatosGraficosAñoAnterior("quemadura", año, lesion);
-            Integer mus2 = DatosGraficos.DatosGraficosAñoAnterior("muscular", año, lesion);
+            Integer cor2 = DatosGraficos.DatosGraficosAñoAnterior("Corte", año, lesion);
+            Integer hep2= DatosGraficos.DatosGraficosAñoAnterior("Herida punzante", año, lesion);
+            Integer hec2 = DatosGraficos.DatosGraficosAñoAnterior("Herida colgajo", año, lesion);
+            Integer hea2 = DatosGraficos.DatosGraficosAñoAnterior("Herida por abrasion", año, lesion);
+            Integer con2 = DatosGraficos.DatosGraficosAñoAnterior("Contusion", año, lesion);
+            Integer fra2 = DatosGraficos.DatosGraficosAñoAnterior("Fractura", año, lesion);
+            Integer que2 = DatosGraficos.DatosGraficosAñoAnterior("Quemadura", año, lesion);
+            Integer mus2 = DatosGraficos.DatosGraficosAñoAnterior("Muscular", año, lesion);
             
             ALesion.addValue(cor, "Año Seleccionado", "Corte");
             ALesion.addValue(hep, "Año Seleccionado", "H. Punzante");
@@ -1084,9 +1143,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Se deben seleccionar los filtros para mostrar graficos");
         }
         
-        ChartPanel panel = new ChartPanel(GraficaAnual);
+        ChartPanel panelAnual = new ChartPanel(GraficaAnual);
         panelGraficoAnual.setLayout(new java.awt.BorderLayout());
-        panelGraficoAnual.add(panel);
+        panelGraficoAnual.add(panelAnual);
         panelGraficoAnual.validate();
     }//GEN-LAST:event_btnGraficarAnualActionPerformed
 
@@ -1099,74 +1158,204 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         } else if (this.rdTrimestre.isSelected()) {
             semTrim = "trimestre";
         }
-        System.out.println("  ..  " + semTrim);
+
         String extremidad = "extremidad";
         String tipo = "incidente";
         String area = "area";
         String sector = "sector";
         String lesion = "lesion";
-        
+
         if (rdExtremidad3.isSelected()) {
-            Integer md = DatosGraficos.DatosGraficosPeriodoActual("Mano derecha", periodo, extremidad, semTrim);
-            Integer mi = DatosGraficos.DatosGraficosPeriodoActual("Mano izquierda", periodo, extremidad, semTrim);
+            Integer man = DatosGraficos.DatosGraficosPeriodoActual("Manos", periodo, extremidad, semTrim);
             Integer cab = DatosGraficos.DatosGraficosPeriodoActual("Cabeza", periodo, extremidad, semTrim);
             Integer cue = DatosGraficos.DatosGraficosPeriodoActual("Cuello", periodo, extremidad, semTrim);
-            Integer bd = DatosGraficos.DatosGraficosPeriodoActual("Brazo derecho", periodo, extremidad, semTrim);
-            Integer bi = DatosGraficos.DatosGraficosPeriodoActual("Brazo izquierdo", periodo, extremidad, semTrim);
+            Integer bra = DatosGraficos.DatosGraficosPeriodoActual("Brazos", periodo, extremidad, semTrim);
             Integer tro = DatosGraficos.DatosGraficosPeriodoActual("Tronco", periodo, extremidad, semTrim);
             Integer abd = DatosGraficos.DatosGraficosPeriodoActual("Abdomen", periodo, extremidad, semTrim);
             Integer cox = DatosGraficos.DatosGraficosPeriodoActual("Coxis", periodo, extremidad, semTrim);
-            Integer pd = DatosGraficos.DatosGraficosPeriodoActual("Pierna derecha", periodo, extremidad, semTrim);
-            Integer pi = DatosGraficos.DatosGraficosPeriodoActual("Pierna izquierda", periodo, extremidad, semTrim);
-            Integer pied = DatosGraficos.DatosGraficosPeriodoActual("Pie derecho", periodo, extremidad, semTrim);
-            Integer piei = DatosGraficos.DatosGraficosPeriodoActual("Pie izquierdo", periodo, extremidad, semTrim);
+            Integer pi = DatosGraficos.DatosGraficosPeriodoActual("Piernas", periodo, extremidad, semTrim);
+            Integer pie = DatosGraficos.DatosGraficosPeriodoActual("Pies", periodo, extremidad, semTrim);
 
-            Integer md2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mano derecha", periodo, extremidad, semTrim);
-            Integer mi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mano izquierda", periodo, extremidad, semTrim);
+            Integer man2 = DatosGraficos.DatosGraficosPeriodoAnterior("Manos", periodo, extremidad, semTrim);
             Integer cab2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cabeza", periodo, extremidad, semTrim);
             Integer cue2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cuello", periodo, extremidad, semTrim);
-            Integer bd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazo derecho", periodo, extremidad, semTrim);
-            Integer bi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazo izquierdo", periodo, extremidad, semTrim);
+            Integer bra2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazos", periodo, extremidad, semTrim);
             Integer tro2 = DatosGraficos.DatosGraficosPeriodoAnterior("Tronco", periodo, extremidad, semTrim);
             Integer abd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Abdomen", periodo, extremidad, semTrim);
             Integer cox2 = DatosGraficos.DatosGraficosPeriodoAnterior("Coxis", periodo, extremidad, semTrim);
-            Integer pd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pierna derecha", periodo, extremidad, semTrim);
-            Integer pi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pierna izquierda", periodo, extremidad, semTrim);
-            Integer pied2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pie derecho", periodo, extremidad, semTrim);
-            Integer piei2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pie izquierdo", periodo, extremidad, semTrim);
-            
+            Integer pi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Piernas", periodo, extremidad, semTrim);
+            Integer pie2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pies", periodo, extremidad, semTrim);
+
             //Configuracion del gráfico        
-            PExtremidad.addValue(md, "Periodo Seleccionado", "M. der");
-            PExtremidad.addValue(mi, "Periodo Seleccionado", "M. izq");
+            PExtremidad.addValue(man, "Periodo Seleccionado", "Manos");
             PExtremidad.addValue(cab, "Periodo Seleccionado", "Cab");
             PExtremidad.addValue(cue, "Periodo Seleccionado", "Cuello");
-            PExtremidad.addValue(bd, "Periodo Seleccionado", "Br. der");
-            PExtremidad.addValue(bi, "Periodo Seleccionado", "Br. izq");
+            PExtremidad.addValue(bra, "Periodo Seleccionado", "Brazos");
             PExtremidad.addValue(tro, "Periodo Seleccionado", "Tronco");
             PExtremidad.addValue(abd, "Periodo Seleccionado", "Abd.");
             PExtremidad.addValue(cox, "Periodo Seleccionado", "Coxis");
-            PExtremidad.addValue(pd, "Periodo Seleccionado", "P. der");
-            PExtremidad.addValue(pi, "Periodo Seleccionado", "P. izq");
-            PExtremidad.addValue(pied, "Periodo Seleccionado", "Pie der");
-            PExtremidad.addValue(piei, "Periodo Seleccionado", "Pie izq");
+            PExtremidad.addValue(pi, "Periodo Seleccionado", "Piernas");
+            PExtremidad.addValue(pie, "Periodo Seleccionado", "Pies");
 
-            PExtremidad.addValue(md2, "Periodo Anterior", "M. der");
-            PExtremidad.addValue(mi2, "Periodo Anterior", "M. izq");
+            PExtremidad.addValue(man2, "Periodo Anterior", "Manos");
             PExtremidad.addValue(cab2, "Periodo Anterior", "Cab");
             PExtremidad.addValue(cue2, "Periodo Anterior", "Cuello");
-            PExtremidad.addValue(bd2, "Periodo Anterior", "Br. der");
-            PExtremidad.addValue(bi2, "Periodo Anterior", "Br. izq");
+            PExtremidad.addValue(bra2, "Periodo Anterior", "Brazos");
             PExtremidad.addValue(tro2, "Periodo Anterior", "Tronco");
             PExtremidad.addValue(abd2, "Periodo Anterior", "Abd.");
             PExtremidad.addValue(cox2, "Periodo Anterior", "Coxis");
-            PExtremidad.addValue(pd2, "Periodo Anterior", "P. der");
-            PExtremidad.addValue(pi2, "Periodo Anterior", "P. izq");
-            PExtremidad.addValue(pied2, "Periodo Anterior", "Pie der");
-            PExtremidad.addValue(piei2, "Periodo Anterior", "Pie izq");
-            
+            PExtremidad.addValue(pi2, "Periodo Anterior", "Piernas");
+            PExtremidad.addValue(pie2, "Periodo Anterior", "Pies");
+
             GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Extremidad",
                     "Extremidades", "Cantidad Incidentes", PExtremidad, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdSector3.isSelected()) {
+            Integer cor = DatosGraficos.DatosGraficosPeriodoActual("Corte", periodo, sector, semTrim);
+            Integer lam = DatosGraficos.DatosGraficosPeriodoActual("Laminado", periodo, sector, semTrim);
+            Integer hor = DatosGraficos.DatosGraficosPeriodoActual("Horno", periodo, sector, semTrim);
+            Integer bot = DatosGraficos.DatosGraficosPeriodoActual("Bottero", periodo, sector, semTrim);
+            Integer ser = DatosGraficos.DatosGraficosPeriodoActual("Serigrafia", periodo, sector, semTrim);
+            Integer hort = DatosGraficos.DatosGraficosPeriodoActual("Horno Templado", periodo, sector, semTrim);
+            Integer sal = DatosGraficos.DatosGraficosPeriodoActual("Sala armado", periodo, sector, semTrim);
+            Integer bio = DatosGraficos.DatosGraficosPeriodoActual("Bodega Bio-bio", periodo, sector, semTrim);
+            Integer log = DatosGraficos.DatosGraficosPeriodoActual("Logistica", periodo, sector, semTrim);
+            Integer bod = DatosGraficos.DatosGraficosPeriodoActual("Bodega Materiales", periodo, sector, semTrim);
+            Integer cc = DatosGraficos.DatosGraficosPeriodoActual("Control de Calidad", periodo, sector, semTrim);
+            Integer tale = DatosGraficos.DatosGraficosPeriodoActual("Taller Electrico", periodo, sector, semTrim);
+            Integer talm = DatosGraficos.DatosGraficosPeriodoActual("Taller Mecanico", periodo, sector, semTrim);
+
+            Integer cor2 = DatosGraficos.DatosGraficosPeriodoAnterior("Corte", periodo, sector, semTrim);
+            Integer lam2 = DatosGraficos.DatosGraficosPeriodoAnterior("Laminado", periodo, sector, semTrim);
+            Integer hor2 = DatosGraficos.DatosGraficosPeriodoAnterior("Horno", periodo, sector, semTrim);
+            Integer bot2 = DatosGraficos.DatosGraficosPeriodoAnterior("Bottero", periodo, sector, semTrim);
+            Integer ser2 = DatosGraficos.DatosGraficosPeriodoAnterior("Serigrafia", periodo, sector, semTrim);
+            Integer hort2 = DatosGraficos.DatosGraficosPeriodoAnterior("Horno Templado", periodo, sector, semTrim);
+            Integer sal2 = DatosGraficos.DatosGraficosPeriodoAnterior("Sala armado", periodo, sector, semTrim);
+            Integer bio2 = DatosGraficos.DatosGraficosPeriodoAnterior("Bodega Bio-bio", periodo, sector, semTrim);
+            Integer log2 = DatosGraficos.DatosGraficosPeriodoAnterior("Logistica", periodo, sector, semTrim);
+            Integer bod2 = DatosGraficos.DatosGraficosPeriodoAnterior("Bodega Materiales", periodo, sector, semTrim);
+            Integer cc2 = DatosGraficos.DatosGraficosPeriodoAnterior("Control de Calidad", periodo, sector, semTrim);
+            Integer tale2 = DatosGraficos.DatosGraficosPeriodoAnterior("Taller Electrico", periodo, sector, semTrim);
+            Integer talm2 = DatosGraficos.DatosGraficosPeriodoAnterior("Taller Mecanico", periodo, sector, semTrim);
+
+            PSector.addValue(cor, "Periodo Seleccionado", "Corte");
+            PSector.addValue(lam, "Periodo Seleccionado", "Lam.");
+            PSector.addValue(hor, "Periodo Seleccionado", "Horno");
+            PSector.addValue(bot, "Periodo Seleccionado", "Bott.");
+            PSector.addValue(ser, "Periodo Seleccionado", "Serig.");
+            PSector.addValue(hort, "Periodo Seleccionado", "H.Temp.");
+            PSector.addValue(sal, "Periodo Seleccionado", "Sala A.");
+            PSector.addValue(bio, "Periodo Seleccionado", "BBio");
+            PSector.addValue(log, "Periodo Seleccionado", "Logi.");
+            PSector.addValue(bod, "Periodo Seleccionado", "Bod.M.");
+            PSector.addValue(cc, "Periodo Seleccionado", "C.Cal.");
+            PSector.addValue(tale, "Periodo Seleccionado", "T.Elec.");
+            PSector.addValue(talm, "Periodo Seleccionado", "T.Mec.");
+
+            PSector.addValue(cor2, "Periodo Anterior", "Corte");
+            PSector.addValue(lam2, "Periodo Anterior", "Lam.");
+            PSector.addValue(hor2, "Periodo Anterior", "Horno");
+            PSector.addValue(bot2, "Periodo Anterior", "Bott.");
+            PSector.addValue(ser2, "Periodo Anterior", "Serig.");
+            PSector.addValue(hort2, "Periodo Anterior", "H.Temp.");
+            PSector.addValue(sal2, "Periodo Anterior", "Sala A.");
+            PSector.addValue(bio2, "Periodo Anterior", "BBio");
+            PSector.addValue(log2, "Periodo Anterior", "Logi.");
+            PSector.addValue(bod2, "Periodo Anterior", "Bod.M.");
+            PSector.addValue(cc2, "Periodo Anterior", "C.Cal.");
+            PSector.addValue(tale2, "Periodo Anterior", "T.Elec.");
+            PSector.addValue(talm2, "Periodo Anterior", "T.Mec.");
+
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Sector",
+                    "Sectores", "Cantidad Incidentes", PSector, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdArea3.isSelected()) {
+            Integer bio = DatosGraficos.DatosGraficosPeriodoActual("Bio-bio", periodo, area, semTrim);
+            Integer man = DatosGraficos.DatosGraficosPeriodoActual("Mantencion", periodo, area, semTrim);
+            Integer adm = DatosGraficos.DatosGraficosPeriodoActual("Administrativo", periodo, area, semTrim);
+            Integer mass = DatosGraficos.DatosGraficosPeriodoActual("Mass", periodo, area, semTrim);
+            Integer pro = DatosGraficos.DatosGraficosPeriodoActual("Produccion", periodo, area, semTrim);
+
+            Integer bio2 = DatosGraficos.DatosGraficosPeriodoAnterior("Bio-bio", periodo, area, semTrim);
+            Integer man2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mantencion", periodo, area, semTrim);
+            Integer adm2 = DatosGraficos.DatosGraficosPeriodoAnterior("Administrativo", periodo, area, semTrim);
+            Integer mass2 = DatosGraficos.DatosGraficosPeriodoAnterior("Mass", periodo, area, semTrim);
+            Integer pro2 = DatosGraficos.DatosGraficosPeriodoAnterior("Produccion", periodo, area, semTrim);
+
+            PArea.addValue(bio, "Periodo Seleccionado", "Bio Bio");
+            PArea.addValue(man, "Periodo Seleccionado", "Mantención");
+            PArea.addValue(adm, "Periodo Seleccionado", "Administrativo");
+            PArea.addValue(mass, "Periodo Seleccionado", "Mass");
+            PArea.addValue(pro, "Periodo Seleccionado", "Producción");
+
+            PArea.addValue(bio2, "Periodo Anterior", "Bio Bio");
+            PArea.addValue(man2, "Periodo Anterior", "Mantención");
+            PArea.addValue(adm2, "Periodo Anterior", "Administrativo");
+            PArea.addValue(mass2, "Periodo Anterior", "Mass");
+            PArea.addValue(pro2, "Periodo Anterior", "Producción");
+
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Area",
+                    "Areas", "Cantidad Incidentes", PArea, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdTipo3.isSelected()) {
+            Integer lab = DatosGraficos.DatosGraficosPeriodoActual("Laboral", periodo, tipo, semTrim);
+            Integer tra = DatosGraficos.DatosGraficosPeriodoActual("Trayecto", periodo, tipo, semTrim);
+
+            Integer lab2 = DatosGraficos.DatosGraficosPeriodoAnterior("Laboral", periodo, tipo, semTrim);
+            Integer tra2 = DatosGraficos.DatosGraficosPeriodoAnterior("Trayecto", periodo, tipo, semTrim);
+
+            PTipo.addValue(lab, "Periodo Seleccionado", "Laboral");
+            PTipo.addValue(tra, "Periodo Seleccionado", "Trayecto");
+
+            PTipo.addValue(lab2, "Periodo Anterior", "Laboral");
+            PTipo.addValue(tra2, "Periodo Anterior", "Trayecto");
+
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Tipo de Incidente",
+                    "Tipo de Incidentes", "Cantidad Incidentes", PTipo, PlotOrientation.VERTICAL, true, true, false);
+        } else if (rdLesion3.isSelected()) {
+            Integer cor = DatosGraficos.DatosGraficosPeriodoActual("Corte", periodo, lesion, semTrim);
+            Integer hep = DatosGraficos.DatosGraficosPeriodoActual("Herida punzante", periodo, lesion, semTrim);
+            Integer hec = DatosGraficos.DatosGraficosPeriodoActual("Herida colgajo", periodo, lesion, semTrim);
+            Integer hea = DatosGraficos.DatosGraficosPeriodoActual("Herida por abrasion", periodo, lesion, semTrim);
+            Integer con = DatosGraficos.DatosGraficosPeriodoActual("Contusion", periodo, lesion, semTrim);
+            Integer fra = DatosGraficos.DatosGraficosPeriodoActual("Fractura", periodo, lesion, semTrim);
+            Integer que = DatosGraficos.DatosGraficosPeriodoActual("Quemadura", periodo, lesion, semTrim);
+            Integer mus = DatosGraficos.DatosGraficosPeriodoActual("Muscular", periodo, lesion, semTrim);
+
+            Integer cor2 = DatosGraficos.DatosGraficosPeriodoAnterior("Corte", periodo, lesion, semTrim);
+            Integer hep2 = DatosGraficos.DatosGraficosPeriodoAnterior("Herida punzante", periodo, lesion, semTrim);
+            Integer hec2 = DatosGraficos.DatosGraficosPeriodoAnterior("Herida colgajo", periodo, lesion, semTrim);
+            Integer hea2 = DatosGraficos.DatosGraficosPeriodoAnterior("Herida por abrasion", periodo, lesion, semTrim);
+            Integer con2 = DatosGraficos.DatosGraficosPeriodoAnterior("Contusion", periodo, lesion, semTrim);
+            Integer fra2 = DatosGraficos.DatosGraficosPeriodoAnterior("Fractura", periodo, lesion, semTrim);
+            Integer que2 = DatosGraficos.DatosGraficosPeriodoAnterior("Quemadura", periodo, lesion, semTrim);
+            Integer mus2 = DatosGraficos.DatosGraficosPeriodoAnterior("Muscular", periodo, lesion, semTrim);
+
+            PLesion.addValue(cor, "Periodo Seleccionado", "Corte");
+            PLesion.addValue(hep, "Periodo Seleccionado", "H. Punzante");
+            PLesion.addValue(hec, "Periodo Seleccionado", "H. Colgajo");
+            PLesion.addValue(hea, "Periodo Seleccionado", "H. Abrasion");
+            PLesion.addValue(con, "Periodo Seleccionado", "Contusion");
+            PLesion.addValue(fra, "Periodo Seleccionado", "Fractura.");
+            PLesion.addValue(que, "Periodo Seleccionado", "Quemadura");
+            PLesion.addValue(mus, "Periodo Seleccionado", "Muscular");
+
+            PLesion.addValue(cor2, "Periodo Anterior", "Corte");
+            PLesion.addValue(hep2, "Periodo Anterior", "H. Punzante");
+            PLesion.addValue(hec2, "Periodo Anterior", "H. Colgajo");
+            PLesion.addValue(hea2, "Periodo Anterior", "H. Abrasion");
+            PLesion.addValue(con2, "Periodo Anterior", "Contusion");
+            PLesion.addValue(fra2, "Periodo Anterior", "Fractura.");
+            PLesion.addValue(que2, "Periodo Anterior", "Quemadura");
+            PLesion.addValue(mus2, "Periodo Anterior", "Muscular");
+
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Lesion",
+                    "Tipo de Lesiones", "Cantidad Incidentes", PLesion, PlotOrientation.VERTICAL, true, true, false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Se deben seleccionar los filtros para mostrar graficos");
         }
+        ChartPanel panelPeriodico = new ChartPanel(GraficaPeriodica);
+        panelGraficoPeriodico.setLayout(new java.awt.BorderLayout());
+        panelGraficoPeriodico.add(panelPeriodico);
+        panelGraficoPeriodico.validate();
     }//GEN-LAST:event_btnGraficarPeriodicoActionPerformed
 
     private void rdSemestreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSemestreMouseClicked
@@ -1199,6 +1388,50 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_rdTrimestreMouseClicked
 
+    private void btnGuardaTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaTortaActionPerformed
+        // TODO add your handling code here:
+        try {
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico torta.jpg"), GraficaTorta, 1024, 768);
+            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            gestion.verificaDirectorio();
+        } catch (IOException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardaTortaActionPerformed
+
+    private void btnGuardarPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeriodicoActionPerformed
+        // TODO add your handling code here:
+        try {
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Periodico.jpg"), GraficaPeriodica, 1024, 768);
+            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            gestion.verificaDirectorio();
+        } catch (IOException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarPeriodicoActionPerformed
+
+    private void btnGuardarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAnualActionPerformed
+        // TODO add your handling code here:
+        try {
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Anual.jpg"), GraficaAnual, 1024, 768);
+            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            gestion.verificaDirectorio();
+        } catch (IOException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarAnualActionPerformed
+
+    private void btnGuardarMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMensualActionPerformed
+        // TODO add your handling code here:
+        try {
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Mensual.jpg"), GraficaMensual, 1024, 768);
+            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            gestion.verificaDirectorio();
+        } catch (IOException ex) {
+            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarMensualActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxAnual;
@@ -1207,11 +1440,15 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGraficarAnual;
     private javax.swing.JButton btnGraficarMensual;
     private javax.swing.JButton btnGraficarPeriodico;
+    private javax.swing.JButton btnGraficarTorta;
+    private javax.swing.JButton btnGuardaTorta;
+    private javax.swing.JButton btnGuardarAnual;
+    private javax.swing.JButton btnGuardarMensual;
+    private javax.swing.JButton btnGuardarPeriodico;
     private javax.swing.ButtonGroup grupoAnual;
     private javax.swing.ButtonGroup grupoMensual;
     private javax.swing.ButtonGroup grupoPeriodico1;
     private javax.swing.ButtonGroup grupoPeriodico2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTabbedPane jTabbedPane1;

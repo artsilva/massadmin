@@ -5,21 +5,26 @@
  */
 package com.massmanager.swing.model;
 
+import com.massmanager.controller.Usuarios;
 import com.massmanager.swing.view.LoginView;
 import com.massmanager.swing.view.MenuMass;
 import com.massmanager.swing.view.MenuSpa;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Artsk
  */
-public class LoginModel implements ActionListener{
+public class LoginModel implements ActionListener {
+
     private LoginView view;
-    //Constructor
+
     public LoginModel(LoginView view) {
         this.view = view;
         addListener();
@@ -29,42 +34,60 @@ public class LoginModel implements ActionListener{
         view.getAceptar().addActionListener(this);
         view.getCancelar().addActionListener(this);
     }
-    
+
     private void showMessage(String msg) {
         Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(view, msg);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.getAceptar()){
-            String user = view.getUsuario().getText();
-            String password = view.getPassword().getText();
-            if (user.trim().length() <= 0 && password.trim().length() <= 0){
-                showMessage("Ingresa tu usuario y tu contraseña");
-                view.getUsuario().requestFocus();
-            } else if(user.trim().length() <= 0) {
-                showMessage("Ingresa tu usuario");
-                view.getUsuario().requestFocus();
-            } else if(password.trim().length() <=0) {
-                showMessage("Ingresa tu password");
-                view.getPassword().requestFocus();
-            } else if(user.equals("Arturo") || user.equals("arturo") && password.equals("skate")) {
-                showMessage("Bienvenido a MassAdmin");
+        Conexion cn = new Conexion();
+        ResultSet rsUsuario = cn.extraeUsuarios();
+        List<Usuarios> listaUsuarios = new ArrayList<>();
+        String user = view.getUsuario().getText();
+        String password = view.getPassword().getText();
+
+        try {
+            while (rsUsuario.next()) {
+                Usuarios usuario = new Usuarios();
+                usuario.setUserid(rsUsuario.getInt("id_usuario"));
+                usuario.setUsuario(rsUsuario.getString("usuario"));
+                usuario.setPassword(rsUsuario.getString("password"));
+                usuario.setEmail(rsUsuario.getString("email"));
+                usuario.setPermisoid(rsUsuario.getInt("id_permiso"));
+                listaUsuarios.add(usuario);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (e.getSource() == view.getAceptar()) {
+            boolean usuarioexistente = false;
+            boolean passwordCorrecto = false;
+            Integer permisoUsuario = null;
+
+            for (Usuarios listaUsuario : listaUsuarios) {
+                if (user.equals(listaUsuario.getUsuario()) && password.equals(listaUsuario.getPassword())) {
+                    usuarioexistente = true;
+                    passwordCorrecto = true;
+                    permisoUsuario = listaUsuario.getPermisoid();
+                }
+            }
+            //permisoUsuario 1: Acceso a MenuMASS, permisoUsuario 2: Acceso a menuSPA
+            if (usuarioexistente && passwordCorrecto && permisoUsuario == 1) {
+                MenuMass mass = new MenuMass();
+                view.setVisible(false);
+                mass.setVisible(true);
+            } else if (usuarioexistente && passwordCorrecto && permisoUsuario == 2) {
                 MenuSpa spa = new MenuSpa();
                 view.setVisible(false);
                 spa.setVisible(true);
-            } else if(user.equals("Patricio") || user.equals("patricio") && password.equals("skate")) {
-                //showMessage("Bienvenido a MassAdmin");
-                MenuMass mass = new MenuMass();
-                view.setVisible(false);
-                mass.setVisible(true);     
-            } else {
-                showMessage("Usuario o contraseña Incorrectos");
+            } else if (!usuarioexistente || !passwordCorrecto) {
+                showMessage("Usuario o contraseña incorrectos");
             }
-            return;
         }
-            if (e.getSource() == view.getCancelar()){
+        if (e.getSource() == view.getCancelar()) {
             System.exit(0);
         }
     }

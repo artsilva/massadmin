@@ -5,12 +5,17 @@
  */
 package com.massmanager.swing.view;
 
+import com.massmanager.controller.Trabajador;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.EnviadorMail;
+import com.massmanager.swing.model.FechaHora;
+import com.massmanager.swing.model.Utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -37,6 +42,7 @@ public class MenuSpa extends javax.swing.JFrame {
         this.boxIncidente.removeAllItems();
         this.boxExtremidad.removeAllItems();
         this.boxParamedico.removeAllItems();
+        
         Conexion cn = new Conexion();
         ResultSet rs;
         //btnLesion
@@ -46,7 +52,7 @@ public class MenuSpa extends javax.swing.JFrame {
                 boxLesion.addItem(rs.getString("lesion").toUpperCase());
             }
         }catch(SQLException e){  
-            
+            e.printStackTrace();
         }
         //btnIncidente
         rs = cn.ExtraerIncidente();
@@ -55,7 +61,7 @@ public class MenuSpa extends javax.swing.JFrame {
                 boxIncidente.addItem(rs.getString("tipo").toUpperCase());
             }
         }catch(SQLException e){ 
-            
+            e.printStackTrace();
         }
         //btnExtremidad
         rs = cn.ExtraerExtremidad();
@@ -64,7 +70,7 @@ public class MenuSpa extends javax.swing.JFrame {
                 boxExtremidad.addItem(rs.getString("nombre").toUpperCase());
             }
         }catch(SQLException e){ 
-            
+            e.printStackTrace();
         }
         //btnParamedico
         rs = cn.ExtraerParamedico();
@@ -73,8 +79,14 @@ public class MenuSpa extends javax.swing.JFrame {
                 boxParamedico.addItem(rs.getString("nombre_paramedico").toUpperCase());
             }
         }catch(SQLException e){ 
-            
+            e.printStackTrace();
         }  
+        
+        FechaHora fecha = new FechaHora();
+
+        this.lblDia.setText(fecha.getDia().toString());
+        this.lblMes.setText(fecha.obtenerMes(fecha.getMes()));
+        this.lblAnio.setText(fecha.getAnio().toString());
     }
 
     public MenuSpa(Object object, boolean b) {
@@ -94,12 +106,11 @@ public class MenuSpa extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnCorreo = new javax.swing.JButton();
         panelFecha = new javax.swing.JPanel();
-        boxAno = new javax.swing.JComboBox();
+        mes = new javax.swing.JLabel();
+        anio = new javax.swing.JLabel();
         lblDia = new javax.swing.JLabel();
-        lvlMes = new javax.swing.JLabel();
-        lblAno = new javax.swing.JLabel();
-        boxDia = new javax.swing.JComboBox();
-        boxMes = new javax.swing.JComboBox();
+        lblMes = new javax.swing.JLabel();
+        lblAnio = new javax.swing.JLabel();
         panelTrabajador = new javax.swing.JPanel();
         lblRut = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -164,60 +175,44 @@ public class MenuSpa extends javax.swing.JFrame {
         panelFecha.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         panelFecha.setToolTipText("Fecha");
 
-        boxAno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", " " }));
-        boxAno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        boxAno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        boxAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxAnoActionPerformed(evt);
-            }
-        });
+        mes.setText("de");
 
-        lblDia.setText("Dia");
+        anio.setText("del");
 
-        lvlMes.setText("Mes");
+        lblDia.setText("jLabel1");
 
-        lblAno.setText("Año");
+        lblMes.setText("jLabel2");
 
-        boxDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        boxDia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        boxDia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        boxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        boxMes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        boxMes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAnio.setText("jLabel3");
 
         javax.swing.GroupLayout panelFechaLayout = new javax.swing.GroupLayout(panelFecha);
         panelFecha.setLayout(panelFechaLayout);
         panelFechaLayout.setHorizontalGroup(
             panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFechaLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFechaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDia)
-                .addGap(18, 18, 18)
-                .addComponent(boxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(lvlMes)
-                .addGap(18, 18, 18)
-                .addComponent(boxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(lblAno)
-                .addGap(18, 18, 18)
-                .addComponent(boxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(anio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAnio)
+                .addGap(109, 109, 109))
         );
         panelFechaLayout.setVerticalGroup(
             panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFechaLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addGroup(panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mes)
+                    .addComponent(anio)
                     .addComponent(lblDia)
-                    .addComponent(lvlMes)
-                    .addComponent(lblAno)
-                    .addComponent(boxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(lblMes)
+                    .addComponent(lblAnio))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         panelTrabajador.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos Trabajador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
@@ -261,7 +256,7 @@ public class MenuSpa extends javax.swing.JFrame {
         panelTrabajadorLayout.setHorizontalGroup(
             panelTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTrabajadorLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(panelTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblJefe)
                     .addComponent(lblLugar)
@@ -269,9 +264,9 @@ public class MenuSpa extends javax.swing.JFrame {
                     .addComponent(lblSector)
                     .addComponent(lblNombre)
                     .addComponent(lblRut))
-                .addGroup(panelTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(50, 50, 50)
+                .addGroup(panelTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelTrabajadorLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
                         .addGroup(panelTrabajadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSector, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,8 +276,7 @@ public class MenuSpa extends javax.swing.JFrame {
                                 .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTrabajadorLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRut)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
                         .addGap(37, 37, 37))))
@@ -404,7 +398,7 @@ public class MenuSpa extends javax.swing.JFrame {
                     .addComponent(boxExtremidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxIncidente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTto))
-                .addGap(34, 34, 34))
+                .addGap(70, 70, 70))
         );
         panelAtencionLayout.setVerticalGroup(
             panelAtencionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +448,7 @@ public class MenuSpa extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103))
+                .addGap(100, 100, 100))
         );
         panelLogoLayout.setVerticalGroup(
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,12 +485,12 @@ public class MenuSpa extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(panelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                        .addComponent(panelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                         .addComponent(panelAtencion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(119, 119, 119)))
-                .addGap(82, 82, 82))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -518,10 +512,6 @@ public class MenuSpa extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void boxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxAnoActionPerformed
 
     private void txtDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDetallesActionPerformed
         // TODO add your handling code here:
@@ -633,24 +623,24 @@ public class MenuSpa extends javax.swing.JFrame {
         
         //Guardamos el archivo
         //Nombre del Archivo
-        Object anio, mes, dia;
-        anio = this.boxAno.getSelectedItem();
-        mes = this.boxMes.getSelectedItem();
-        dia = this.boxDia.getSelectedItem();
+        String anio, mes, dia;
+        anio = this.lblAnio.getText();
+        mes = this.lblMes.getText();
+        dia = this.lblDia.getText();
         String file = "Atenciones_"+anio+""+mes+""+dia+".xls";
         try (FileOutputStream out = new FileOutputStream(file)) {
             libro.write(out);
         }
         catch (IOException e){
             System.err.println(e.getMessage());
-        }
-        
+        }   
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorreoActionPerformed
         // TODO add your handling code here:
+        Utils utilitario = new Utils();
         try {
-            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com","Atención ?nombretrabajador? en Sala de Primeros Auxilios", "Buenos dias,\n Junto con saludar, se informa la atencion de indole ?tipo? al sr. ?nombretrabajador? a causa de una ?lesion? en el area ?area? especificamente en ?lugarincidente? mientras ?detalles?, siendo atendido en Spa y ?comentario?.\n\n\n Atte.\n\n\n ?paramedico?\n Paramédico SPA Lirquen Santiago.\n\n\n\n Este fue un mensaje generado automaticamente por MassAdmin, para mas información comunicarse a SPA Vidrios Liquen Santiago.");
+            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", "Atención ?nombretrabajador? en Sala de Primeros Auxilios", utilitario.cuerpoCorreo());
             JOptionPane.showMessageDialog(null, "Se envio el mail correctamente");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -667,20 +657,28 @@ public class MenuSpa extends javax.swing.JFrame {
         // TODO add your handling code here:
         Conexion cn = new Conexion();
         String rut = this.txtRut.getText();
-        System.out.println(rut);
         
         ResultSet rs;
-                rs = cn.ExtraerTrabajador(rut);
+        rs = cn.ExtraerTrabajador(Integer.parseInt(rut));
+        
+        Trabajador trabajador = new Trabajador();
         try {
-            while(rs.next()){
-                txtNombre.setText(rs.getString("nombre"));
-                txtSector.setText(rs.getString("nombre_sector"));
-                txtArea.setText(rs.getString("nombre_area"));
-                txtJefe.setText(rs.getString("jefe_area"));
+            while (rs.next()) {
+            trabajador.setRut(Integer.parseInt(rut.trim()));
+            trabajador.setNombre(rs.getString("nombre"));
+            trabajador.setApellido(rs.getString("apellido"));
+            trabajador.setArea(rs.getString("nombre_area"));
+            trabajador.setSector(rs.getString("nombre_sector"));
+            trabajador.setJefeArea(rs.getString("jefe_area"));
             }
-        } catch (SQLException e) {
-          
-        }   
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuSpa.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        this.txtNombre.setText(trabajador.getNombre() + " " + trabajador.getApellido());
+        this.txtArea.setText(trabajador.getArea());
+        this.txtJefe.setText(trabajador.getJefeArea());
+        this.txtSector.setText(trabajador.getSector());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -695,22 +693,6 @@ public class MenuSpa extends javax.swing.JFrame {
     private void boxLesionComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_boxLesionComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_boxLesionComponentAdded
-    
-    public JComboBox getBoxAno() {
-        return boxAno;
-    }
-
-    public void setBoxAno(JComboBox boxAno) {
-        this.boxAno = boxAno;
-    }
-
-    public JComboBox getBoxDia() {
-        return boxDia;
-    }
-
-    public void setBoxDia(JComboBox boxDia) {
-        this.boxDia = boxDia;
-    }
 
     public JComboBox getBoxExtremidad() {
         return boxExtremidad;
@@ -734,14 +716,6 @@ public class MenuSpa extends javax.swing.JFrame {
 
     public void setBoxLesion(JComboBox boxLesion) {
         this.boxLesion = boxLesion;
-    }
-
-    public JComboBox getBoxMes() {
-        return boxMes;
-    }
-
-    public void setBoxMes(JComboBox boxMes) {
-        this.boxMes = boxMes;
     }
 
     public JComboBox getBoxParamedico() {
@@ -843,12 +817,10 @@ public class MenuSpa extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox boxAno;
-    private javax.swing.JComboBox boxDia;
+    private javax.swing.JLabel anio;
     private javax.swing.JComboBox boxExtremidad;
     private javax.swing.JComboBox boxIncidente;
     private javax.swing.JComboBox boxLesion;
-    private javax.swing.JComboBox boxMes;
     private javax.swing.JComboBox boxParamedico;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCorreo;
@@ -858,7 +830,7 @@ public class MenuSpa extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAno;
+    private javax.swing.JLabel lblAnio;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblComentario;
     private javax.swing.JLabel lblDetalles;
@@ -868,12 +840,13 @@ public class MenuSpa extends javax.swing.JFrame {
     private javax.swing.JLabel lblJefe;
     private javax.swing.JLabel lblLesion;
     private javax.swing.JLabel lblLugar;
+    private javax.swing.JLabel lblMes;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblParamedico;
     private javax.swing.JLabel lblRut;
     private javax.swing.JLabel lblSector;
     private javax.swing.JLabel lblTto;
-    private javax.swing.JLabel lvlMes;
+    private javax.swing.JLabel mes;
     private javax.swing.JPanel panelAtencion;
     private javax.swing.JPanel panelFecha;
     private javax.swing.JPanel panelLogo;
