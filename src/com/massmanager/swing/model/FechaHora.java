@@ -43,8 +43,7 @@ public final class FechaHora {
         setFecha(formatoFecha.format(fechaActual));
         setHora(formatoHora.format(fechaActual)); 
         setHoraMinutos(formatoHora2.format(fechaActual));
-        
-        
+        //  
     }
     
     public String obtenerMes(Integer mes) {
