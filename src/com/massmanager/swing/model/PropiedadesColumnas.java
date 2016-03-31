@@ -365,7 +365,7 @@ public class PropiedadesColumnas {
         nombreTabla.getTableHeader().setFont(new Font("Arial", 1, 14));
 
         // cambia el fondo del encabezado de la tabla
-        nombreTabla.getTableHeader().setBackground(Color.lightGray);
+        nombreTabla.getTableHeader().setBackground(new Color(108 ,166 ,205));
 
         // cambia el color de la letra del encabezado de la tabla
         nombreTabla.getTableHeader().setForeground(Color.WHITE);

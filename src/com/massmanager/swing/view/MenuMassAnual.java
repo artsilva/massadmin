@@ -224,6 +224,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         panelTipo.setPreferredSize(new java.awt.Dimension(340, 129));
 
         boxOpcion.setEditable(true);
+        boxOpcion.setForeground(new java.awt.Color(255, 255, 255));
         boxOpcion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnFiltrar.setText("Filtrar");
@@ -339,17 +340,18 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         QuerysAnuales query = new QuerysAnuales();
         grdAnual.setModel(new DefaultTableModel());
         DefaultTableModel dfm = new DefaultTableModel();
-        PropiedadesColumnas ancho = new PropiedadesColumnas();
+        PropiedadesColumnas ancho = new PropiedadesColumnas();     
+        int cont = 1;
         
         //Borra el contenido de la tabla antes de cargar datos
-        if (rdExtremidad.isSelected()) {
+        if (rdExtremidad.isSelected()) {           
             String where = "extremidad"; 
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(extremidad, anio, where);
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -363,7 +365,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -377,7 +379,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -391,7 +393,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -417,21 +419,27 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.boxOpcion.removeAllItems();
         this.boxAno.removeAllItems();
+        String opcion = (String) this.boxOpcion.getSelectedItem();
+        String anio = (String) this.boxAno.getSelectedItem();
+        
+        QuerysAnuales query = new QuerysAnuales();
         Conexion cn = new Conexion();
+        ResultSet rs;
         ResultSet rs2;
-        rs2 = cn.ExtraerIncidente();
+        rs = cn.ExtraerIncidente();
+        rs2 = query.countAtencionAnualVariable(opcion, anio, opcion.toLowerCase());
         try {
-            while (rs2.next()) {
-                this.boxOpcion.addItem(rs2.getString("tipo"));
+            while (rs.next()) {
+                this.boxOpcion.addItem(rs2.getInt("count") + " - " + rs.getString("tipo"));
             }
         } catch (Exception e) {
         }
         //Setea el Mes en el COmboBox de AÑO cuando se selecciona un radioButton
-        ResultSet rs6;
-        rs6 = cn.ExtraerAno();
+        ResultSet rs3;
+        rs3 = cn.ExtraerAno();
         try {
-            while (rs6.next()) {
-                this.boxAno.addItem(rs6.getString("ano"));
+            while (rs3.next()) {
+                this.boxAno.addItem(rs3.getString("ano"));
             }
         } catch (Exception e) {
             e.printStackTrace();

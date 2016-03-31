@@ -51,11 +51,12 @@ public class LoginModel implements ActionListener {
         try {
             while (rsUsuario.next()) {
                 Usuarios usuario = new Usuarios();
-                usuario.setUserid(rsUsuario.getInt("id_usuario"));
+                usuario.setUserId(rsUsuario.getInt("id_usuario"));
                 usuario.setUsuario(rsUsuario.getString("usuario"));
                 usuario.setPassword(rsUsuario.getString("password"));
                 usuario.setEmail(rsUsuario.getString("email"));
-                usuario.setPermisoid(rsUsuario.getInt("id_permiso"));
+                usuario.setPermisoId(rsUsuario.getInt("id_permiso"));
+                usuario.setNombreUsuario(rsUsuario.getString("nombre_usuario"));
                 listaUsuarios.add(usuario);
             }
         } catch (Exception ex) {
@@ -68,10 +69,10 @@ public class LoginModel implements ActionListener {
             Integer permisoUsuario = null;
 
             for (Usuarios listaUsuario : listaUsuarios) {
-                if (user.equals(listaUsuario.getUsuario()) && password.equals(listaUsuario.getPassword())) {
+                if (user.trim().equals(listaUsuario.getUsuario()) && password.trim().equals(listaUsuario.getPassword())) {
                     usuarioexistente = true;
                     passwordCorrecto = true;
-                    permisoUsuario = listaUsuario.getPermisoid();
+                    permisoUsuario = listaUsuario.getPermisoId();
                 }
             }
             //permisoUsuario 1: Acceso a MenuMASS, permisoUsuario 2: Acceso a menuSPA

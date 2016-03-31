@@ -5,8 +5,11 @@
  */
 package com.massmanager.swing.model;
 
+import com.massmanager.controller.Atencion;
+import com.sun.org.glassfish.external.statistics.annotations.Reset;
 import java.sql.Connection;
 import java.sql.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,30 +38,76 @@ public class Conexion{
         } 
         return cn;
     }
-    
-    public void InsertarDatos(int id, String nombre, String email) {
+    /*
+    public ResultSet convierteAtenciones (List<Atencion> listaAtenciones) {
         try {
-            ps = cn.prepareStatement("INSERT INTO mass_admin.prueba (id,nombre,email) VALUES (?,?,?)");
-            ps.setInt(1, id);
-            ps.setString(2, nombre);
-            ps.setString(3, email);
+            ps = cn.prepareStatement("");
+            for (Atencion atencion : atenciones) {                           
+            ps.setInt(1, atencion.getRut());
+            ps.setInt(2, atencion.getSector());
+            ps.setInt(3, atencion.getArea());
+            ps.setInt(4, atencion.getJefearea());
+            ps.setDate(5, atencion.getFecha());
+            ps.setString(6, atencion.getRut());
+            ps.setString(7, atencion.getRut());
+            ps.setInt(8, atencion.getRut());
+            ps.setInt(9, atencion.getRut());
+            ps.setInt(10, atencion.getRut());
+            ps.setInt(11, atencion.getRut());
+            ps.setString(12, atencion.getRut());
+            ps.setString(13, atencion.getRut());
+            ps.setString(14, atencion.getRut());
+            ps.setString(15, atencion.getRut());
+            
             ps.execute();
+        } catch (Exception e) {
+        }
+        return rs;
+    }
+    
+    public void InsertarDatos(List<Atencion> atenciones) {
+        try {
+            ps = cn.prepareStatement("INSERT INTO mass_admin.rel_atenciones "
+                    + "(rut, id_sector, id_area, id_jefe_area, fecha, lugarincidente, detalles, id_lesion, "
+                    + "id_incidente, id_extremidad, id_paramedico, tratamiento, comentario, deriva, control) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?");
+            for (Atencion atencion : atenciones) {                           
+            ps.setInt(1, atencion.getRut());
+            ps.setInt(2, atencion.getSector());
+            ps.setInt(3, atencion.getRut());
+            ps.setInt(4, atencion.getRut());
+            ps.setDate(5, atencion.getRut());
+            ps.setString(6, atencion.getRut());
+            ps.setString(7, atencion.getRut());
+            ps.setInt(8, atencion.getRut());
+            ps.setInt(9, atencion.getRut());
+            ps.setInt(10, atencion.getRut());
+            ps.setInt(11, atencion.getRut());
+            ps.setString(12, atencion.getRut());
+            ps.setString(13, atencion.getRut());
+            ps.setString(14, atencion.getRut());
+            ps.setString(15, atencion.getRut());
+            
+            ps.execute();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-    
+    */
     public ResultSet ExtraerTrabajador(Integer rut) {
         try {
-            ps = cn.prepareStatement("SELECT trab.nombre, trab.apellido, sec.nombre_sector, ars.nombre_area,jef.nombre AS jefe_area FROM mass_admin.rel_atenciones aten "
-            + "JOIN mass_admin.rel_sectores sec ON ((sec.id_sector = aten.id_sector)) JOIN mass_admin.rel_trabajadores trab ON ((trab.rut = aten.rut)) "
-            + "JOIN mass_admin.rel_areas ars ON ((ars.id_area = aten.id_area)) JOIN mass_admin.rel_jefes_area jef ON ((jef.id_jefe_area = aten.id_jefe_area)) "
-            + "WHERE aten.rut = ? GROUP BY trab.nombre,trab.apellido, sec.nombre_sector, ars.nombre_area,jef.nombre");
+            ps = cn.prepareStatement("SELECT trab.nombre, trab.apellido, sec.nombre_sector, area.nombre_area, jefe.nombre AS jefe_area\n"
+                    + "FROM mass_admin.rel_trabajadores trab\n"
+                    + "JOIN mass_admin.rel_sectores sec ON (sec.id_sector = trab.id_sector)\n"
+                    + "JOIN mass_admin.rel_areas area ON (area.id_area = trab.id_area)\n"
+                    + "JOIN mass_admin.rel_jefes_area jefe ON (jefe.id_jefe_area = trab.id_jefe_area)\n"
+                    + "WHERE trab.rut = ?");
             ps.setInt(1, rut);
-            rs = ps.executeQuery();   
+            rs = ps.executeQuery();
         } catch (SQLException ex) {
             ex.getSQLState();
-        } 
+        }
         return rs;
     }
     
@@ -161,7 +210,7 @@ public class Conexion{
     public ResultSet extraeUsuarios() {
         try {
             st = cn.createStatement();
-            rs = st.executeQuery("SELECT id_usuario, usuario, password, email, id_permiso FROM mass_security.users");
+            rs = st.executeQuery("SELECT id_usuario, usuario, password, email, id_permiso, nombre_usuario FROM mass_security.users");
         } catch (SQLException e) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
         }

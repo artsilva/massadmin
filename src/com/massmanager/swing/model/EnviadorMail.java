@@ -23,8 +23,7 @@ public class EnviadorMail {
     String asunto = null;
     String cuerpo = null;
 
-    public EnviadorMail(String mailReceptor, String asunto,
-            String cuerpo) {
+    public EnviadorMail(String mailReceptor, String asunto, String cuerpo) {
         this.mailReceptor = mailReceptor;
         this.asunto = asunto;
         this.cuerpo = cuerpo;
@@ -36,8 +35,7 @@ public class EnviadorMail {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.socketFactory.port", puertoEnvio);
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
 
         SecurityManager security = System.getSecurityManager();
@@ -52,13 +50,11 @@ public class EnviadorMail {
             msg.setSubject(asunto);
             msg.setContent(cuerpo, "text/html; charset=utf-8");
             msg.setFrom(new InternetAddress(miCorreo));
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-                    mailReceptor));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(mailReceptor));
             Transport.send(msg);
         } catch (Exception mex) {
             mex.printStackTrace();
         }
-
     }
 
     private class autentificadorSMTP extends javax.mail.Authenticator {

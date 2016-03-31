@@ -5,24 +5,37 @@
  */
 package com.massmanager.swing.model;
 
+import com.massmanager.controller.Atencion;
+import java.util.List;
+
 /**
  *
  * @author Artsk
  */
 public class Utils {
 
-    public String cuerpoCorreo() {
+    public String asuntoCorreo(List<Atencion> atencion) {
+        StringBuilder asunto = new StringBuilder();
+        for (Atencion atenciones : atencion) {
+            asunto.append("Atencion a ").append(atenciones.getNombre()).append(" ").append(atenciones.getApellido()).append(" en Sala de Primeros Auxilios Lirquen Santiago");
+        }
+        return asunto.toString();
+    }
+    
+    public String cuerpoCorreo(List <Atencion> atencion) {
+
+        FechaHora fecha = new FechaHora("dd-MM-yyyy");
         StringBuilder correo = new StringBuilder();
+        
+        for (Atencion atenciones : atencion) {   
         correo.append("<head></head>");
-
-        correo.append("<p class=MsoNormal>Estimado Patricio Arévalo,</p>");
-
+        correo.append("<p class=MsoNormal>Estimado ").append(atenciones.getJefearea()).append(",</p>");
         correo.append("<p class=MsoNormal>&nbsp;</p>");
-        correo.append("<p class=MsoNormal>Buenos días, junto con saludar, se informa que el día");
-        correo.append("31-12-2015 la atención de índole +laboral prestada al Sr. +Javier Perez a causa");
-        correo.append("de una lesión provocada por un/a +Corte en el área +Boi-bio específicamente en");
-        correo.append("+lugarincidente provocado por un + Dolor muñeca izquierda por caída en metro,");
-        correo.append("siendo atendido en SPA con el siguiente comentario de atención: +comentario</p><p class=MsoNormal><br></p>");
+        correo.append("<p class=MsoNormal>").append(fecha.obtenerSaludoHorario(fecha.getHoraMinutos())).append(", junto con saludar, se informa sobre");
+        correo.append(" la atención de índole ").append(atenciones.getIncidente()).append(" prestada al Sr. ").append(atenciones.getNombre()).append(" ").append(atenciones.getApellido()).append(" el día ").append(fecha.getFecha()).append(" a causa ");
+        correo.append("de una lesión provocada por un/a ").append(atenciones.getLesion()).append(" cuando el trabajador desempeñaba sus funciones en el área ").append(atenciones.getArea()).append(" específicamente en ");
+        correo.append(atenciones.getLugar()).append(" provocado por un ").append(atenciones.getDetalles()).append(", ");
+        correo.append("siendo atendido en SPA con el siguiente comentario de atención: ").append(atenciones.getComentario()).append("</p><p class=MsoNormal><br></p>");
 
         correo.append("<table class='MsoTableGrid' style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;");
         correo.append(" mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt' border='1' cellpadding='0' cellspacing='0'>");
@@ -80,58 +93,55 @@ public class Utils {
         correo.append("border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;");
         correo.append("padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='48'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>14:56</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(fecha.getHoraMinutos()).append("</span></i></p>");
         correo.append("</td><td style='width:48.75pt;border-top:none;border-left:");
         correo.append("none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='65'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Sala de Armado</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getLugar()).append("</span></i></p>");
         correo.append("</td><td style='width:177.2pt;border-top:none;border-left:");
         correo.append("none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='236'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Contusión en rodilla provocada por");
-        correo.append("golpe contra el suelo debido a mala maniobra al tomar parabrisas</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getDetalles()).append("</span></i></p>");
         correo.append("</td><td style='width:63.8pt;border-top:none;border-left:none;");
         correo.append("border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='85'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Herida por abrasión</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getLesion()).append("</span></i></p>");
         correo.append("</td><td style='width:39.5pt;border-top:none;border-left:none;");
         correo.append("border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='53'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Trayecto</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getIncidente()).append("</span></i></p>");
         correo.append("</td><td style='width:63.4pt;border-top:none;border-left:none;");
         correo.append("border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='85'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Hombros</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getExtremidad()).append("</span></i></p>");
         correo.append("</td><td style='width:131.0pt;border-top:none;border-left:");
         correo.append("none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='175'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>Calor local, masaje y analgésico");
-        correo.append("antinflamatorio</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getTratamiento()).append("</span></i></p>");
         correo.append("</td><td style='width:40.55pt;border-top:none;border-left:");
         correo.append("none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;");
         correo.append("mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;");
         correo.append("mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:78.45pt' valign='top' width='54'>");
         correo.append("<p class='MsoNormal' style='margin-bottom:0cm;margin-bottom:.0001pt;");
-        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>No</span></i></p>");
+        correo.append("text-align:center;line-height:normal' align='center'><i style='mso-bidi-font-style:normal'><span style='color:black;mso-themecolor:text1'>").append(atenciones.getDeriva()).append("</span></i></p>");
         correo.append("</td></tr></tbody></table>");
         
         correo.append("<p class=MsoNormal>&nbsp;</p><p class=MsoNormal>&nbsp;</p>");
         correo.append("<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'><i style='mso-bidi-font-style:normal'><span style='color:#44546A;mso-themecolor:");
-        correo.append("text2'>+</span><span style='color:#4472C4;mso-themecolor:accent5'>Mauricio");
-        correo.append("Vigorena</span><span style='color:#44546A;mso-themecolor:text2'></span></i></p>");
-        correo.append("<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'><i style='mso-bidi-font-style:normal'>Paramedico SPA Lirquen Santiago.</i></p>");
+        correo.append("text2'></span><span style='color:#4472C4;mso-themecolor:accent5'>").append(atenciones.getParamedico()).append("</span><span style='color:#44546A;mso-themecolor:text2'></span></i></p>");
+        correo.append("<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'><i style='mso-bidi-font-style:normal'>Paramédico SPA Lirquen Santiago.</i></p>");
         correo.append("<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'><i style='mso-bidi-font-style:normal'><span style='color:#4472C4;mso-themecolor:");
         correo.append("accent5'>Tél:</span><span style='color:#44546A;mso-themecolor:text2'> </span>+562-4736251</i></p>");
         correo.append("<p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'><i style='mso-bidi-font-style:normal'><span style='color:#4472C4;mso-themecolor:");
@@ -144,6 +154,7 @@ public class Utils {
         correo.append("mso-style-textfill-fill-colortransforms:&quot;lumm=50000 lumo=50000&quot;'>Este");
         correo.append("mensaje ha sido generado automáticamente por MassAdmin Software®, para más información");
         correo.append("comunicarse a SPA Vidrios Lirquen Santiago o MASS Lirquen Santiago.</span></p>");
+        }
         return correo.toString();
     }
 

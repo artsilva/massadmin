@@ -23,19 +23,28 @@ public final class FechaHora {
     private Integer Mes;
     private Integer Dia;
     private String Hora;
+    private String horaMinutos;
     private String Fecha;
+    private String saludoHorario;
     
-    public FechaHora(){
+    public FechaHora(String formato){
         Date fechaActual = new Date();
+        //Formatos:
+        //Hora: "HH:mm:ss"
+        //Fecha: "dd:MM:yyyy"
         Calendar date = Calendar.getInstance();
         DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-        DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat formatoHora2 = new SimpleDateFormat("HH:mm");
+        DateFormat formatoFecha = new SimpleDateFormat(formato);
         
         setDia(date.get(Calendar.DAY_OF_MONTH));
         setMes(date.get(Calendar.MONTH)+1);
         setAnio(date.get(Calendar.YEAR));
         setFecha(formatoFecha.format(fechaActual));
-        setHora(formatoHora.format(fechaActual));
+        setHora(formatoHora.format(fechaActual)); 
+        setHoraMinutos(formatoHora2.format(fechaActual));
+        
+        
     }
     
     public String obtenerMes(Integer mes) {
@@ -66,6 +75,23 @@ public final class FechaHora {
             mesResult = "Diciembre";
         }
         return mesResult;
+    }
+    
+    public String obtenerSaludoHorario(String hora) {
+        String saludo = null;
+        String[] parte = hora.split(":");
+        Integer hour = Integer.parseInt(parte[0]);
+        
+        if (hour < 6 ){
+           saludo = "Buenas noches"; 
+        } else if (hour < 12 ) {
+            saludo = "Buenos dias";
+        } else if (hour < 19 ) {
+            saludo = "Buenas tardes";
+        } else {
+            saludo = "Buenas noches";
+        }
+        return saludo;
     }
     
     public Integer getAnio() {
@@ -106,5 +132,21 @@ public final class FechaHora {
 
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
+    }
+
+    public String getHoraMinutos() {
+        return horaMinutos;
+    }
+
+    public void setHoraMinutos(String horaMinutos) {
+        this.horaMinutos = horaMinutos;
+    }
+
+    public String getSaludoHorario() {
+        return saludoHorario;
+    }
+
+    public void setSaludoHorario(String saludoHorario) {
+        this.saludoHorario = saludoHorario;
     }
 }
