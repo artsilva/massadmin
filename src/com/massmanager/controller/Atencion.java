@@ -5,8 +5,6 @@
  */
 package com.massmanager.controller;
 
-import java.sql.Date;
-
 /**
  *
  * @author Artsk
@@ -18,18 +16,26 @@ public class Atencion {
     private String nombre;
     private String apellido;
     private String sector;
+    private Integer sectorId;
     private String area;
+    private Integer areaId;
     private String jefearea;
+    private Integer jefeAreaId;
     private String fecha;
     private String lugar;
     private String lesion;
+    private Integer lesionId;
     private String incidente;
+    private Integer incidenteId;
     private String extremidad;
+    private Integer extremidadId;
     private String paramedico;
+    private Integer paramedicoId;
     private String detalles;
     private String tratamiento;
     private String comentario;
     private String deriva;
+    private String control;
     
     public Atencion() {
     }
@@ -168,5 +174,69 @@ public class Atencion {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getControl() {
+        return control;
+    }
+
+    public void setControl(String control) {
+        this.control = control;
+    }
+
+    public Integer getSectorId() {
+        return sectorId;
+    }
+
+    public void setSectorId(Integer sectorId) {
+        this.sectorId = sectorId;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
+    }
+
+    public Integer getJefeAreaId() {
+        return jefeAreaId;
+    }
+
+    public void setJefeAreaId(Integer jefeAreaId) {
+        this.jefeAreaId = jefeAreaId;
+    }
+
+    public Integer getLesionId() {
+        return lesionId;
+    }
+
+    public void setLesionId(Integer lesionId) {
+        this.lesionId = lesionId;
+    }
+
+    public Integer getIncidenteId() {
+        return incidenteId;
+    }
+
+    public void setIncidenteId(Integer incidenteId) {
+        this.incidenteId = incidenteId;
+    }
+
+    public Integer getExtremidadId() {
+        return extremidadId;
+    }
+
+    public void setExtremidadId(Integer extremidadId) {
+        this.extremidadId = extremidadId;
+    }
+
+    public Integer getParamedicoId() {
+        return paramedicoId;
+    }
+
+    public void setParamedicoId(Integer paramedicoId) {
+        this.paramedicoId = paramedicoId;
     }
 }

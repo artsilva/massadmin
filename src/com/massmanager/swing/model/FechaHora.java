@@ -16,9 +16,6 @@ import java.util.Date;
  */
 public final class FechaHora { 
     
-    /**
-     *
-     */
     private Integer Anio;
     private Integer Mes;
     private Integer Dia;

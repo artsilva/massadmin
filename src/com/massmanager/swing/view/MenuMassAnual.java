@@ -51,7 +51,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         try {
             while (rs.next()) {
                 dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), rs.getString("sector"),
-                    rs.getString("area"), rs.getString("jefe_area"), rs.getDate("fecha"), rs.getString("lugarincidente"), rs.getString("detalles"),
+                    rs.getString("area"), rs.getString("jefe_area"), rs.getString("fecha"), rs.getString("lugarincidente"), rs.getString("detalles"),
                     rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
             }
         } catch (Exception e) {
@@ -348,10 +348,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             String where = "extremidad"; 
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(extremidad, anio, where);
             this.grdAnual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -362,10 +366,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             String where = "incidente";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(incidente, anio, where);
             this.grdAnual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -376,10 +384,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             String where = "area";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(area, anio, where);
             this.grdAnual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -390,10 +402,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             String where = "sector";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(sector, anio, where);
             this.grdAnual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -402,7 +418,8 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         }
         else {
             this.grdAnual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
