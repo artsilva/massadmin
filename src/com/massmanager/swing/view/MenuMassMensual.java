@@ -42,13 +42,17 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         grid = this.grdMensual;
         grid.setModel(dfm);
         
-        dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario" });
+        dfm.setColumnIdentifiers(new Object[]{ "ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+            "Mes" , "Lugar Incidente", "Detalles" ,"Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario" });
         
         QuerysMensuales query = new QuerysMensuales();
         rs = query.ExtraerAtencionesMensual();
         try{
             while(rs.next()){
-                dfm.addRow(new Object[] { rs.getInt("id_atencion"), rs.getString("nombre"),rs.getString("apellido"),  rs.getInt("rut"), rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"),rs.getDate("fecha"), rs.getString("mes") , rs.getString("lugarincidente"), rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario") });
+                dfm.addRow(new Object[] { rs.getInt("id_atencion"), rs.getString("nombre"),rs.getString("apellido"),  rs.getInt("rut"), 
+                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"),rs.getString("fecha"), rs.getString("mes") , 
+                    rs.getString("lugarincidente"), rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), 
+                    rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario") });
             }
         }catch(Exception e){
             
@@ -330,15 +334,20 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         QuerysMensuales query = new QuerysMensuales();
         DefaultTableModel dfm = new DefaultTableModel();
         PropiedadesColumnas columna = new PropiedadesColumnas();
+        int cont = 1;
         
         if (rdExtremidad.isSelected()) {
             where = "extremidad";
             ResultSet rsExtr = query.ExtraerAtencionMensualVariable(extremidad, mes, where);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -349,10 +358,14 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             where = "incidente";
             ResultSet rsExtr = query.ExtraerAtencionMensualVariable(tipo, mes, where);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -363,10 +376,14 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             where = "area";
             ResultSet rsExtr = query.ExtraerAtencionMensualVariable(area, mes, where);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -377,10 +394,14 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             where = "sector";
             ResultSet rsExtr = query.ExtraerAtencionMensualVariable(sector, mes, where);
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getDate("fecha"), rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                        rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
+                        rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                        rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -389,7 +410,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         }
         else {
             this.grdMensual.setModel(dfm);
-            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
+            dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
+                "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
         }
         

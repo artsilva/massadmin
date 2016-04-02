@@ -11,21 +11,22 @@ package com.massmanager.controller;
  */
 public class Usuarios {
     
-    private Integer userid;
+    private Integer userId;
     private String usuario;
     private String password;
     private String email;
-    private Integer permisoid;
+    private Integer permisoId;
+    private String nombreUsuario;
     
     public Usuarios() {
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsuario() {
@@ -52,11 +53,21 @@ public class Usuarios {
         this.email = email;
     }
 
-    public Integer getPermisoid() {
-        return permisoid;
+    public Integer getPermisoId() {
+        return permisoId;
     }
 
-    public void setPermisoid(Integer permisoid) {
-        this.permisoid = permisoid;
-    } 
+    public void setPermisoId(Integer permisoId) {
+        this.permisoId = permisoId;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+
 }

@@ -54,7 +54,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         try {
             while (rs.next()) {
                 dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), 
-                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getDate("fecha"), rs.getString("periodo_del_anio"), 
+                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getString("fecha"), rs.getString("periodo_del_anio"), 
                     rs.getString("periodo_del_mes"), rs.getString("trimestre"), rs.getString("semestre"), rs.getString("lugarincidente"), 
                     rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), 
                     rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
@@ -429,6 +429,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         grdPeriodico.setModel(new DefaultTableModel());
         DefaultTableModel dfm = new DefaultTableModel();
         PropiedadesColumnas columna = new PropiedadesColumnas();
+        int cont = 1;
 
         //SEMESTRAL
         //Semestrales Sin Filtro Semana
@@ -442,9 +443,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{rsExtr.getInt("id_atencion"), rsExtr.getString("nombre"), rsExtr.getString("apellido"), 
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), 
                         rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), 
-                        rsExtr.getDate("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"), 
+                        rsExtr.getString("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"), 
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
@@ -465,9 +466,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"), 
+                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"), 
                         rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), 
-                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), 
+                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), 
                         rsTip.getString("lugarincidente"),rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), 
                         rsTip.getString("extremidad"), rsTip.getString("paramedico"),rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
@@ -487,9 +488,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsArea.getString("nombre"), rsArea.getString("apellido"),
                         rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
-                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
+                        rsArea.getString("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
                         rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
                         rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
                 }
@@ -508,9 +509,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsSec.getString("nombre"), rsSec.getString("apellido"),
                         rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
-                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
+                        rsSec.getString("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
                         rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
                         rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
                 }
@@ -529,9 +530,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExt.next()) {
-                    dfm.addRow(new Object[]{rsExt.getInt("id_atencion"), rsExt.getString("nombre"), rsExt.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsExt.getString("nombre"), rsExt.getString("apellido"),
                         rsExt.getInt("rut"), rsExt.getString("sector"), rsExt.getString("area"), rsExt.getString("jefe_area"),
-                        rsExt.getDate("fecha"), rsExt.getString("periodo_del_anio"), rsExt.getString("periodo_del_mes"), rsExt.getString("semestre"),
+                        rsExt.getString("fecha"), rsExt.getString("periodo_del_anio"), rsExt.getString("periodo_del_mes"), rsExt.getString("semestre"),
                         rsExt.getString("lugarincidente"), rsExt.getString("detalles"), rsExt.getString("lesion"), rsExt.getString("incidente"),
                         rsExt.getString("extremidad"), rsExt.getString("paramedico"), rsExt.getString("tratamiento"), rsExt.getString("comentario")});
                 }
@@ -550,9 +551,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"),
                         rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
-                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"),
+                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"),
                         rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
                         rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
@@ -571,9 +572,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Año", "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsArea.getString("nombre"), rsArea.getString("apellido"),
                         rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
-                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
+                        rsArea.getString("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("semestre"),
                         rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
                         rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
                 }
@@ -592,9 +593,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsSec.getString("nombre"), rsSec.getString("apellido"),
                         rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
-                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
+                        rsSec.getString("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("semestre"),
                         rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
                         rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
                 }
@@ -614,9 +615,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExt2.next()) {
-                    dfm.addRow(new Object[]{rsExt2.getInt("id_atencion"), rsExt2.getString("nombre"), rsExt2.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsExt2.getString("nombre"), rsExt2.getString("apellido"),
                         rsExt2.getInt("rut"), rsExt2.getString("sector"), rsExt2.getString("area"), rsExt2.getString("jefe_area"),
-                        rsExt2.getDate("fecha"), rsExt2.getString("periodo_del_anio"), rsExt2.getString("periodo_del_mes"), rsExt2.getString("trimestre"),
+                        rsExt2.getString("fecha"), rsExt2.getString("periodo_del_anio"), rsExt2.getString("periodo_del_mes"), rsExt2.getString("trimestre"),
                         rsExt2.getString("lugarincidente"), rsExt2.getString("detalles"), rsExt2.getString("lesion"), rsExt2.getString("incidente"),
                         rsExt2.getString("extremidad"), rsExt2.getString("paramedico"), rsExt2.getString("tratamiento"), rsExt2.getString("comentario")});
                 }
@@ -635,9 +636,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"),
                         rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
-                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
+                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
                         rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
                         rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
@@ -656,9 +657,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsArea.getString("nombre"), rsArea.getString("apellido"),
                         rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
-                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
+                        rsArea.getString("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
                         rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
                         rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
                 }
@@ -677,9 +678,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsSec.getString("nombre"), rsSec.getString("apellido"),
                         rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
-                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
+                        rsSec.getString("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
                         rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
                         rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
                 }
@@ -698,9 +699,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExt3.next()) {
-                    dfm.addRow(new Object[]{rsExt3.getInt("id_atencion"), rsExt3.getString("nombre"), rsExt3.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsExt3.getString("nombre"), rsExt3.getString("apellido"),
                         rsExt3.getInt("rut"), rsExt3.getString("sector"), rsExt3.getString("area"), rsExt3.getString("jefe_area"),
-                        rsExt3.getDate("fecha"), rsExt3.getString("periodo_del_anio"), rsExt3.getString("periodo_del_mes"), rsExt3.getString("trimestre"),
+                        rsExt3.getString("fecha"), rsExt3.getString("periodo_del_anio"), rsExt3.getString("periodo_del_mes"), rsExt3.getString("trimestre"),
                         rsExt3.getString("lugarincidente"), rsExt3.getString("detalles"), rsExt3.getString("lesion"), rsExt3.getString("incidente"),
                         rsExt3.getString("extremidad"), rsExt3.getString("paramedico"), rsExt3.getString("tratamiento"), rsExt3.getString("comentario")});
                 }
@@ -719,9 +720,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{rsTip.getInt("id_atencion"), rsTip.getString("nombre"), rsTip.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"),
                         rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
-                        rsTip.getDate("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
+                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("trimestre"),
                         rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
                         rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
@@ -740,9 +741,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsArea.next()) {
-                    dfm.addRow(new Object[]{rsArea.getInt("id_atencion"), rsArea.getString("nombre"), rsArea.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsArea.getString("nombre"), rsArea.getString("apellido"),
                         rsArea.getInt("rut"), rsArea.getString("sector"), rsArea.getString("area"), rsArea.getString("jefe_area"),
-                        rsArea.getDate("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
+                        rsArea.getString("fecha"), rsArea.getString("periodo_del_anio"), rsArea.getString("periodo_del_mes"), rsArea.getString("trimestre"),
                         rsArea.getString("lugarincidente"), rsArea.getString("detalles"), rsArea.getString("lesion"), rsArea.getString("incidente"),
                         rsArea.getString("extremidad"), rsArea.getString("paramedico"), rsArea.getString("tratamiento"), rsArea.getString("comentario")});
                 }
@@ -761,9 +762,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsSec.next()) {
-                    dfm.addRow(new Object[]{rsSec.getInt("id_atencion"), rsSec.getString("nombre"), rsSec.getString("apellido"),
+                    dfm.addRow(new Object[]{cont++, rsSec.getString("nombre"), rsSec.getString("apellido"),
                         rsSec.getInt("rut"), rsSec.getString("sector"), rsSec.getString("area"), rsSec.getString("jefe_area"),
-                        rsSec.getDate("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
+                        rsSec.getString("fecha"), rsSec.getString("periodo_del_anio"), rsSec.getString("periodo_del_mes"), rsSec.getString("trimestre"),
                         rsSec.getString("lugarincidente"), rsSec.getString("detalles"), rsSec.getString("lesion"), rsSec.getString("incidente"),
                         rsSec.getString("extremidad"), rsSec.getString("paramedico"), rsSec.getString("tratamiento"), rsSec.getString("comentario")});
                 }
@@ -795,6 +796,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 boxOpcion.addItem(rs2.getString("tipo"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdTipoMouseClicked
 
@@ -813,6 +815,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs3.getString("nombre_area"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdAreaMouseClicked
 
@@ -831,6 +834,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs4.getString("nombre_sector"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdSectorMouseClicked
 
@@ -845,6 +849,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 this.boxOpcion.addItem(rs5.getString("nombre"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_rdExtremidadMouseClicked
 

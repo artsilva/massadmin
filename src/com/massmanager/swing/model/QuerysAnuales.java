@@ -6,7 +6,6 @@
 package com.massmanager.swing.model;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,12 +17,13 @@ import java.util.logging.Logger;
  * @author Artsk
  */
 public class QuerysAnuales extends Conexion {
+    
+    Connection cn = Conectar();
+    Statement st = null;
+    ResultSet rs = null;
 
     //EXTRAE ATENCIONES ANUAL 
-    public ResultSet ExtraerAtencionesAnual() {
-        Connection cn = Conectar();
-        Statement st = null;
-        ResultSet rs = null;
+    public ResultSet ExtraerAtencionesAnual() {   
         try {
             st = cn.createStatement();
             rs = st.executeQuery(" SELECT id_atencion, nombre, apellido, rut, sector, area, jefe_area, fecha, lugarincidente, "
@@ -37,9 +37,6 @@ public class QuerysAnuales extends Conexion {
 
     //EXTRAE ATENCIONES POR AÑO 
     public ResultSet ExtraerAtencionAnualVariable(String variable, String anio, String where) {
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             ps = cn.prepareStatement(" SELECT id_atencion, nombre, apellido, rut, sector, area, "
                     + "jefe_area, fecha, lugarincidente, detalles, lesion, incidente, extremidad, paramedico, tratamiento, comentario "
@@ -52,14 +49,27 @@ public class QuerysAnuales extends Conexion {
         } 
         return rs;
     }
+    
+    //CUENTA ATENCIONES POR AÑO
+    public ResultSet countAtencionAnualVariable(String variable, String anio, String where) {
+        try {
+            ps = cn.prepareStatement(" SELECT count(*) \n"
+                    + "FROM mass_dim.dim_rep_anual \n"
+                    + "WHERE " + where + " = ?\n"
+                    + "AND ano = ?; ");
+            ps.setString(1, variable);
+            ps.setString(2, anio);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return rs;
+    }
 
     //QUERYS GRAFICOS
     //Query para armar el grafico Anual
     
     public ResultSet graficoAnualActual(String variable, String ano, String where) {
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         StringBuilder graficos = new StringBuilder();
             graficos.append("SELECT COUNT(id_atencion)\n");
             graficos.append("FROM mass_dim.dim_rep_anual\n");
@@ -78,9 +88,6 @@ public class QuerysAnuales extends Conexion {
     }
 
     public ResultSet graficoAnualAnterior(String variable, String ano, String where) {
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             ps = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
                     + "FROM mass_dim.dim_rep_anual\n"

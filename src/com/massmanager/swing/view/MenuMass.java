@@ -5,7 +5,7 @@
  */
 package com.massmanager.swing.view;
 
-import java.awt.Component;
+import com.massmanager.controller.Usuarios;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +28,8 @@ public class MenuMass extends javax.swing.JFrame {
         
         grupoPrimero.add(rdGraficos);
         grupoPrimero.add(rdReportes);
-        this.jLabel1.setText("Bienvenido a MassAdmin ");
+        Usuarios user = new Usuarios();
+        this.jLabel1.setText("Bienvenido a MassAdmin " + user.getNombreUsuario());
     }
 
     /**
