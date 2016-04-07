@@ -30,6 +30,7 @@ public class MenuMass extends javax.swing.JFrame {
         grupoPrimero.add(rdReportes);
         Usuarios user = new Usuarios();
         this.jLabel1.setText("Bienvenido a MassAdmin " + user.getNombreUsuario());
+        this.btnHistorico.setVisible(false);
     }
 
     /**
@@ -129,6 +130,7 @@ public class MenuMass extends javax.swing.JFrame {
 
         btnHistorico.setText("Historico");
         btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHistorico.setEnabled(false);
         btnHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoricoActionPerformed(evt);
@@ -219,7 +221,6 @@ public class MenuMass extends javax.swing.JFrame {
             }
         });
 
-        menuAtenciones.setIcon(new javax.swing.ImageIcon("D:\\Documentos, datos\\grid.png")); // NOI18N
         menuAtenciones.setText("Atenciones SPA");
         menuAtenciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,14 +293,6 @@ public class MenuMass extends javax.swing.JFrame {
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         // TODO add your handling code here:
-        MenuMassHistorico his = new MenuMassHistorico();
-        desktopMass.add(his);
-        try {
-            his.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        his.setVisible(true);
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void rdReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdReportesMouseClicked

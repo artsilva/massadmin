@@ -6,7 +6,9 @@
 package com.massmanager.swing.model;
 
 import com.massmanager.controller.Atencion;
+import java.awt.Toolkit;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,5 +159,19 @@ public class Utils {
         }
         return correo.toString();
     }
-
+    
+    public void showMessage(String msg, String title) {
+        Toolkit.getDefaultToolkit().beep();
+        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
+    }
+    
+    public boolean showMessageOption() {
+        boolean respuesta = false;
+        Toolkit.getDefaultToolkit().beep();
+        int confirmado = JOptionPane.showConfirmDialog(null, "¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente", JOptionPane.YES_NO_OPTION);
+        if (JOptionPane.OK_OPTION == confirmado) {
+            respuesta = true;
+        }
+        return respuesta;
+    }
 }

@@ -299,7 +299,7 @@
                                   </Group>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="boxDeriva1" alignment="0" pref="55" max="32767" attributes="0"/>
+                                  <Component id="boxControl" alignment="0" pref="55" max="32767" attributes="0"/>
                                   <Component id="boxDeriva" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -350,7 +350,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="boxDeriva1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="boxControl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDeriva1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -485,7 +485,7 @@
             <Property name="text" type="java.lang.String" value="Control"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="boxDeriva1">
+        <Component class="javax.swing.JComboBox" name="boxControl">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">

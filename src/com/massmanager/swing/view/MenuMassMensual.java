@@ -8,11 +8,24 @@ package com.massmanager.swing.view;
 import com.massmanager.swing.model.PropiedadesColumnas;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.QuerysMensuales;
-import java.awt.Toolkit;
+import com.massmanager.swing.model.Utils;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -22,6 +35,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                             
     JTable grid;
     ResultSet rs;
+    JProgressBar barraProgreso;
+    JFileChooser seleccionado = new JFileChooser();
+    File archivo;
     
     /**
      * Creates new form MenuMassMensual
@@ -37,6 +53,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         grupoPrimero.add(rdExtremidad);
         grupoPrimero.add(rdSector);
         grupoPrimero.add(rdTipo);
+        progressMensual.setForeground(new Color(93, 130, 189));
+        progressMensual.setBackground(new Color(240,255,255));
         
         DefaultTableModel dfm = new DefaultTableModel();
         grid = this.grdMensual;
@@ -70,12 +88,6 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     
-    //Metodo local para mostrar mensajes
-    private void showMessage(String msg) {
-        Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(null, msg);
-    }
-    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -95,6 +107,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         panelGrillasMensuales = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdMensual = new javax.swing.JTable();
+        progressMensual = new javax.swing.JProgressBar();
 
         setTitle("Reportes Mensuales");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -258,14 +271,18 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             panelGrillasMensualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrillasMensualesLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+                .addGroup(panelGrillasMensualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(progressMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGrillasMensualesLayout.setVerticalGroup(
             panelGrillasMensualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGrillasMensualesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progressMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -297,8 +314,8 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelGrillasMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1.setLayer(panelTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -313,7 +330,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
 
         pack();
@@ -330,6 +347,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         String sector = (String) this.boxOpcion.getSelectedItem();
         String where = "";
         
+        Utils util = new Utils();
         grdMensual.setModel(new DefaultTableModel());
         QuerysMensuales query = new QuerysMensuales();
         DefaultTableModel dfm = new DefaultTableModel();
@@ -412,13 +430,83 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos");
+            util.showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
         }
         
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         // TODO add your handling code here:
+        barraProgreso = this.progressMensual;
+        grid = this.grdMensual;
+
+        try {
+            Thread t = new Thread() {
+
+                public void run() {
+                    if (seleccionado.showDialog(null, "Guardar Archivo") == JFileChooser.APPROVE_OPTION) {
+                        archivo = seleccionado.getSelectedFile();
+                        String rutaNombreArchivo = archivo.toString();
+
+                        Workbook wb = null;
+                        try {
+                            wb = new XSSFWorkbook(OPCPackage.open("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\templates\\template_atencion_mensual.xlsx"));
+                        } catch (Exception ex) {
+                            Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("No se encuentra el archivo de template");
+                        } 
+                        Sheet hoja = wb.getSheetAt(0);
+
+                        barraProgreso.setMaximum(grid.getRowCount());
+                        XSSFRow filas;
+                        Rectangle rect;
+                        for (int i = 0; i < grid.getRowCount(); i++) {
+
+                            rect = grid.getCellRect(i, 0, true);
+                            /* Scroll linea por linea del jTable al usar el JprosgressBar
+                            try {
+                                grid.scrollRectToVisible(rect);
+                            } catch (java.lang.ClassCastException e) {
+                                e.printStackTrace();
+                            }*/
+                            grid.setRowSelectionInterval(i, i);
+                            barraProgreso.setValue(i + 1);
+
+                            filas = (XSSFRow) hoja.createRow(i + 5);
+                            for (int x = 1; x < 17; x++) {
+                                filas.createCell(x).setCellValue(grid.getValueAt(i, x).toString());
+                            }
+
+                            try {
+                                Thread.sleep(12);
+                            } catch (Exception e) {
+                            }
+                        }
+                        barraProgreso.setValue(0);
+
+                        //Guarda Reportes en el excel de la ruta especificado al comienzo del metodo
+                        try {
+                            wb.write(new FileOutputStream(rutaNombreArchivo));
+                        } catch (Exception ex) {
+                            Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //Opcion para abrir el archivo exportado
+                        Utils util = new Utils();
+                        boolean respuesta = util.showMessageOption();
+                        if (respuesta) {
+                            try {
+                                Desktop.getDesktop().open(archivo);
+                            } catch (Exception ex) {
+                                Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                }
+            };
+            t.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnExportarActionPerformed
 
     private void rdTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipoMouseClicked
@@ -535,6 +623,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelGrillasMensuales;
     private javax.swing.JPanel panelTipo;
+    private javax.swing.JProgressBar progressMensual;
     private javax.swing.JRadioButton rdArea;
     private javax.swing.JRadioButton rdExtremidad;
     private javax.swing.JRadioButton rdSector;

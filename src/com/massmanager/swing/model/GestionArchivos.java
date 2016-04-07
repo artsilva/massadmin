@@ -5,6 +5,7 @@
  */
 package com.massmanager.swing.model;
 import java.io.*;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -20,11 +21,12 @@ public class GestionArchivos {
     /*
     * Guarda Archivo
     */
-    public String guardarArchivo (File archivo, String contenido){
+    public String guardarArchivo (File archivo, Workbook contenido){
         String respuesta = null;
         try {
             salida = new FileOutputStream(archivo);
-            byte[] bytesTxt = contenido.getBytes();
+            String cont = contenido.toString();
+            byte[] bytesTxt = cont.getBytes();
             salida.write(bytesTxt);
             respuesta = "El archivo se guardo correctamente";
         } catch (Exception e) {
