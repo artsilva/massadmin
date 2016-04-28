@@ -99,7 +99,6 @@ public class MenuSpa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGuardar = new javax.swing.JButton();
         btnCorreo = new javax.swing.JButton();
         panelFecha = new javax.swing.JPanel();
         mes = new javax.swing.JLabel();
@@ -144,6 +143,8 @@ public class MenuSpa extends javax.swing.JFrame {
         panelLogo = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuTrabajador = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MASS ADMIN SPA LIRQUEN");
@@ -151,15 +152,6 @@ public class MenuSpa extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(920, 710));
         setResizable(false);
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnCorreo.setText("Enviar Correo");
         btnCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -281,6 +273,7 @@ public class MenuSpa extends javax.swing.JFrame {
         boxDeriva.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         boxDeriva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boxDeriva.setMinimumSize(new java.awt.Dimension(42, 22));
+        boxDeriva.setOpaque(false);
         boxDeriva.setPreferredSize(new java.awt.Dimension(44, 22));
         boxDeriva.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -299,6 +292,7 @@ public class MenuSpa extends javax.swing.JFrame {
         boxControl.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         boxControl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boxControl.setMinimumSize(new java.awt.Dimension(44, 22));
+        boxControl.setOpaque(false);
         boxControl.setPreferredSize(new java.awt.Dimension(44, 22));
 
         javax.swing.GroupLayout panelTrabajadorLayout = new javax.swing.GroupLayout(panelTrabajador);
@@ -398,9 +392,10 @@ public class MenuSpa extends javax.swing.JFrame {
         });
 
         boxLesion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        boxLesion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        boxLesion.setBorder(null);
         boxLesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boxLesion.setMinimumSize(new java.awt.Dimension(60, 22));
+        boxLesion.setOpaque(false);
         boxLesion.setPreferredSize(new java.awt.Dimension(60, 22));
         boxLesion.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -417,12 +412,14 @@ public class MenuSpa extends javax.swing.JFrame {
         boxIncidente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         boxIncidente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boxIncidente.setMinimumSize(new java.awt.Dimension(60, 22));
+        boxIncidente.setOpaque(false);
         boxIncidente.setPreferredSize(new java.awt.Dimension(60, 22));
 
         boxExtremidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         boxExtremidad.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         boxExtremidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boxExtremidad.setMinimumSize(new java.awt.Dimension(60, 22));
+        boxExtremidad.setOpaque(false);
         boxExtremidad.setPreferredSize(new java.awt.Dimension(60, 22));
 
         boxParamedico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -531,6 +528,23 @@ public class MenuSpa extends javax.swing.JFrame {
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(62, 30773));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(50, 25));
+
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu1.setText("Agregar");
+
+        menuTrabajador.setBackground(new java.awt.Color(102, 153, 255));
+        menuTrabajador.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuTrabajador.setForeground(new java.awt.Color(255, 255, 255));
+        menuTrabajador.setText("Insertar Nuevo");
+        menuTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTrabajadorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuTrabajador);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -550,10 +564,8 @@ public class MenuSpa extends javax.swing.JFrame {
                             .addComponent(panelAtencion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                        .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,10 +578,8 @@ public class MenuSpa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelAtencion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(btnCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -583,10 +593,6 @@ public class MenuSpa extends javax.swing.JFrame {
     private void boxParamedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxParamedicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxParamedicoActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorreoActionPerformed
         // TODO add your handling code here:  
@@ -623,7 +629,7 @@ public class MenuSpa extends javax.swing.JFrame {
             e.printStackTrace();
         }
         //INSERTA LA ATENCION DIRECTO A BD
-        cn.InsertarDatos(listaAtencion,cn.convierteAtenciones(listaAtencion));
+        cn.InsertarAtenciones(listaAtencion,cn.convierteAtenciones(listaAtencion));
 
         Utils utilitario = new Utils();
         try {
@@ -667,7 +673,7 @@ public class MenuSpa extends javax.swing.JFrame {
             this.txtJefe.setText(trabajador.getJefeArea());
             this.txtSector.setText(trabajador.getSector());
         } catch (Exception e) {
-            util.showMessage("Ingrese un rut válido", "Mass Admin");
+            util.showMessageWarning("Ingrese un rut válido", "Mass Admin");
             this.txtRut.requestFocus();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -693,6 +699,14 @@ public class MenuSpa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boxDerivaActionPerformed
 
+    private void menuTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTrabajadorActionPerformed
+        // TODO add your handling code here:
+        InsertarTrabajador nuevo = new InsertarTrabajador(); 
+        nuevo.setLocationRelativeTo(null);
+        nuevo.setTitle("Insertar datos nuevos");
+        nuevo.setVisible(true);  
+    }//GEN-LAST:event_menuTrabajadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anio;
     private javax.swing.JComboBox boxControl;
@@ -703,8 +717,8 @@ public class MenuSpa extends javax.swing.JFrame {
     private javax.swing.JComboBox boxParamedico;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCorreo;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnio;
@@ -725,6 +739,7 @@ public class MenuSpa extends javax.swing.JFrame {
     private javax.swing.JLabel lblRut;
     private javax.swing.JLabel lblSector;
     private javax.swing.JLabel lblTto;
+    private javax.swing.JMenuItem menuTrabajador;
     private javax.swing.JLabel mes;
     private javax.swing.JPanel panelAtencion;
     private javax.swing.JPanel panelFecha;

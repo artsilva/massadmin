@@ -9,6 +9,9 @@ import com.massmanager.swing.model.LoginModel;
 import com.massmanager.swing.view.LoginView;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
@@ -22,16 +25,16 @@ public class Principal {
     public static void main(String[] args) {
         LoginView view = new LoginView(null, true);
         new LoginModel(view);
-        view.addWindowListener(new WindowAdapter(){
+        view.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent we){
+            public void windowClosing(WindowEvent we) {
                 System.exit(0);
             }
         });
-        
+
         view.pack();
         view.setLocationRelativeTo(null);
         view.setVisible(true);
-       
+
     }
 }

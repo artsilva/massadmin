@@ -5,10 +5,8 @@
  */
 package com.massmanager.swing.model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,10 +15,6 @@ import java.util.logging.Logger;
  * @author Artsk
  */
 public class QuerysAnuales extends Conexion {
-    
-    Connection cn = Conectar();
-    Statement st = null;
-    ResultSet rs = null;
 
     //EXTRAE ATENCIONES ANUAL 
     public ResultSet ExtraerAtencionesAnual() {   
@@ -65,39 +59,42 @@ public class QuerysAnuales extends Conexion {
         }
         return rs;
     }
-
-    //QUERYS GRAFICOS
-    //Query para armar el grafico Anual
     
-    public ResultSet graficoAnualActual(String variable, String ano, String where) {
-        StringBuilder graficos = new StringBuilder();
-            graficos.append("SELECT COUNT(id_atencion)\n");
-            graficos.append("FROM mass_dim.dim_rep_anual\n");
-            graficos.append("WHERE ");
-            graficos.append(where);
-            graficos.append("= ? AND ano = ? ;");
+    public Integer countLesionAnual(String lesion, String anio) {
+        Integer resultado = 0;
         try {
-            ps = cn.prepareStatement(graficos.toString());        
-            ps.setString(1, variable);
-            ps.setString(2, ano);
+            ps = cn.prepareStatement(" SELECT count(*) "
+                    + "FROM mass_dim.dim_rep_anual "
+                    + "WHERE lesion = ? "
+                    + "AND ano = ?; ");
+            ps.setString(1, lesion);
+            ps.setString(2, anio);
             rs = ps.executeQuery();
-        } catch (SQLException e) {
+            while (rs.next()) {
+                resultado = rs.getInt("count");
+            }
+        } catch (Exception e) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
-        } 
-        return rs;
+        }
+        return resultado;
     }
-
-    public ResultSet graficoAnualAnterior(String variable, String ano, String where) {
+    
+    public Integer countLesionAnualVariable(String lesion, String anio, String where, String variable) {
+        Integer resultado = 0;
         try {
-            ps = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
+            ps = cn.prepareStatement(" SELECT count(*)\n"
                     + "FROM mass_dim.dim_rep_anual\n"
-                    + "WHERE " + where + " = ? AND ano = ? ;");
-            ps.setString(1, variable);
-            ps.setString(2, ano);
+                    + "WHERE lesion = ? AND ano = ? AND " + where + " = ? ");
+            ps.setString(1, lesion);
+            ps.setString(2, anio);
+            ps.setString(3, variable);
             rs = ps.executeQuery();
-        } catch (SQLException e) {
+            while (rs.next()) {
+                resultado = rs.getInt("count");
+            }
+        } catch (Exception e) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
-        } 
-        return rs;
+        }
+        return resultado;
     }
 }

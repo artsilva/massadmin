@@ -32,6 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Artsk
  */
 public class MenuMassPeriodico extends javax.swing.JInternalFrame {
+
     JTable grid;
     ResultSet rs;
     JProgressBar barraProgreso;
@@ -43,9 +44,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
      */
     public MenuMassPeriodico() {
         initComponents();
-        
+
         this.boxSemana.setVisible(false);
-        
+
         grdPeriodico.setAutoResizeMode(grdPeriodico.AUTO_RESIZE_OFF);
         grdPeriodico.doLayout();
 
@@ -54,28 +55,28 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         grupoPrimero.add(rdExtremidad);
         grupoPrimero.add(rdSector);
         grupoPrimero.add(rdTipo);
-        
+
         grupoSegundo.add(rdSemestral);
         grupoSegundo.add(rdTrimestral);
-        
+
         progressPeriodico.setForeground(new Color(93, 130, 189));
-        progressPeriodico.setBackground(new Color(240,255,255));
-        
+        progressPeriodico.setBackground(new Color(240, 255, 255));
+
         DefaultTableModel dfm = new DefaultTableModel();
         grid = this.grdPeriodico;
         grid.setModel(dfm);
-        
-        dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre", 
+
+        dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año", "Sem. del Mes", "Trimestre",
             "Semestre", "Lugar", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-        
+
         QuerysPeriodicas query = new QuerysPeriodicas();
         rs = query.ExtraerAtencionesPeriodico();
         try {
             while (rs.next()) {
-                dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), 
-                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getString("fecha"), rs.getString("periodo_del_anio"), 
-                    rs.getString("periodo_del_mes"), rs.getString("trimestre"), rs.getString("semestre"), rs.getString("lugarincidente"), 
-                    rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), 
+                dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"),
+                    rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"), rs.getString("fecha"), rs.getString("periodo_del_anio"),
+                    rs.getString("periodo_del_mes"), rs.getString("trimestre"), rs.getString("semestre"), rs.getString("lugarincidente"),
+                    rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"),
                     rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
             }
         } catch (Exception e) {
@@ -146,6 +147,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         });
         grdPeriodico.setRowSelectionAllowed(false);
+        grdPeriodico.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(grdPeriodico);
         if (grdPeriodico.getColumnModel().getColumnCount() > 0) {
             grdPeriodico.getColumnModel().getColumn(0).setResizable(false);
@@ -259,22 +261,12 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 rdTipoMouseClicked(evt);
             }
         });
-        rdTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdTipoActionPerformed(evt);
-            }
-        });
 
         rdArea.setText("Area");
         rdArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rdAreaMouseClicked(evt);
-            }
-        });
-        rdArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdAreaActionPerformed(evt);
             }
         });
 
@@ -422,15 +414,15 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
-        
+
         Boolean checkSemana = false;
         if (chkSemana.isSelected()) {
             checkSemana = true;
-        } 
-        
+        }
+
         Utils util = new Utils();
         String extremidad = (String) this.boxOpcion.getSelectedItem();
         String tipo = (String) this.boxOpcion.getSelectedItem();
@@ -460,10 +452,10 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), 
-                        rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), 
-                        rsExtr.getString("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"), 
-                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
+                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"),
+                        rsExtr.getInt("rut"), rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"),
+                        rsExtr.getString("fecha"), rsExtr.getString("periodo_del_anio"), rsExtr.getString("periodo_del_mes"), rsExtr.getString("semestre"),
+                        rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
 
@@ -471,8 +463,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdTipo.isSelected() && rdSemestral.isSelected() && !checkSemana) {
+        } else if (rdTipo.isSelected() && rdSemestral.isSelected() && !checkSemana) {
             where = "incidente";
             semTrim = "semestre";
             ResultSet rsTip;
@@ -483,18 +474,17 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 "Sem. del Mes", "Semestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsTip.next()) {
-                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"), 
-                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"), 
-                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"), 
-                        rsTip.getString("lugarincidente"),rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"), 
-                        rsTip.getString("extremidad"), rsTip.getString("paramedico"),rsTip.getString("tratamiento"), rsTip.getString("comentario")});
+                    dfm.addRow(new Object[]{cont++, rsTip.getString("nombre"), rsTip.getString("apellido"),
+                        rsTip.getInt("rut"), rsTip.getString("sector"), rsTip.getString("area"), rsTip.getString("jefe_area"),
+                        rsTip.getString("fecha"), rsTip.getString("periodo_del_anio"), rsTip.getString("periodo_del_mes"), rsTip.getString("semestre"),
+                        rsTip.getString("lugarincidente"), rsTip.getString("detalles"), rsTip.getString("lesion"), rsTip.getString("incidente"),
+                        rsTip.getString("extremidad"), rsTip.getString("paramedico"), rsTip.getString("tratamiento"), rsTip.getString("comentario")});
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdArea.isSelected() && rdSemestral.isSelected() && !checkSemana) {
+        } else if (rdArea.isSelected() && rdSemestral.isSelected() && !checkSemana) {
             where = "area";
             semTrim = "semestre";
             ResultSet rsArea;
@@ -515,8 +505,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdSector.isSelected() && rdSemestral.isSelected() && !checkSemana) {
+        } else if (rdSector.isSelected() && rdSemestral.isSelected() && !checkSemana) {
             where = "sector";
             semTrim = "semestre";
             ResultSet rsSec;
@@ -557,8 +546,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdTipo.isSelected() && rdSemestral.isSelected() && checkSemana) {
+        } else if (rdTipo.isSelected() && rdSemestral.isSelected() && checkSemana) {
             where = "incidente";
             semTrim = "semestre";
             ResultSet rsTip;
@@ -578,8 +566,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana) {
+        } else if (rdArea.isSelected() && rdSemestral.isSelected() && checkSemana) {
             where = "area";
             semTrim = "semestre";
             ResultSet rsArea;
@@ -599,8 +586,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana) {
+        } else if (rdSector.isSelected() && rdSemestral.isSelected() && checkSemana) {
             where = "sector";
             semTrim = "semestre";
             ResultSet rsSec;
@@ -642,8 +628,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
+        } else if (rdTipo.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
             semTrim = "trimestre";
             where = "incidente";
             ResultSet rsTip;
@@ -663,8 +648,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdArea.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
+        } else if (rdArea.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
             semTrim = "trimestre";
             where = "area";
             ResultSet rsArea;
@@ -684,8 +668,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdSector.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
+        } else if (rdSector.isSelected() && rdTrimestral.isSelected() && !checkSemana) {
             semTrim = "trimestre";
             where = "sector";
             ResultSet rsSec;
@@ -726,8 +709,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana) {
+        } else if (rdTipo.isSelected() && rdTrimestral.isSelected() && checkSemana) {
             semTrim = "trimestre";
             where = "extremidad";
             ResultSet rsTip;
@@ -747,8 +729,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana) {
+        } else if (rdArea.isSelected() && rdTrimestral.isSelected() && checkSemana) {
             semTrim = "trimestre";
             where = "extremidad";
             ResultSet rsArea;
@@ -768,8 +749,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana) {
+        } else if (rdSector.isSelected() && rdTrimestral.isSelected() && checkSemana) {
             semTrim = "trimestre";
             where = "extremidad";
             ResultSet rsSec;
@@ -789,12 +769,11 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 e.printStackTrace();
             }
             columna.setAnchoColumnasPeriodico(grdPeriodico);
-        } 
-        else {
+        } else {
             this.grdPeriodico.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", "Sem. del Año",
                 "Sem. del Mes", "Trimestre", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            util.showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
+            util.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
@@ -807,6 +786,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             Thread t = new Thread() {
 
                 public void run() {
+                    seleccionado.setSelectedFile(new File("Atenciones_Periodicas.xlsx"));
                     if (seleccionado.showDialog(null, "Guardar Archivo") == JFileChooser.APPROVE_OPTION) {
                         archivo = seleccionado.getSelectedFile();
                         String rutaNombreArchivo = archivo.toString();
@@ -817,7 +797,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                         } catch (Exception ex) {
                             Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                             System.out.println("No se encuentra el archivo de template");
-                        } 
+                        }
                         Sheet hoja = wb.getSheetAt(0);
 
                         barraProgreso.setMaximum(grid.getRowCount());
@@ -826,12 +806,6 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                         for (int i = 0; i < grid.getRowCount(); i++) {
 
                             rect = grid.getCellRect(i, 0, true);
-                            /* Scroll linea por linea del jTable al usar el JprosgressBar
-                            try {
-                                grid.scrollRectToVisible(rect);
-                            } catch (java.lang.ClassCastException e) {
-                                e.printStackTrace();
-                            }*/
                             grid.setRowSelectionInterval(i, i);
                             barraProgreso.setValue(i + 1);
 
@@ -855,7 +829,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                         }
                         //Opcion para abrir el archivo exportado
                         Utils util = new Utils();
-                        boolean respuesta = util.showMessageOption();
+                        boolean respuesta = util.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);
@@ -879,17 +853,13 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         ResultSet rs2;
         rs2 = cn.ExtraerIncidente();
         try {
-            while(rs2.next()){
+            while (rs2.next()) {
                 boxOpcion.addItem(rs2.getString("tipo"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_rdTipoMouseClicked
-
-    private void rdTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdTipoActionPerformed
 
     private void rdAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAreaMouseClicked
         // TODO add your handling code here:
@@ -905,10 +875,6 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_rdAreaMouseClicked
-
-    private void rdAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAreaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdAreaActionPerformed
 
     private void rdSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSectorMouseClicked
         // TODO add your handling code here:
@@ -981,9 +947,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
     private void chkSemanaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkSemanaMouseClicked
         // TODO add your handling code here:
         //Al seleccionar el checbox Semanal
-        if(this.chkSemana.isSelected()){
+        if (this.chkSemana.isSelected()) {
             this.boxSemana.setVisible(true);
-        }else{
+        } else {
             this.boxSemana.setVisible(false);
         }
     }//GEN-LAST:event_chkSemanaMouseClicked
@@ -1004,14 +970,13 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        //AL HACER CLIC EN EL RADBUTTON SEMESTRAL
+        } //AL HACER CLIC EN EL RADBUTTON SEMESTRAL
         else if (rdTrimestral.isSelected()) {
             this.boxSemana.removeAllItems();
             String trimestre = (String) boxSemTrim.getSelectedItem();
             rs = query.ExtraerPeriodosTrimestre(trimestre);
             try {
-                while(rs.next()) {
+                while (rs.next()) {
                     this.boxSemana.addItem(rs.getString("periodo_del_anio"));
                 }
             } catch (Exception e) {
@@ -1019,7 +984,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_boxSemTrimItemStateChanged
- 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxOpcion;

@@ -5,11 +5,8 @@
  */
 package com.massmanager.swing.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,9 +17,6 @@ import java.util.logging.Logger;
 public class QuerysMensuales extends Conexion {
 
     public ResultSet ExtraerAtencionesMensual() {
-        Connection cn = Conectar();
-        Statement st = null;
-        ResultSet rs = null;
         try {
             st = cn.createStatement();
             rs = st.executeQuery(" SELECT id_atencion, nombre, apellido, rut, sector, area, jefe_area,"
@@ -37,9 +31,6 @@ public class QuerysMensuales extends Conexion {
     //EXTRAE ATENCIONES MENSUALES
     public ResultSet ExtraerAtencionMensualVariable(String extremidad, String mes, String where) {
         //Muestra reportes mensuales con filtro variable
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             ps = cn.prepareStatement(" SELECT id_atencion, nombre, apellido, rut, sector, area, jefe_area,"
                     + " fecha, mes, lugarincidente, detalles, lesion, incidente, extremidad, paramedico, tratamiento, comentario "
@@ -58,9 +49,6 @@ public class QuerysMensuales extends Conexion {
     //Query para armar el grafico mensual
 
     public ResultSet graficoMensualActual(String variable, String mes, String where) {
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             ps = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
                     + "FROM mass_dim.dim_rep_mensual\n"
@@ -75,9 +63,6 @@ public class QuerysMensuales extends Conexion {
     }
 
     public ResultSet graficoMensualAnterior(String variable, String mes, String where) {
-        Connection cn = Conectar();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             ps = cn.prepareStatement("SELECT COUNT(id_atencion)\n"
                     + "FROM mass_dim.dim_rep_mensual\n"

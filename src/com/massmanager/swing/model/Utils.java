@@ -15,6 +15,26 @@ import javax.swing.JOptionPane;
  * @author Artsk
  */
 public class Utils {
+    
+    public void showMessageWarning(String msg, String title) {
+        Toolkit.getDefaultToolkit().beep();
+        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
+    }
+    
+    public void showMessageInfo(String msg, String title) {
+        Toolkit.getDefaultToolkit().beep();
+        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public boolean showMessageOption(String msgPregunta, String msgTitulo) {
+        boolean respuesta = false;
+        Toolkit.getDefaultToolkit().beep();
+        int confirmado = JOptionPane.showConfirmDialog(null, msgPregunta, msgTitulo, JOptionPane.YES_NO_OPTION);
+        if (JOptionPane.OK_OPTION == confirmado) {
+            respuesta = true;
+        }
+        return respuesta;
+    }
 
     public String asuntoCorreo(List<Atencion> atencion) {
         StringBuilder asunto = new StringBuilder();
@@ -158,20 +178,5 @@ public class Utils {
         correo.append("comunicarse a SPA Vidrios Lirquen Santiago o MASS Lirquen Santiago.</span></p>");
         }
         return correo.toString();
-    }
-    
-    public void showMessage(String msg, String title) {
-        Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
-    }
-    
-    public boolean showMessageOption() {
-        boolean respuesta = false;
-        Toolkit.getDefaultToolkit().beep();
-        int confirmado = JOptionPane.showConfirmDialog(null, "¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente", JOptionPane.YES_NO_OPTION);
-        if (JOptionPane.OK_OPTION == confirmado) {
-            respuesta = true;
-        }
-        return respuesta;
-    }
+    } 
 }

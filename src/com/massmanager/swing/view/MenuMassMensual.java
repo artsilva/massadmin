@@ -188,11 +188,6 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 rdAreaMouseClicked(evt);
             }
         });
-        rdArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdAreaActionPerformed(evt);
-            }
-        });
 
         rdSector.setText("Sector");
         rdSector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -430,7 +425,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            util.showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
+            util.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
         }
         
     }//GEN-LAST:event_btnFiltrarActionPerformed
@@ -444,6 +439,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             Thread t = new Thread() {
 
                 public void run() {
+                    seleccionado.setSelectedFile(new File("Atenciones_Mensuales.xlsx"));
                     if (seleccionado.showDialog(null, "Guardar Archivo") == JFileChooser.APPROVE_OPTION) {
                         archivo = seleccionado.getSelectedFile();
                         String rutaNombreArchivo = archivo.toString();
@@ -492,7 +488,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                         }
                         //Opcion para abrir el archivo exportado
                         Utils util = new Utils();
-                        boolean respuesta = util.showMessageOption();
+                        boolean respuesta = util.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);
@@ -556,10 +552,6 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_rdAreaMouseClicked
-
-    private void rdAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAreaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdAreaActionPerformed
 
     private void rdSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSectorMouseClicked
         // TODO add your handling code here:

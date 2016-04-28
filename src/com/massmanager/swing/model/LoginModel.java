@@ -8,7 +8,7 @@ package com.massmanager.swing.model;
 import com.massmanager.controller.Usuarios;
 import com.massmanager.swing.view.LoginView;
 import com.massmanager.swing.view.MenuMass;
-import com.massmanager.swing.view.MenuSpa;
+import com.massmanager.swing.view.MenuSpaNuevo;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +43,7 @@ public class LoginModel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Conexion cn = new Conexion();
-        ResultSet rsUsuario = cn.extraeUsuarios();
+        ResultSet rsUsuario = cn.extraerUsuarios();
         List<Usuarios> listaUsuarios = new ArrayList<>();
         String user = view.getUsuario().getText();
         String password = view.getPassword().getText();
@@ -67,21 +67,31 @@ public class LoginModel implements ActionListener {
             boolean usuarioexistente = false;
             boolean passwordCorrecto = false;
             Integer permisoUsuario = null;
+            String nombreUsuario = null;
 
             for (Usuarios listaUsuario : listaUsuarios) {
                 if (user.trim().equals(listaUsuario.getUsuario()) && password.trim().equals(listaUsuario.getPassword())) {
                     usuarioexistente = true;
                     passwordCorrecto = true;
                     permisoUsuario = listaUsuario.getPermisoId();
+                    nombreUsuario = listaUsuario.getNombreUsuario();
+                    
+                    FechaHora fecha = new FechaHora("yyyy-MM-dd");
+                    String fechaActual = fecha.getFecha();
+                    String horaActual = fecha.getHora();
+                    //Inserta el registro del login
+                    cn.insertaLogin(fechaActual, horaActual, nombreUsuario, permisoUsuario);
                 }
             }
+            
             //permisoUsuario 1: Acceso a MenuMASS, permisoUsuario 2: Acceso a menuSPA
             if (usuarioexistente && passwordCorrecto && permisoUsuario == 1) {
                 MenuMass mass = new MenuMass();
                 view.setVisible(false);
                 mass.setVisible(true);
+
             } else if (usuarioexistente && passwordCorrecto && permisoUsuario == 2) {
-                MenuSpa spa = new MenuSpa();
+                MenuSpaNuevo spa = new MenuSpaNuevo();
                 view.setVisible(false);
                 spa.setVisible(true);
             } else if (!usuarioexistente || !passwordCorrecto) {
@@ -93,4 +103,3 @@ public class LoginModel implements ActionListener {
         }
     }
 }
-

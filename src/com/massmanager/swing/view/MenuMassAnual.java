@@ -124,22 +124,12 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 rdTipoMouseClicked(evt);
             }
         });
-        rdTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdTipoActionPerformed(evt);
-            }
-        });
 
         rdArea.setText("Area");
         rdArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rdAreaMouseClicked(evt);
-            }
-        });
-        rdArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdAreaActionPerformed(evt);
             }
         });
 
@@ -342,10 +332,6 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rdAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdAreaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdAreaActionPerformed
-
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         //Setea variables de la Query con el contenido del ComboBox
@@ -435,13 +421,9 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha",
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            util.showMessage("Debe seleccionar algun filtro para poder mostrar reportes especificos","Advertencia");
+            util.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos","Advertencia");
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
-
-    private void rdTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdTipoActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         // TODO add your handling code here:
@@ -452,6 +434,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             Thread t = new Thread() {
 
                 public void run() {
+                    seleccionado.setSelectedFile(new File("Atenciones_Anuales.xlsx"));
                     if (seleccionado.showDialog(null, "Guardar Archivo") == JFileChooser.APPROVE_OPTION) {
                         archivo = seleccionado.getSelectedFile();
                         String rutaNombreArchivo = archivo.toString();
@@ -500,7 +483,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                         }
                         //Opcion para abrir el archivo exportado
                         Utils util = new Utils();
-                        boolean respuesta = util.showMessageOption();
+                        boolean respuesta = util.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);

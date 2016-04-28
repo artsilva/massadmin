@@ -13,9 +13,13 @@ public class Trabajador {
     private Integer rut;
     private String nombre;
     private String apellido;
+    private String direccion;
     private String sector;
+    private Integer sectorId;
     private String area;
+    private Integer areaId;
     private String jefeArea;
+    private Integer jefeAreaId;
     
     public Trabajador() {
         
@@ -69,4 +73,35 @@ public class Trabajador {
         this.jefeArea = jefeArea;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Integer getSectorId() {
+        return sectorId;
+    }
+
+    public void setSectorId(Integer sectorId) {
+        this.sectorId = sectorId;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
+    }
+
+    public Integer getJefeAreaId() {
+        return jefeAreaId;
+    }
+
+    public void setJefeAreaId(Integer jefeAreaId) {
+        this.jefeAreaId = jefeAreaId;
+    }
 }

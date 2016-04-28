@@ -119,7 +119,7 @@ public class DatosGraficos extends MassGraficos {
         ResultSet rs = null;
         Integer filtro = null;
 
-        rs = query.graficoAnualActual(ext, variable, where);
+        rs = query.countAtencionAnualVariable(ext, variable, where);
         try {
             while (rs.next()) {
                 filtro = rs.getInt("count");
@@ -137,7 +137,7 @@ public class DatosGraficos extends MassGraficos {
         ResultSet rs = null;
         Integer filtro = null;
 
-        rs = query.graficoAnualAnterior(ext, ObtieneVariableAnterior(variable), where);
+        rs = query.countAtencionAnualVariable(ext, ObtieneVariableAnterior(variable), where);
         try {
             while (rs.next()) {
                 filtro = rs.getInt("count");

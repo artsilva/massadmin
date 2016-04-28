@@ -6,6 +6,7 @@
 package com.massmanager.swing.model;
 
 import com.massmanager.controller.Atencion;
+import com.massmanager.controller.Trabajador;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Conexion {
         return cn;
     }
 
-    public Integer obtenerLastId() {
+    public Integer obtenerLastIdAtencion() {
         Integer ultimoId = null;
         try {
             ps = cn.prepareStatement("SELECT MAX(id_atencion) FROM mass_admin.rel_atenciones;");
@@ -104,8 +105,8 @@ public class Conexion {
         return listaIdsAtencion;
     }
 
-    public void InsertarDatos(List<Atencion> atenciones, List<Atencion> listaIdAtencion) {
-        int ultimoId = obtenerLastId();
+    public void InsertarAtenciones(List<Atencion> atenciones, List<Atencion> listaIdAtencion) {
+        int ultimoId = obtenerLastIdAtencion();
         try {
             ps = cn.prepareStatement("INSERT INTO mass_admin.rel_atenciones "
                     + "(id_atencion, rut, id_sector, id_area, id_jefe_area, fecha, lugarincidente, detalles, id_lesion, "
@@ -135,6 +136,157 @@ public class Conexion {
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("No se pudieron ingresar a BD las atenciones convertidas a IDs");
+        }
+    }
+
+    //Este método recibe la lista de trabajadores y los transforma en IDs 
+    public List<Trabajador> convierteTrabajadores(List<Trabajador> listaTrabajador) {
+        List<Trabajador> listaIdsTrabajador = new ArrayList<>();
+        try {
+            ps = cn.prepareStatement("SELECT sec.id_sector, area.id_area, jefe.id_jefe_area "
+                    + "FROM mass_admin.rel_sectores sec,"
+                    + "mass_admin.rel_areas area,"
+                    + "mass_admin.rel_jefes_area jefe "
+                    + "WHERE sec.nombre_sector = ? "
+                    + "AND area.nombre_area = ? "
+                    + "AND jefe.nombre = ? ;");
+            for (Trabajador trabajador : listaTrabajador) {
+                ps.setString(1, trabajador.getSector());
+                ps.setString(2, trabajador.getArea());
+                ps.setString(3, trabajador.getJefeArea());
+                rs = ps.executeQuery();
+            }
+            while (rs.next()) {
+                Trabajador trabajadorId = new Trabajador();
+                trabajadorId.setSectorId(rs.getInt("id_sector"));
+                trabajadorId.setAreaId(rs.getInt("id_area"));
+                trabajadorId.setJefeAreaId(rs.getInt("id_jefe_area"));
+                listaIdsTrabajador.add(trabajadorId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo convertir a IDs las atenciones ingresadas");
+        }
+        return listaIdsTrabajador;
+    }
+
+    public void insertarTrabajador(List<Trabajador> listaTrabajador, List<Trabajador> listaIdtrabajador) {
+        try {
+            Integer orden = obtenerLastIdTrabajador() + 1;
+            ps = cn.prepareStatement("INSERT INTO mass_admin.rel_trabajadores "
+                    + "(rut, nombre, apellido, direccion, id_sector, id_area, id_jefe_area, orden) "
+                    + "VALUES (?,?,?,?,?,?,?,?);");
+            for (Trabajador listaTrabajadores : listaTrabajador) {
+                ps.setInt(1, listaTrabajadores.getRut());
+                ps.setString(2, listaTrabajadores.getNombre());
+                ps.setString(3, listaTrabajadores.getApellido());
+                ps.setString(4, listaTrabajadores.getDireccion());
+            }
+            for (Trabajador listaIdtrabajadorId : listaIdtrabajador) {
+                ps.setInt(5, listaIdtrabajadorId.getSectorId());
+                ps.setInt(6, listaIdtrabajadorId.getAreaId());
+                ps.setInt(7, listaIdtrabajadorId.getJefeAreaId());
+                ps.setInt(8, orden);
+            }
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Integer obtenerLastIdTrabajador() {
+        Integer idTrabajador = null;
+        try {
+            ps = cn.prepareStatement("SELECT MAX(orden) AS orden FROM mass_admin.rel_trabajadores ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                idTrabajador = rs.getInt("orden");
+            }
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+        return idTrabajador;
+    }
+
+    public List<Trabajador> obtenerLastTrabajador() {
+        List<Trabajador> listaTrabajador = new ArrayList<>();
+        Integer idTrabajador = obtenerLastIdTrabajador();
+        try {
+            ps = cn.prepareStatement("SELECT rut, nombre, apellido, direccion FROM mass_admin.rel_trabajadores WHERE orden = ?;");
+            ps.setInt(1, idTrabajador);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trabajador trabajador = new Trabajador();
+                trabajador.setRut(rs.getInt("rut"));
+                trabajador.setNombre(rs.getString("nombre"));
+                trabajador.setApellido(rs.getString("apellido"));
+                trabajador.setDireccion(rs.getString("direccion"));
+                listaTrabajador.add(trabajador);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaTrabajador;
+    }
+
+    public void eliminarTrabajador(Integer orden) {
+        try {
+            ps = cn.prepareStatement("DELETE FROM mass_admin.rel_trabajadores WHERE orden = ?;");
+            ps.setInt(1, orden);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+    }
+
+    public Integer obtenerLastIdLesion() {
+        Integer idLesion = null;
+        try {
+            ps = cn.prepareStatement("SELECT MAX(id_lesion) AS id_lesion FROM mass_admin.rel_tipo_lesion ");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                idLesion = rs.getInt("id_lesion");
+            }
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+        return idLesion;
+    }
+
+    public void InsertarLesion(Integer idLesion, String lesion) {
+        try {
+            ps = cn.prepareStatement("INSERT INTO mass_admin.rel_tipo_lesion (id_lesion, lesion) VALUES (?, ?);");
+            ps.setInt(1, idLesion);
+            ps.setString(2, lesion);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+    }
+
+    public String obtenerLastLesion() {
+        String lesion = "";
+        Integer idLesion = obtenerLastIdLesion();
+        try {
+            ps = cn.prepareStatement("SELECT lesion FROM mass_admin.rel_tipo_lesion WHERE id_lesion = ?;");
+            ps.setInt(1, idLesion);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lesion = rs.getString("lesion");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lesion;
+    }
+
+    public void eliminarLesion(String lesion) {
+        try {
+            ps = cn.prepareStatement("DELETE FROM mass_admin.rel_tipo_lesion WHERE lesion = ?;");
+            ps.setString(1, lesion);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.getSQLState();
         }
     }
 
@@ -250,7 +402,7 @@ public class Conexion {
         return rs;
     }
 
-    public ResultSet extraeUsuarios() {
+    public ResultSet extraerUsuarios() {
         try {
             st = cn.createStatement();
             rs = st.executeQuery("SELECT id_usuario, usuario, password, email, id_permiso, nombre_usuario FROM mass_security.users");
@@ -258,6 +410,60 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
         }
         return rs;
+    }
+
+    public ResultSet extraerJefeArea() {
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery("SELECT id_jefe_area, nombre FROM mass_admin.rel_jefes_area");
+        } catch (SQLException e) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return rs;
+    }
+
+    public void insertaLogin(String fechaActual, String horaActual, String nombreUsuario, Integer permisoUsuario) {
+        try {
+            ps = cn.prepareStatement("INSERT INTO mass_log.registro_logins (fecha, hora, usuario, permiso) "
+                    + "VALUES (?, ?, ?, ?)");
+            ps.setString(1, fechaActual);
+            ps.setString(2, horaActual);
+            ps.setString(3, nombreUsuario);
+            ps.setInt(4, permisoUsuario);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Integer obtenerLastIdLogin() {
+        Integer nombreUsuario = null;
+        try {
+            ps = cn.prepareStatement("SELECT MAX(id) AS id FROM mass_log.registro_logins ;");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                nombreUsuario = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nombreUsuario;
+    }
+
+    public String obtenerNombreUltimoLogin() {
+        Integer ultimoLoginId = obtenerLastIdLogin();
+        String nombreUsuario = null;
+        try {
+            ps = cn.prepareStatement("SELECT usuario FROM mass_log.registro_logins WHERE id = ?");
+            ps.setInt(1, ultimoLoginId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                nombreUsuario = rs.getString("usuario");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nombreUsuario;
     }
 
     public void cerrarConexion(Object obj) {

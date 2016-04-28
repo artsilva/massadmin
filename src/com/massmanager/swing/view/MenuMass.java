@@ -6,6 +6,7 @@
 package com.massmanager.swing.view;
 
 import com.massmanager.controller.Usuarios;
+import com.massmanager.swing.model.Conexion;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,10 +27,11 @@ public class MenuMass extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
+        Conexion cn = new Conexion();
         grupoPrimero.add(rdGraficos);
         grupoPrimero.add(rdReportes);
         Usuarios user = new Usuarios();
-        this.jLabel1.setText("Bienvenido a MassAdmin " + user.getNombreUsuario());
+        this.jLabel1.setText("Bienvenido a MassAdmin " + cn.obtenerNombreUltimoLogin());
         this.btnHistorico.setVisible(false);
     }
 
@@ -131,11 +133,6 @@ public class MenuMass extends javax.swing.JFrame {
         btnHistorico.setText("Historico");
         btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorico.setEnabled(false);
-        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoricoActionPerformed(evt);
-            }
-        });
 
         btnAnual.setText("Anual");
         btnAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -215,11 +212,6 @@ public class MenuMass extends javax.swing.JFrame {
         menuDatos.setText("Datos");
         menuDatos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         menuDatos.setPreferredSize(new java.awt.Dimension(104, 19));
-        menuDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuDatosActionPerformed(evt);
-            }
-        });
 
         menuAtenciones.setText("Atenciones SPA");
         menuAtenciones.addActionListener(new java.awt.event.ActionListener() {
@@ -275,10 +267,6 @@ public class MenuMass extends javax.swing.JFrame {
         p.setVisible(true);
     }//GEN-LAST:event_btnPeriodicoActionPerformed
 
-    private void menuDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDatosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuDatosActionPerformed
-
     private void menuAtencionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAtencionesActionPerformed
         // TODO add your handling code here:
         AtencionesSpaMass a = new AtencionesSpaMass();
@@ -290,10 +278,6 @@ public class MenuMass extends javax.swing.JFrame {
         }
         a.setVisible(true);
     }//GEN-LAST:event_menuAtencionesActionPerformed
-
-    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void rdReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdReportesMouseClicked
         // TODO add your handling code here:
