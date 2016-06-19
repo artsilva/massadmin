@@ -9,6 +9,7 @@ import com.massmanager.controller.Usuarios;
 import com.massmanager.swing.view.LoginView;
 import com.massmanager.swing.view.MenuMass;
 import com.massmanager.swing.view.MenuSpaNuevo;
+import com.massmanager.swing.view.WebServiceView;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,13 +87,17 @@ public class LoginModel implements ActionListener {
             
             //permisoUsuario 1: Acceso a MenuMASS, permisoUsuario 2: Acceso a menuSPA
             if (usuarioexistente && passwordCorrecto && permisoUsuario == 1) {
-                MenuMass mass = new MenuMass();
+                //MenuMass mass = new MenuMass();
+                WebServiceView web = new WebServiceView();
                 view.setVisible(false);
-                mass.setVisible(true);
+                web.setVisible(true);
+                //mass.setVisible(true);
 
             } else if (usuarioexistente && passwordCorrecto && permisoUsuario == 2) {
                 MenuSpaNuevo spa = new MenuSpaNuevo();
+                WebServiceView web = new WebServiceView();
                 view.setVisible(false);
+                web.setVisible(true);
                 spa.setVisible(true);
             } else if (!usuarioexistente || !passwordCorrecto) {
                 showMessage("Usuario o contraseña incorrectos");
