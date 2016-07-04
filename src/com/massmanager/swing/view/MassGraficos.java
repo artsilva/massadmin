@@ -43,7 +43,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     File archivo;
     byte[] bytesImg;
     GestionArchivos gestion = new GestionArchivos();
-    
+
     //JFreeChart Grafica;
     JFreeChart GraficaMensual;
     JFreeChart GraficaAnual;
@@ -70,7 +70,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     //Torta
     DefaultPieDataset Torta = new DefaultPieDataset();
     DefaultPieDataset Torta2 = new DefaultPieDataset();
-    
+
     /**
      * Creates new form PruebaMass
      */
@@ -83,26 +83,26 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         grupoMensual.add(rdExtremidad);
         grupoMensual.add(rdTipo);
         grupoMensual.add(rdLesion);
-        
+
         grupoAnual.add(rdArea2);
         grupoAnual.add(rdSector2);
         grupoAnual.add(rdExtremidad2);
         grupoAnual.add(rdTipo2);
         grupoAnual.add(rdLesion2);
-        
+
         grupoPeriodico1.add(rdArea3);
         grupoPeriodico1.add(rdSector3);
         grupoPeriodico1.add(rdExtremidad3);
         grupoPeriodico1.add(rdTipo3);
         grupoPeriodico1.add(rdLesion3);
-        
+
         grupoPeriodico2.add(rdSemestre);
         grupoPeriodico2.add(rdTrimestre);
-        
+
         grupoTortaTiempo.add(rdTortaAnual);
         grupoTortaTiempo.add(rdTortaTrimestral);
         grupoTortaTiempo.add(rdTortaSemestral);
-        
+
         grupoTortaSectores.add(rdTortaSector);
         grupoTortaSectores.add(rdTortaArea);
     }
@@ -852,6 +852,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
     private void btnGraficarMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarMensualActionPerformed
         // TODO add your handling code here:
+        Extremidad.clear();
+        Sector.clear();
+        Area.clear();
+        Tipo.clear();
+        Lesion.clear();
         String mes = (String) this.boxMes.getSelectedItem();
         String extremidad = "extremidad";
         String tipo = "incidente";
@@ -1018,16 +1023,16 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer fra = DatosGraficos.DatosGraficosActual("Fractura", mes, lesion);
             Integer que = DatosGraficos.DatosGraficosActual("Quemadura", mes, lesion);
             Integer mus = DatosGraficos.DatosGraficosActual("Muscular", mes, lesion);
-            
+
             Integer cor2 = DatosGraficos.DatosGraficosAnterior("Corte", mes, lesion);
-            Integer hep2= DatosGraficos.DatosGraficosAnterior("Herida punzante", mes, lesion);
+            Integer hep2 = DatosGraficos.DatosGraficosAnterior("Herida punzante", mes, lesion);
             Integer hec2 = DatosGraficos.DatosGraficosAnterior("Herida colgajo", mes, lesion);
             Integer hea2 = DatosGraficos.DatosGraficosAnterior("Herida por abrasion", mes, lesion);
             Integer con2 = DatosGraficos.DatosGraficosAnterior("Contusion", mes, lesion);
             Integer fra2 = DatosGraficos.DatosGraficosAnterior("Fractura", mes, lesion);
             Integer que2 = DatosGraficos.DatosGraficosAnterior("Quemadura", mes, lesion);
             Integer mus2 = DatosGraficos.DatosGraficosAnterior("Muscular", mes, lesion);
-            
+
             Lesion.addValue(cor, "Mes Seleccionado", "Corte");
             Lesion.addValue(hep, "Mes Seleccionado", "H. Punzante");
             Lesion.addValue(hec, "Mes Seleccionado", "H. Colgajo");
@@ -1036,7 +1041,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Lesion.addValue(fra, "Mes Seleccionado", "Fractura.");
             Lesion.addValue(que, "Mes Seleccionado", "Quemadura");
             Lesion.addValue(mus, "Mes Seleccionado", "Muscular");
-            
+
             Lesion.addValue(cor2, "Mes Anterior", "Corte");
             Lesion.addValue(hep2, "Mes Anterior", "H. Punzante");
             Lesion.addValue(hec2, "Mes Anterior", "H. Colgajo");
@@ -1045,9 +1050,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Lesion.addValue(fra2, "Mes Anterior", "Fractura.");
             Lesion.addValue(que2, "Mes Anterior", "Quemadura");
             Lesion.addValue(mus2, "Mes Anterior", "Muscular");
-            
+
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Lesion",
-                    "Tipo de Lesiones", "Cantidad Incidentes", Lesion, PlotOrientation.VERTICAL, true, true, false);    
+                    "Tipo de Lesiones", "Cantidad Incidentes", Lesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
             Utils util = new Utils();
             util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
@@ -1058,215 +1063,576 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoMensual.add(panelMensual);
         panelGraficoMensual.validate();
         /*
-        try {
-            ChartUtilities.saveChartAsJPEG(new File("grafico.jpg"), GraficaMensual, 1024, 768);
-        } catch (IOException ex) {
-            Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+         try {
+         ChartUtilities.saveChartAsJPEG(new File("grafico.jpg"), GraficaMensual, 1024, 768);
+         } catch (IOException ex) {
+         Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
     }//GEN-LAST:event_btnGraficarMensualActionPerformed
 
     private void btnGraficarTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarTortaActionPerformed
         // TODO add your handling code here:
+        Torta.clear();
+        panelGraficoTorta.removeAll();
         QuerysPeriodicas per = new QuerysPeriodicas();
         QuerysAnuales anual = new QuerysAnuales();
+        Utils util = new Utils();
+        String anio = (String) this.boxTortaTiempo.getSelectedItem();
+        String semestre = (String) this.boxTortaTiempo.getSelectedItem();
+        String trimestre = (String) this.boxTortaTiempo.getSelectedItem();
         
-        if (rdTortaAnual.isSelected() && !rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String anio = (String) this.boxTortaTiempo.getSelectedItem();
-            Torta.setValue("Corte", anual.countLesionAnual("Corte", anio));
-            Torta.setValue("Herida Punzante", anual.countLesionAnual("Herida punzante", anio));
-            Torta.setValue("Herida Colgajo", anual.countLesionAnual("Herida colgajo", anio));
-            Torta.setValue("Herida Abrasión", anual.countLesionAnual("Herida por abrasion", anio));
-            Torta.setValue("Contusión", anual.countLesionAnual("Contusion", anio));
-            Torta.setValue("Fractura", anual.countLesionAnual("Fractura", anio));
-            Torta.setValue("Quemadura", anual.countLesionAnual("Quemadura", anio));
-            Torta.setValue("Muscular", anual.countLesionAnual("Muscular", anio));
-            Torta.setValue("Mareos", anual.countLesionAnual("Mareos", anio));
-            Torta.setValue("Irritación", anual.countLesionAnual("Irritacion", anio));
-             
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
-                Torta,false,true,false);
-        }
-        else if (rdTortaAnual.isSelected() && rdTortaArea.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String anio = (String) this.boxTortaTiempo.getSelectedItem();
-            String variable = (String) this.boxTortaArea.getSelectedItem();
-            String where = "area";
-            Torta.setValue("Herida Punzante", anual.countLesionAnualVariable("Herida punzante", anio, where, variable));
-            Torta.setValue("Herida Colgajo", anual.countLesionAnualVariable("Herida colgajo", anio, where, variable));
-            Torta.setValue("Herida Abrasión", anual.countLesionAnualVariable("Herida por abrasion", anio, where, variable));
-            Torta.setValue("Contusión", anual.countLesionAnualVariable("Contusion", anio, where, variable));
-            Torta.setValue("Fractura", anual.countLesionAnualVariable("Fractura", anio, where, variable));
-            Torta.setValue("Quemadura", anual.countLesionAnualVariable("Quemadura", anio, where, variable));
-            Torta.setValue("Muscular", anual.countLesionAnualVariable("Muscular", anio, where, variable));
-            Torta.setValue("Mareos", anual.countLesionAnualVariable("Mareos", anio, where, variable));
-            Torta.setValue("Irritación", anual.countLesionAnualVariable("Irritacion", anio, where, variable));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
-                Torta,false,true,false);
-        }
-        else if (rdTortaAnual.isSelected() && rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String anio = (String) this.boxTortaTiempo.getSelectedItem();
-            String variable = (String) this.boxTortaSector.getSelectedItem();
-            String where = "sector";
-            Torta.setValue("Corte", anual.countLesionAnualVariable("Corte", anio, where, variable));
-            Torta.setValue("Herida Punzante", anual.countLesionAnualVariable("Herida punzante", anio, where, variable));
-            Torta.setValue("Herida Colgajo", anual.countLesionAnualVariable("Herida colgajo", anio, where, variable));
-            Torta.setValue("Herida Abrasión", anual.countLesionAnualVariable("Herida por abrasion", anio, where, variable));
-            Torta.setValue("Contusión", anual.countLesionAnualVariable("Contusion", anio, where, variable));
-            Torta.setValue("Fractura", anual.countLesionAnualVariable("Fractura", anio, where, variable));
-            Torta.setValue("Quemadura", anual.countLesionAnualVariable("Quemadura", anio, where, variable));
-            Torta.setValue("Muscular", anual.countLesionAnualVariable("Muscular", anio, where, variable));
-            Torta.setValue("Mareos", anual.countLesionAnualVariable("Mareos", anio, where, variable));
-            Torta.setValue("Irritación", anual.countLesionAnualVariable("Irritacion", anio, where, variable));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
-                Torta,false,true,false);
-        }
-        else if (rdTortaSemestral.isSelected() && !rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String semestre = (String) this.boxTortaTiempo.getSelectedItem();
+        String corte = "Corte";
+        String punzante = "Herida punzante";
+        String colgajo = "Herida colgajo";
+        String abrasion = "Herida por abrasion";
+        String contusion = "Contusion";
+        String fractura = "Fractura";
+        String quemadura = "Quemadura";
+        String muscular = "Muscular";
+        String mareos = "Mareos";
+        String irritacion = "Irritacion";   
+        
+        if (rdTortaAnual.isSelected()) {
+            Integer corteAnual = anual.countLesionAnual(corte, anio);
+            Integer punzanteAnual = anual.countLesionAnual(punzante, anio);
+            Integer colgajoAnual = anual.countLesionAnual(colgajo, anio);
+            Integer abrasionAnual = anual.countLesionAnual(abrasion, anio);
+            Integer contusionAnual = anual.countLesionAnual(contusion, anio);
+            Integer fracturaAnual = anual.countLesionAnual(fractura, anio);
+            Integer quemaduraAnual = anual.countLesionAnual(quemadura, anio);
+            Integer muscularAnual = anual.countLesionAnual(muscular, anio);
+            Integer mareosAnual = anual.countLesionAnual(mareos, anio);
+            Integer irritacionAnual = anual.countLesionAnual(irritacion, anio);
+            Integer sumaAnual = corteAnual + punzanteAnual + colgajoAnual + abrasionAnual + contusionAnual + fracturaAnual + quemaduraAnual + muscularAnual + mareosAnual + irritacionAnual;
+
+            if (!rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
+                if (sumaAnual > 0) {
+                    if (corteAnual > 0) {
+                        Torta.setValue("Corte", corteAnual);
+                    }
+                    if (punzanteAnual > 0) {
+                        Torta.setValue("Herida Punzante", punzanteAnual);
+                    }
+                    if (colgajoAnual > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoAnual);
+                    }
+                    if (abrasionAnual > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionAnual);
+                    }
+                    if (contusionAnual > 0) {
+                        Torta.setValue("Contusión", contusionAnual);
+                    }
+                    if (fracturaAnual > 0) {
+                        Torta.setValue("Fractura", fracturaAnual);
+                    }
+                    if (quemaduraAnual > 0) {
+                        Torta.setValue("Quemadura", quemaduraAnual);
+                    }
+                    if (muscularAnual > 0) {
+                        Torta.setValue("Muscular", muscularAnual);
+                    }
+                    if (mareosAnual > 0) {
+                        Torta.setValue("Mareos", mareosAnual);
+                    }
+                    if (irritacionAnual > 0) {
+                        Torta.setValue("Irritación", irritacionAnual);
+                    }
+                    
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaArea.isSelected()) {
+                String variable = (String) this.boxTortaArea.getSelectedItem();
+                String where = "area";
+
+                Integer corteAnualVar = anual.countLesionAnualVariable(corte, anio, where, variable);
+                Integer punzanteAnualVar = anual.countLesionAnualVariable(punzante, anio, where, variable);
+                Integer colgajoAnualVar = anual.countLesionAnualVariable(colgajo, anio, where, variable);
+                Integer abrasionAnualVar = anual.countLesionAnualVariable(abrasion, anio, where, variable);
+                Integer contusionAnualVar = anual.countLesionAnualVariable(contusion, anio, where, variable);
+                Integer fracturaAnualVar = anual.countLesionAnualVariable(fractura, anio, where, variable);
+                Integer quemaduraAnualVar = anual.countLesionAnualVariable(quemadura, anio, where, variable);
+                Integer muscularAnualVar = anual.countLesionAnualVariable(muscular, anio, where, variable);
+                Integer mareosAnualVar = anual.countLesionAnualVariable(mareos, anio, where, variable);
+                Integer irritacionAnualVar = anual.countLesionAnualVariable(irritacion, anio, where, variable);
+                Integer sumaAnualVar = corteAnualVar + punzanteAnualVar + colgajoAnualVar + abrasionAnualVar + contusionAnualVar + fracturaAnualVar + quemaduraAnualVar + muscularAnualVar + mareosAnualVar + irritacionAnualVar;
+
+                if (sumaAnualVar > 0) {
+                    if (corteAnualVar > 0) {
+                        Torta.setValue("Corte", corteAnualVar);
+                    }
+                    if (punzanteAnualVar > 0) {
+                        Torta.setValue("Herida Punzante", punzanteAnualVar);
+                    }
+                    if (colgajoAnualVar > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoAnualVar);
+                    }
+                    if (abrasionAnualVar > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionAnualVar);
+                    }
+                    if (contusionAnualVar > 0) {
+                        Torta.setValue("Contusión", contusionAnualVar);
+                    }
+                    if (fracturaAnualVar > 0) {
+                        Torta.setValue("Fractura", fracturaAnualVar);
+                    }
+                    if (quemaduraAnualVar > 0) {
+                        Torta.setValue("Quemadura", quemaduraAnualVar);
+                    }
+                    if (muscularAnualVar > 0) {
+                        Torta.setValue("Muscular", muscularAnualVar);
+                    }
+                    if (mareosAnualVar > 0) {
+                        Torta.setValue("Mareos", mareosAnualVar);
+                    }
+                    if (irritacionAnualVar > 0) {
+                        Torta.setValue("Irritación", irritacionAnualVar);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaSector.isSelected()) {
+                String variable = (String) this.boxTortaSector.getSelectedItem();
+                String where = "sector";
+
+                Integer corteAnualVar2 = anual.countLesionAnualVariable(corte, anio, where, variable);
+                Integer punzanteAnualVar2 = anual.countLesionAnualVariable(punzante, anio, where, variable);
+                Integer colgajoAnualVar2 = anual.countLesionAnualVariable(colgajo, anio, where, variable);
+                Integer abrasionAnualVar2 = anual.countLesionAnualVariable(abrasion, anio, where, variable);
+                Integer contusionAnualVar2 = anual.countLesionAnualVariable(contusion, anio, where, variable);
+                Integer fracturaAnualVar2 = anual.countLesionAnualVariable(fractura, anio, where, variable);
+                Integer quemaduraAnualVar2 = anual.countLesionAnualVariable(quemadura, anio, where, variable);
+                Integer muscularAnualVar2 = anual.countLesionAnualVariable(muscular, anio, where, variable);
+                Integer mareosAnualVar2 = anual.countLesionAnualVariable(mareos, anio, where, variable);
+                Integer irritacionAnualVar2 = anual.countLesionAnualVariable(irritacion, anio, where, variable);
+                Integer sumaAnualVar2 = corteAnualVar2 + punzanteAnualVar2 + colgajoAnualVar2 + abrasionAnualVar2 + contusionAnualVar2 + fracturaAnualVar2 + quemaduraAnualVar2 + muscularAnualVar2 + mareosAnualVar2 + irritacionAnualVar2;
+
+                if (sumaAnualVar2 > 0) {
+                    if (corteAnualVar2 > 0) {
+                        Torta.setValue("Corte", corteAnualVar2);
+                    }
+                    if (punzanteAnualVar2 > 0) {
+                        Torta.setValue("Herida Punzante", punzanteAnualVar2);
+                    }
+                    if (colgajoAnualVar2 > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoAnualVar2);
+                    }
+                    if (abrasionAnualVar2 > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionAnualVar2);
+                    }
+                    if (contusionAnualVar2 > 0) {
+                        Torta.setValue("Contusión", contusionAnualVar2);
+                    }
+                    if (fracturaAnualVar2 > 0) {
+                        Torta.setValue("Fractura", fracturaAnualVar2);
+                    }
+                    if (quemaduraAnualVar2 > 0) {
+                        Torta.setValue("Quemadura", quemaduraAnualVar2);
+                    }
+                    if (muscularAnualVar2 > 0) {
+                        Torta.setValue("Muscular", muscularAnualVar2);
+                    }
+                    if (mareosAnualVar2 > 0) {
+                        Torta.setValue("Mareos", mareosAnualVar2);
+                    }
+                    if (irritacionAnualVar2 > 0) {
+                        Torta.setValue("Irritación", irritacionAnualVar2);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
+                            Torta, true, true, false);
+                }
+            }
+
+        } else if (rdTortaSemestral.isSelected()) {
             String where = "semestre";
-            Torta.setValue("Corte", per.countAtencionesPeriodicas("Corte", semestre, where));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicas("Herida punzante", semestre, where));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicas("Herida colgajo", semestre, where));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicas("Herida por abrasion", semestre, where));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicas("Contusion", semestre, where));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicas("Fractura", semestre, where));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicas("Quemadura", semestre, where));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicas("Muscular", semestre, where));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicas("Mareos", semestre, where));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicas("Irritacion", semestre, where));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
-                Torta,false,true,false);
-        }
-        else if (rdTortaSemestral.isSelected() && rdTortaArea.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String semestre = (String) this.boxTortaTiempo.getSelectedItem();
-            String where = "semestre";
-            String variable = "area";
-            String area = (String) this.boxTortaArea.getSelectedItem(); 
-            Torta.setValue("Corte", per.countAtencionesPeriodicasVariable("Corte", semestre, where, variable, area));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicasVariable("Herida punzante", semestre, where, variable, area));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicasVariable("Herida colgajo", semestre, where, variable, area));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicasVariable("Herida por abrasion", semestre, where, variable, area));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicasVariable("Contusion", semestre, where, variable, area));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicasVariable("Fractura", semestre, where, variable, area));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicasVariable("Quemadura", semestre, where, variable, area));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicasVariable("Muscular", semestre, where, variable, area));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicasVariable("Mareos", semestre, where, variable, area));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicasVariable("Irritacion", semestre, where, variable, area));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
-                Torta,false,true,false);
-        }
-        else if (rdTortaSemestral.isSelected() && rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String semestre = (String) this.boxTortaTiempo.getSelectedItem();
-            String where = "semestre";
-            String variable = "sector";
-            String sector = (String) this.boxTortaSector.getSelectedItem(); 
-            Torta.setValue("Corte", per.countAtencionesPeriodicasVariable("Corte", semestre, where, variable, sector));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicasVariable("Herida punzante", semestre, where, variable, sector));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicasVariable("Herida colgajo", semestre, where, variable, sector));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicasVariable("Herida por abrasion", semestre, where, variable, sector));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicasVariable("Contusion", semestre, where, variable, sector));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicasVariable("Fractura", semestre, where, variable, sector));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicasVariable("Quemadura", semestre, where, variable, sector));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicasVariable("Muscular", semestre, where, variable, sector));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicasVariable("Mareos", semestre, where, variable, sector));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicasVariable("Irritacion", semestre, where, variable, sector));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
-                Torta,false,true,false);
-        }
-        else if (rdTortaTrimestral.isSelected() && !rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String trimestre = (String) this.boxTortaTiempo.getSelectedItem();
-            String where = "trimestre";
-            Torta.setValue("Corte", per.countAtencionesPeriodicas("Corte", trimestre, where));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicas("Herida punzante", trimestre, where));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicas("Herida colgajo", trimestre, where));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicas("Herida por abrasion", trimestre, where));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicas("Contusion", trimestre, where));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicas("Fractura", trimestre, where));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicas("Quemadura", trimestre, where));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicas("Muscular", trimestre, where));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicas("Mareos", trimestre, where));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicas("Irritacion", trimestre, where));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
-                Torta,false,true,false);
-        }
-        else if (rdTortaTrimestral.isSelected() && rdTortaArea.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String trimestre = (String) this.boxTortaTiempo.getSelectedItem();
-            String where = "trimestre";
-            String variable = "area";
-            String area = (String) this.boxTortaArea.getSelectedItem(); 
-            Torta.setValue("Corte", per.countAtencionesPeriodicasVariable("Corte", trimestre, where, variable, area));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicasVariable("Herida punzante", trimestre, where, variable, area));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicasVariable("Herida colgajo", trimestre, where, variable, area));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicasVariable("Herida por abrasion", trimestre, where, variable, area));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicasVariable("Contusion", trimestre, where, variable, area));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicasVariable("Fractura", trimestre, where, variable, area));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicasVariable("Quemadura", trimestre, where, variable, area));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicasVariable("Muscular", trimestre, where, variable, area));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicasVariable("Mareos", trimestre, where, variable, area));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicasVariable("Irritacion", trimestre, where, variable, area));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
-                Torta,false,true,false);
-        }
-        else if (rdTortaTrimestral.isSelected() && rdTortaSector.isSelected()) {
-            panelGraficoTorta.removeAll();
-            String trimestre = (String) this.boxTortaTiempo.getSelectedItem();
-            String where = "trimestre";
-            String variable = "sector";
-            String sector = (String) this.boxTortaSector.getSelectedItem(); 
-            Torta.setValue("Corte", per.countAtencionesPeriodicasVariable("Corte", trimestre, where, variable, sector));
-            Torta.setValue("Herida Punzante", per.countAtencionesPeriodicasVariable("Herida punzante", trimestre, where, variable, sector));
-            Torta.setValue("Herida Colgajo", per.countAtencionesPeriodicasVariable("Herida colgajo", trimestre, where, variable, sector));
-            Torta.setValue("Herida Abrasión", per.countAtencionesPeriodicasVariable("Herida por abrasion", trimestre, where, variable, sector));
-            Torta.setValue("Contusión", per.countAtencionesPeriodicasVariable("Contusion", trimestre, where, variable, sector));
-            Torta.setValue("Fractura", per.countAtencionesPeriodicasVariable("Fractura", trimestre, where, variable, sector));
-            Torta.setValue("Quemadura", per.countAtencionesPeriodicasVariable("Quemadura", trimestre, where, variable, sector));
-            Torta.setValue("Muscular", per.countAtencionesPeriodicasVariable("Muscular", trimestre, where, variable, sector));
-            Torta.setValue("Mareos", per.countAtencionesPeriodicasVariable("Mareos", trimestre, where, variable, sector));
-            Torta.setValue("Irritación", per.countAtencionesPeriodicasVariable("Irritacion", trimestre, where, variable, sector));
-            
-            GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
-                Torta,false,true,false);
-        }
-        else {
-            Utils util = new Utils();
+            Integer corteSemestral = per.countAtencionesPeriodicas(corte, semestre, where);
+            Integer punzanteSemestral = per.countAtencionesPeriodicas(punzante, semestre, where);
+            Integer colgajoSemestral = per.countAtencionesPeriodicas(colgajo, semestre, where);
+            Integer abrasionSemestral = per.countAtencionesPeriodicas(abrasion, semestre, where);
+            Integer contusionSemestral = per.countAtencionesPeriodicas(contusion, semestre, where);
+            Integer fracturaSemestral = per.countAtencionesPeriodicas(fractura, semestre, where);
+            Integer quemaduraSemestral = per.countAtencionesPeriodicas(quemadura, semestre, where);
+            Integer muscularSemestral = per.countAtencionesPeriodicas(muscular, semestre, where);
+            Integer mareosSemestral = per.countAtencionesPeriodicas(mareos, semestre, where);
+            Integer irritacionSemestral = per.countAtencionesPeriodicas(irritacion, semestre, where);
+            Integer sumaSemestral = corteSemestral + punzanteSemestral + colgajoSemestral + abrasionSemestral + contusionSemestral + fracturaSemestral + quemaduraSemestral + muscularSemestral + mareosSemestral + irritacionSemestral;
+
+            if (!rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
+                if (sumaSemestral > 0) {
+                    if (corteSemestral > 0) {
+                        Torta.setValue("Corte", corteSemestral);
+                    }
+                    if (punzanteSemestral > 0) {
+                        Torta.setValue("Herida Punzante", punzanteSemestral);
+                    }
+                    if (colgajoSemestral > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoSemestral);
+                    }
+                    if (abrasionSemestral > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionSemestral);
+                    }
+                    if (contusionSemestral > 0) {
+                        Torta.setValue("Contusión", contusionSemestral);
+                    }
+                    if (fracturaSemestral > 0) {
+                        Torta.setValue("Fractura", fracturaSemestral);
+                    }
+                    if (quemaduraSemestral > 0) {
+                        Torta.setValue("Quemadura", quemaduraSemestral);
+                    }
+                    if (muscularSemestral > 0) {
+                        Torta.setValue("Muscular", muscularSemestral);
+                    }
+                    if (mareosSemestral > 0) {
+                        Torta.setValue("Mareos", mareosSemestral);
+                    }
+                    if (irritacionSemestral > 0) {
+                        Torta.setValue("Irritación", irritacionSemestral);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaArea.isSelected()) {
+                String variable = "area";
+                String area = (String) this.boxTortaArea.getSelectedItem();
+                Integer corteSemestralVal = 0;
+                Integer punzanteSemestralVal = 0;
+                Integer colgajoSemestralVal = 0;
+                Integer abrasionSemestralVal = 0;
+                Integer contusionSemestralVal = 0;
+                Integer fracturaSemestralVal = 0;
+                Integer quemaduraSemestralVal = 0;
+                Integer muscularSemestralVal = 0;
+                Integer mareosSemestralVal = 0;
+                Integer irritacionSemestralVal = 0;
+                Integer sumaSemestralVal = 0;
+                
+                corteSemestralVal = per.countAtencionesPeriodicasVariable(corte, semestre, where, variable, area);
+                punzanteSemestralVal = per.countAtencionesPeriodicasVariable(punzante, semestre, where, variable, area);
+                colgajoSemestralVal = per.countAtencionesPeriodicasVariable(colgajo, semestre, where, variable, area);
+                abrasionSemestralVal = per.countAtencionesPeriodicasVariable(abrasion, semestre, where, variable, area);
+                contusionSemestralVal = per.countAtencionesPeriodicasVariable(contusion, semestre, where, variable, area);
+                fracturaSemestralVal = per.countAtencionesPeriodicasVariable(fractura, semestre, where, variable, area);
+                quemaduraSemestralVal = per.countAtencionesPeriodicasVariable(quemadura, semestre, where, variable, area);
+                muscularSemestralVal = per.countAtencionesPeriodicasVariable(muscular, semestre, where, variable, area);
+                mareosSemestralVal = per.countAtencionesPeriodicasVariable(mareos, semestre, where, variable, area);
+                irritacionSemestralVal = per.countAtencionesPeriodicasVariable(irritacion, semestre, where, variable, area);
+                sumaSemestralVal = corteSemestralVal + punzanteSemestralVal + colgajoSemestralVal + abrasionSemestralVal + contusionSemestralVal + fracturaSemestralVal + quemaduraSemestralVal + muscularSemestralVal + mareosSemestralVal + irritacionSemestralVal;
+
+                if (sumaSemestralVal > 0) {
+                    if (corteSemestralVal > 0) {
+                        Torta.setValue("Corte", corteSemestralVal);
+                    }
+                    if (punzanteSemestralVal > 0) {
+                        Torta.setValue("Herida Punzante", punzanteSemestralVal);
+                    }
+                    if (colgajoSemestralVal > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoSemestralVal);
+                    }
+                    if (abrasionSemestralVal > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionSemestralVal);
+                    }
+                    if (contusionSemestralVal > 0) {
+                        Torta.setValue("Contusión", contusionSemestralVal);
+                    }
+                    if (fracturaSemestralVal > 0) {
+                        Torta.setValue("Fractura", fracturaSemestralVal);
+                    }
+                    if (quemaduraSemestralVal > 0) {
+                        Torta.setValue("Quemadura", quemaduraSemestralVal);
+                    }
+                    if (muscularSemestralVal > 0) {
+                        Torta.setValue("Muscular", muscularSemestralVal);
+                    }
+                    if (mareosSemestralVal > 0) {
+                        Torta.setValue("Mareos", mareosSemestralVal);
+                    }
+                    if (irritacionSemestralVal > 0) {
+                        Torta.setValue("Irritación", irritacionSemestralVal);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaSector.isSelected()) {
+                String variable = "sector";
+                String sector = (String) this.boxTortaSector.getSelectedItem();
+
+                Integer corteSemestralVal2 = per.countAtencionesPeriodicasVariable(corte, semestre, where, variable, sector);
+                Integer punzanteSemestralVal2 = per.countAtencionesPeriodicasVariable(punzante, semestre, where, variable, sector);
+                Integer colgajoSemestralVal2 = per.countAtencionesPeriodicasVariable(colgajo, semestre, where, variable, sector);
+                Integer abrasionSemestralVal2 = per.countAtencionesPeriodicasVariable(abrasion, semestre, where, variable, sector);
+                Integer contusionSemestralVal2 = per.countAtencionesPeriodicasVariable(contusion, semestre, where, variable, sector);
+                Integer fracturaSemestralVal2 = per.countAtencionesPeriodicasVariable(fractura, semestre, where, variable, sector);
+                Integer quemaduraSemestralVal2 = per.countAtencionesPeriodicasVariable(quemadura, semestre, where, variable, sector);
+                Integer muscularSemestralVal2 = per.countAtencionesPeriodicasVariable(muscular, semestre, where, variable, sector);
+                Integer mareosSemestralVal2 = per.countAtencionesPeriodicasVariable(mareos, semestre, where, variable, sector);
+                Integer irritacionSemestralVal2 = per.countAtencionesPeriodicasVariable(irritacion, semestre, where, variable, sector);
+                Integer sumaSemestralVal2 = corteSemestralVal2 + punzanteSemestralVal2 + colgajoSemestralVal2 + abrasionSemestralVal2 + contusionSemestralVal2 + fracturaSemestralVal2 + quemaduraSemestralVal2 + muscularSemestralVal2 + mareosSemestralVal2 + irritacionSemestralVal2;
+
+                if (sumaSemestralVal2 > 0) {
+                    if (corteSemestralVal2 > 0) {
+                        Torta.setValue("Corte", corteSemestralVal2);
+                    }
+                    if (punzanteSemestralVal2 > 0) {
+                        Torta.setValue("Herida Punzante", punzanteSemestralVal2);
+                    }
+                    if (colgajoSemestralVal2 > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoSemestralVal2);
+                    }
+                    if (abrasionSemestralVal2 > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionSemestralVal2);
+                    }
+                    if (contusionSemestralVal2 > 0) {
+                        Torta.setValue("Contusión", contusionSemestralVal2);
+                    }
+                    if (fracturaSemestralVal2 > 0) {
+                        Torta.setValue("Fractura", fracturaSemestralVal2);
+                    }
+                    if (quemaduraSemestralVal2 > 0) {
+                        Torta.setValue("Quemadura", quemaduraSemestralVal2);
+                    }
+                    if (muscularSemestralVal2 > 0) {
+                        Torta.setValue("Muscular", muscularSemestralVal2);
+                    }
+                    if (mareosSemestralVal2 > 0) {
+                        Torta.setValue("Mareos", mareosSemestralVal2);
+                    }
+                    if (irritacionSemestralVal2 > 0) {
+                        Torta.setValue("Irritación", irritacionSemestralVal2);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
+                            Torta, true, true, false);
+                }
+            }
+
+        } else if (rdTortaTrimestral.isSelected()) {
+
+            if (!rdTortaArea.isSelected() && !rdTortaSector.isSelected()) {
+                String where = "trimestre";
+                Integer corteTrimestral = per.countAtencionesPeriodicas(corte, trimestre, where);
+                Integer punzanteTrimestral = per.countAtencionesPeriodicas(punzante, trimestre, where);
+                Integer colgajoTrimestral = per.countAtencionesPeriodicas(colgajo, trimestre, where);
+                Integer abrasionTrimestral = per.countAtencionesPeriodicas(abrasion, trimestre, where);
+                Integer contusionTrimestral = per.countAtencionesPeriodicas(contusion, trimestre, where);
+                Integer fracturaTrimestral = per.countAtencionesPeriodicas(fractura, trimestre, where);
+                Integer quemaduraTrimestral = per.countAtencionesPeriodicas(quemadura, trimestre, where);
+                Integer muscularTrimestral = per.countAtencionesPeriodicas(muscular, trimestre, where);
+                Integer mareosTrimestral = per.countAtencionesPeriodicas(mareos, trimestre, where);
+                Integer irritacionTrimestral = per.countAtencionesPeriodicas(irritacion, trimestre, where);
+                Integer sumaTrimestral = corteTrimestral + punzanteTrimestral + colgajoTrimestral + abrasionTrimestral + contusionTrimestral + fracturaTrimestral + quemaduraTrimestral + muscularTrimestral + mareosTrimestral + irritacionTrimestral;
+
+                if (sumaTrimestral > 0) {
+                    if (corteTrimestral > 0) {
+                        Torta.setValue("Corte", corteTrimestral);
+                    }
+                    if (punzanteTrimestral > 0) {
+                        Torta.setValue("Herida Punzante", punzanteTrimestral);
+                    }
+                    if (colgajoTrimestral > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoTrimestral);
+                    }
+                    if (abrasionTrimestral > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionTrimestral);
+                    }
+                    if (contusionTrimestral > 0) {
+                        Torta.setValue("Contusión", contusionTrimestral);
+                    }
+                    if (fracturaTrimestral > 0) {
+                        Torta.setValue("Fractura", fracturaTrimestral);
+                    }
+                    if (quemaduraTrimestral > 0) {
+                        Torta.setValue("Quemadura", quemaduraTrimestral);
+                    }
+                    if (muscularTrimestral > 0) {
+                        Torta.setValue("Muscular", muscularTrimestral);
+                    }
+                    if (mareosTrimestral > 0) {
+                        Torta.setValue("Mareos", mareosTrimestral);
+                    }
+                    if (irritacionTrimestral > 0) {
+                        Torta.setValue("Irritación", irritacionTrimestral);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaArea.isSelected()) {
+                String where = "trimestre";
+                String variable = "area";
+                String area = (String) this.boxTortaArea.getSelectedItem();
+
+                Integer corteTrimestralVal = per.countAtencionesPeriodicasVariable(corte, trimestre, where, variable, area);
+                Integer punzanteTrimestralVal = per.countAtencionesPeriodicasVariable(punzante, trimestre, where, variable, area);
+                Integer colgajoTrimestralVal = per.countAtencionesPeriodicasVariable(colgajo, trimestre, where, variable, area);
+                Integer abrasionTrimestralVal = per.countAtencionesPeriodicasVariable(abrasion, trimestre, where, variable, area);
+                Integer contusionTrimestralVal = per.countAtencionesPeriodicasVariable(contusion, trimestre, where, variable, area);
+                Integer fracturaTrimestralVal = per.countAtencionesPeriodicasVariable(fractura, trimestre, where, variable, area);
+                Integer quemaduraTrimestralVal = per.countAtencionesPeriodicasVariable(quemadura, trimestre, where, variable, area);
+                Integer muscularTrimestralVal = per.countAtencionesPeriodicasVariable(muscular, trimestre, where, variable, area);
+                Integer mareosTrimestralVal = per.countAtencionesPeriodicasVariable(mareos, trimestre, where, variable, area);
+                Integer irritacionTrimestralVal = per.countAtencionesPeriodicasVariable(irritacion, trimestre, where, variable, area);
+                Integer sumaTrimestralVal = corteTrimestralVal + punzanteTrimestralVal + colgajoTrimestralVal + abrasionTrimestralVal + contusionTrimestralVal + fracturaTrimestralVal + quemaduraTrimestralVal + muscularTrimestralVal + mareosTrimestralVal + irritacionTrimestralVal;
+
+                if (sumaTrimestralVal > 0) {
+                    if (corteTrimestralVal > 0) {
+                        Torta.setValue("Corte", corteTrimestralVal);
+                    }
+                    if (punzanteTrimestralVal > 0) {
+                        Torta.setValue("Herida Punzante", punzanteTrimestralVal);
+                    }
+                    if (colgajoTrimestralVal > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoTrimestralVal);
+                    }
+                    if (abrasionTrimestralVal > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionTrimestralVal);
+                    }
+                    if (contusionTrimestralVal > 0) {
+                        Torta.setValue("Contusión", contusionTrimestralVal);
+                    }
+                    if (fracturaTrimestralVal > 0) {
+                        Torta.setValue("Fractura", fracturaTrimestralVal);
+                    }
+                    if (quemaduraTrimestralVal > 0) {
+                        Torta.setValue("Quemadura", quemaduraTrimestralVal);
+                    }
+                    if (muscularTrimestralVal > 0) {
+                        Torta.setValue("Muscular", muscularTrimestralVal);
+                    }
+                    if (mareosTrimestralVal > 0) {
+                        Torta.setValue("Mareos", mareosTrimestralVal);
+                    }
+                    if (irritacionTrimestralVal > 0) {
+                        Torta.setValue("Irritación", irritacionTrimestralVal);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
+                            Torta, true, true, false);
+                }
+            } else if (rdTortaSector.isSelected()) {
+                String where = "trimestre";
+                String variable = "sector";
+                String sector = (String) this.boxTortaSector.getSelectedItem();
+
+                Integer corteTrimestralVal2 = per.countAtencionesPeriodicasVariable(corte, trimestre, where, variable, sector);
+                Integer punzanteTrimestralVal2 = per.countAtencionesPeriodicasVariable(punzante, trimestre, where, variable, sector);
+                Integer colgajoTrimestralVal2 = per.countAtencionesPeriodicasVariable(colgajo, trimestre, where, variable, sector);
+                Integer abrasionTrimestralVal2 = per.countAtencionesPeriodicasVariable(abrasion, trimestre, where, variable, sector);
+                Integer contusionTrimestralVal2 = per.countAtencionesPeriodicasVariable(contusion, trimestre, where, variable, sector);
+                Integer fracturaTrimestralVal2 = per.countAtencionesPeriodicasVariable(fractura, trimestre, where, variable, sector);
+                Integer quemaduraTrimestralVal2 = per.countAtencionesPeriodicasVariable(quemadura, trimestre, where, variable, sector);
+                Integer muscularTrimestralVal2 = per.countAtencionesPeriodicasVariable(muscular, trimestre, where, variable, sector);
+                Integer mareosTrimestralVal2 = per.countAtencionesPeriodicasVariable(mareos, trimestre, where, variable, sector);
+                Integer irritacionTrimestralVal2 = per.countAtencionesPeriodicasVariable(irritacion, trimestre, where, variable, sector);
+                Integer sumaTrimestralVal2 = corteTrimestralVal2 + punzanteTrimestralVal2 + colgajoTrimestralVal2 + abrasionTrimestralVal2 + contusionTrimestralVal2 + fracturaTrimestralVal2 + quemaduraTrimestralVal2 + muscularTrimestralVal2 + mareosTrimestralVal2 + irritacionTrimestralVal2;
+
+                if (sumaTrimestralVal2 > 0) {
+                    if (corteTrimestralVal2 > 0) {
+                        Torta.setValue("Corte", corteTrimestralVal2);
+                    }
+                    if (punzanteTrimestralVal2 > 0) {
+                        Torta.setValue("Herida Punzante", punzanteTrimestralVal2);
+                    }
+                    if (colgajoTrimestralVal2 > 0) {
+                        Torta.setValue("Herida Colgajo", colgajoTrimestralVal2);
+                    }
+                    if (abrasionTrimestralVal2 > 0) {
+                        Torta.setValue("Herida Abrasión", abrasionTrimestralVal2);
+                    }
+                    if (contusionTrimestralVal2 > 0) {
+                        Torta.setValue("Contusión", contusionTrimestralVal2);
+                    }
+                    if (fracturaTrimestralVal2 > 0) {
+                        Torta.setValue("Fractura", fracturaTrimestralVal2);
+                    }
+                    if (quemaduraTrimestralVal2 > 0) {
+                        Torta.setValue("Quemadura", quemaduraTrimestralVal2);
+                    }
+                    if (muscularTrimestralVal2 > 0) {
+                        Torta.setValue("Muscular", muscularTrimestralVal2);
+                    }
+                    if (mareosTrimestralVal2 > 0) {
+                        Torta.setValue("Mareos", mareosTrimestralVal2);
+                    }
+                    if (irritacionTrimestralVal2 > 0) {
+                        Torta.setValue("Irritación", irritacionTrimestralVal2);
+                    }
+
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
+                            Torta, true, true, false);
+                } else {
+                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
+                            Torta, true, true, false);
+                }
+            }
+        } else {
             util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
-        GraficaTorta.setBackgroundPaint(new Color(222, 222, 255));
-        final PiePlot plot = (PiePlot) GraficaTorta.getPlot();
-        plot.setBackgroundPaint(Color.white);
-        
-        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
-            "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%"));
-        plot.setLabelGenerator(gen);
+            GraficaTorta.setBackgroundPaint(new Color(222, 222, 255));
+            final PiePlot plot = (PiePlot) GraficaTorta.getPlot();
+            plot.setBackgroundPaint(Color.white);
 
-        ChartPanel panelTorta = new ChartPanel(GraficaTorta);
-        panelGraficoTorta.setLayout(new java.awt.BorderLayout());
-        panelGraficoTorta.add(panelTorta);
-        panelGraficoTorta.validate();        
+            PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
+                    "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%"));
+            plot.setLabelGenerator(gen);
+
+            ChartPanel panelTorta = new ChartPanel(GraficaTorta);
+            panelGraficoTorta.setLayout(new java.awt.BorderLayout());
+            panelGraficoTorta.add(panelTorta);
+            panelGraficoTorta.validate();
     }//GEN-LAST:event_btnGraficarTortaActionPerformed
 
     private void btnGraficarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarAnualActionPerformed
         // TODO add your handling code here:
+        AExtremidad.clear();
+        AArea.clear();
+        ASector.clear();
+        ATipo.clear();
+        ALesion.clear();
         String año = (String) this.boxAnual.getSelectedItem();
         String extremidad = "extremidad";
         String tipo = "incidente";
         String area = "area";
         String sector = "sector";
         String lesion = "lesion";
-        
+
         if (rdExtremidad2.isSelected()) {
             panelGraficoAnual.removeAll();
             Integer man = DatosGraficos.DatosGraficosAñoActual("Manos", año, extremidad);
@@ -1288,7 +1654,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer cox2 = DatosGraficos.DatosGraficosAñoAnterior("Coxis", año, extremidad);
             Integer pi2 = DatosGraficos.DatosGraficosAñoAnterior("Piernas", año, extremidad);
             Integer pie2 = DatosGraficos.DatosGraficosAñoAnterior("Pies", año, extremidad);
-            
+
             //Configuracion del gráfico        
             AExtremidad.addValue(man, "año Seleccionado", "Manos");
             AExtremidad.addValue(cab, "año Seleccionado", "Cab");
@@ -1309,7 +1675,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             AExtremidad.addValue(cox2, "año Anterior", "Coxis");
             AExtremidad.addValue(pi2, "año Anterior", "Piernas");
             AExtremidad.addValue(pie2, "año Anterior", "Pies");
-            
+
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad",
                     "Extremidades", "Cantidad Incidentes", AExtremidad, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdSector2.isSelected()) {
@@ -1426,16 +1792,16 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer fra = DatosGraficos.DatosGraficosAñoActual("Fractura", año, lesion);
             Integer que = DatosGraficos.DatosGraficosAñoActual("Quemadura", año, lesion);
             Integer mus = DatosGraficos.DatosGraficosAñoActual("Muscular", año, lesion);
-            
+
             Integer cor2 = DatosGraficos.DatosGraficosAñoAnterior("Corte", año, lesion);
-            Integer hep2= DatosGraficos.DatosGraficosAñoAnterior("Herida punzante", año, lesion);
+            Integer hep2 = DatosGraficos.DatosGraficosAñoAnterior("Herida punzante", año, lesion);
             Integer hec2 = DatosGraficos.DatosGraficosAñoAnterior("Herida colgajo", año, lesion);
             Integer hea2 = DatosGraficos.DatosGraficosAñoAnterior("Herida por abrasion", año, lesion);
             Integer con2 = DatosGraficos.DatosGraficosAñoAnterior("Contusion", año, lesion);
             Integer fra2 = DatosGraficos.DatosGraficosAñoAnterior("Fractura", año, lesion);
             Integer que2 = DatosGraficos.DatosGraficosAñoAnterior("Quemadura", año, lesion);
             Integer mus2 = DatosGraficos.DatosGraficosAñoAnterior("Muscular", año, lesion);
-            
+
             ALesion.addValue(cor, "Año Seleccionado", "Corte");
             ALesion.addValue(hep, "Año Seleccionado", "H. Punzante");
             ALesion.addValue(hec, "Año Seleccionado", "H. Colgajo");
@@ -1444,7 +1810,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             ALesion.addValue(fra, "Año Seleccionado", "Fractura.");
             ALesion.addValue(que, "Año Seleccionado", "Quemadura");
             ALesion.addValue(mus, "Año Seleccionado", "Muscular");
-            
+
             ALesion.addValue(cor2, "Año Anterior", "Corte");
             ALesion.addValue(hep2, "Año Anterior", "H. Punzante");
             ALesion.addValue(hec2, "Año Anterior", "H. Colgajo");
@@ -1453,14 +1819,14 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             ALesion.addValue(fra2, "Año Anterior", "Fractura.");
             ALesion.addValue(que2, "Año Anterior", "Quemadura");
             ALesion.addValue(mus2, "Año Anterior", "Muscular");
-            
+
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Lesion",
-                    "Tipo de Lesiones", "Cantidad Incidentes", ALesion, PlotOrientation.VERTICAL, true, true, false);                    
+                    "Tipo de Lesiones", "Cantidad Incidentes", ALesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
             Utils util = new Utils();
             util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
-        
+
         ChartPanel panelAnual = new ChartPanel(GraficaAnual);
         panelGraficoAnual.setLayout(new java.awt.BorderLayout());
         panelGraficoAnual.add(panelAnual);
@@ -1469,6 +1835,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
     private void btnGraficarPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarPeriodicoActionPerformed
         // TODO add your handling code here:
+        PExtremidad.clear();
+        PArea.clear();
+        PSector.clear();
+        PTipo.clear();
+        PLesion.clear();
         String periodo = (String) this.boxPeriodico.getSelectedItem();
         String semTrim = "";
         if (this.rdSemestre.isSelected()) {
@@ -1796,6 +2167,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void rdTortaSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTortaSectorMouseClicked
         // TODO add your handling code here:
         this.boxTortaSector.removeAllItems();
+        this.boxTortaArea.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs;
         rs = cn.ExtraerSector();
@@ -1811,6 +2183,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void rdTortaAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTortaAreaMouseClicked
         // TODO add your handling code here:
         this.boxTortaArea.removeAllItems();
+        this.boxTortaSector.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs;
         rs = cn.ExtraerArea();
