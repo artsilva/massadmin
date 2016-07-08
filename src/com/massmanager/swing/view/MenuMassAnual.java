@@ -347,9 +347,11 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         DefaultTableModel dfm = new DefaultTableModel();
         PropiedadesColumnas ancho = new PropiedadesColumnas();
         int cont = 1;
+        int countRs = 0;
 
         //Borra el contenido de la tabla antes de cargar datos
         if (rdExtremidad.isSelected()) {
+            countRs = 0;
             String where = "extremidad";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(extremidad, anio, where);
             this.grdAnual.setModel(dfm);
@@ -357,16 +359,22 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    countRs++;
                     dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
+                if (countRs <= 0){
+                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                } 
+                    
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         } else if (rdTipo.isSelected()) {
+            countRs = 0;
             String where = "incidente";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(incidente, anio, where);
             this.grdAnual.setModel(dfm);
@@ -374,16 +382,21 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    countRs++;
                     dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                }
+                if (countRs <= 0){
+                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         } else if (rdArea.isSelected()) {
+            countRs = 0;
             String where = "area";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(area, anio, where);
             this.grdAnual.setModel(dfm);
@@ -391,16 +404,21 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    countRs++;
                     dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                }
+                if (countRs <= 0){
+                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             ancho.setAnchoColumnasAnual(grdAnual);
         } else if (rdSector.isSelected()) {
+            countRs = 0;
             String where = "sector";
             ResultSet rsExtr = query.ExtraerAtencionAnualVariable(sector, anio, where);
             this.grdAnual.setModel(dfm);
@@ -408,10 +426,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    countRs++;
                     dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
+                }
+                if (countRs <= 0){
+                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -103,8 +103,8 @@ public class QuerysPeriodicas extends Conexion {
     public ResultSet ExtraerAtencionPeriodicaSemanaVariable(String extremidad, String periodo, String semana, String where, String variable) {
         try {
             ps = cn.prepareStatement(" SELECT id_atencion, nombre, apellido, rut, sector, area, jefe_area, fecha, periodo_del_anio, "
-                    + "periodo_del_mes, trimestre, lugarincidente, detalles, lesion, incidente, extremidad, paramedico, tratamiento, comentario\n"
-                    + "FROM mass_dim.dim_rep_periodico\n"
+                    + "periodo_del_mes, " + variable + ", lugarincidente, detalles, lesion, incidente, extremidad, paramedico, tratamiento, comentario "
+                    + "FROM mass_dim.dim_rep_periodico "
                     + "WHERE " + where + " = ? AND " + variable + " = ? AND periodo_del_anio = ? ; ");
             ps.setString(1, extremidad);
             ps.setString(2, periodo);

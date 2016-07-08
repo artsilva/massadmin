@@ -32,7 +32,6 @@ public class MenuMass extends javax.swing.JFrame {
         grupoPrimero.add(rdReportes);
         Usuarios user = new Usuarios();
         this.jLabel1.setText("Bienvenido a MassAdmin " + cn.obtenerNombreUltimoLogin());
-        this.btnHistorico.setVisible(false);
     }
 
     /**
@@ -51,7 +50,6 @@ public class MenuMass extends javax.swing.JFrame {
         rdGraficos = new javax.swing.JRadioButton();
         btnPeriodico = new javax.swing.JButton();
         btnMensual = new javax.swing.JButton();
-        btnHistorico = new javax.swing.JButton();
         btnAnual = new javax.swing.JButton();
         desktopMass = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
@@ -130,10 +128,6 @@ public class MenuMass extends javax.swing.JFrame {
             }
         });
 
-        btnHistorico.setText("Historico");
-        btnHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnHistorico.setEnabled(false);
-
         btnAnual.setText("Anual");
         btnAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnual.addActionListener(new java.awt.event.ActionListener() {
@@ -152,8 +146,7 @@ public class MenuMass extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPeriodico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPeriodico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -167,9 +160,7 @@ public class MenuMass extends javax.swing.JFrame {
                 .addComponent(btnMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
@@ -231,6 +222,8 @@ public class MenuMass extends javax.swing.JFrame {
     private void btnMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensualActionPerformed
         // TODO add your handling code here:
         MenuMassMensual m = new MenuMassMensual();
+        MenuMassAnual a = new MenuMassAnual();
+        MenuMassPeriodico p = new MenuMassPeriodico();
         this.desktopMass.add(m);
         m.show();
         try {
@@ -239,10 +232,16 @@ public class MenuMass extends javax.swing.JFrame {
             e.printStackTrace();
         }
         m.setVisible(true);
+        a.setVisible(false);
+        a.dispose();
+        p.setVisible(false);
+        p.dispose();
     }//GEN-LAST:event_btnMensualActionPerformed
 
     private void btnAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnualActionPerformed
+        MenuMassMensual m = new MenuMassMensual();
         MenuMassAnual a = new MenuMassAnual();
+        MenuMassPeriodico p = new MenuMassPeriodico();
         desktopMass.add(a);
         a.show();
         try {
@@ -251,11 +250,16 @@ public class MenuMass extends javax.swing.JFrame {
             Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
         }
         a.setVisible(true);
-        
+        m.setVisible(false);
+        m.dispose();
+        p.setVisible(false);
+        p.dispose();
     }//GEN-LAST:event_btnAnualActionPerformed
 
     private void btnPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriodicoActionPerformed
         // TODO add your handling code here
+        MenuMassMensual m = new MenuMassMensual();
+        MenuMassAnual a = new MenuMassAnual();
         MenuMassPeriodico p = new MenuMassPeriodico();
         desktopMass.add(p);
         p.show();
@@ -265,6 +269,10 @@ public class MenuMass extends javax.swing.JFrame {
             Logger.getLogger(MenuMass.class.getName()).log(Level.SEVERE, null, ex);
         }
         p.setVisible(true);
+        m.setVisible(false);
+        m.dispose();
+        a.setVisible(false);
+        a.dispose();
     }//GEN-LAST:event_btnPeriodicoActionPerformed
 
     private void menuAtencionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAtencionesActionPerformed
@@ -285,7 +293,6 @@ public class MenuMass extends javax.swing.JFrame {
             this.btnAnual.setVisible(true);
             this.btnMensual.setVisible(true);
             this.btnPeriodico.setVisible(true);
-            this.btnHistorico.setVisible(true);
             MenuMassAnual a = new MenuMassAnual();
             desktopMass.add(a);
             try {
@@ -303,7 +310,6 @@ public class MenuMass extends javax.swing.JFrame {
             this.btnAnual.setVisible(false);
             this.btnMensual.setVisible(false);
             this.btnPeriodico.setVisible(false);
-            this.btnHistorico.setVisible(false);
             MassGraficos g = new MassGraficos();
             desktopMass.add(g);
             try {
@@ -321,7 +327,6 @@ public class MenuMass extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnual;
-    private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnMensual;
     private javax.swing.JButton btnPeriodico;
     private javax.swing.JDesktopPane desktopMass;
@@ -383,14 +388,6 @@ public class MenuMass extends javax.swing.JFrame {
 
     public void setRdReportes(JRadioButton rdReportes) {
         this.rdReportes = rdReportes;
-    }
-
-    public JButton getBtnHistorico() {
-        return btnHistorico;
-    }
-
-    public void setBtnHistorico(JButton btnHistorico) {
-        this.btnHistorico = btnHistorico;
     }
 
 }

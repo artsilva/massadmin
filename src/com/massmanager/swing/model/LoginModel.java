@@ -7,7 +7,6 @@ package com.massmanager.swing.model;
 
 import com.massmanager.controller.Usuarios;
 import com.massmanager.swing.view.LoginView;
-import com.massmanager.swing.view.MenuMass;
 import com.massmanager.swing.view.MenuSpaNuevo;
 import com.massmanager.swing.view.WebServiceView;
 import java.awt.Toolkit;
@@ -48,6 +47,7 @@ public class LoginModel implements ActionListener {
         List<Usuarios> listaUsuarios = new ArrayList<>();
         String user = view.getUsuario().getText();
         String password = view.getPassword().getText();
+        WebServiceView web = new WebServiceView();
 
         try {
             while (rsUsuario.next()) {
@@ -87,16 +87,15 @@ public class LoginModel implements ActionListener {
             
             //permisoUsuario 1: Acceso a MenuMASS, permisoUsuario 2: Acceso a menuSPA
             if (usuarioexistente && passwordCorrecto && permisoUsuario == 1) {
-                //MenuMass mass = new MenuMass();
-                WebServiceView web = new WebServiceView();
+                //MenuMass mass = new MenuMass();          
                 view.setVisible(false);
+                view.dispose();
                 web.setVisible(true);
-                //mass.setVisible(true);
 
             } else if (usuarioexistente && passwordCorrecto && permisoUsuario == 2) {
-                MenuSpaNuevo spa = new MenuSpaNuevo();
-                WebServiceView web = new WebServiceView();
+                MenuSpaNuevo spa = new MenuSpaNuevo();                
                 view.setVisible(false);
+                view.dispose();
                 web.setVisible(true);
                 spa.setVisible(true);
             } else if (!usuarioexistente || !passwordCorrecto) {

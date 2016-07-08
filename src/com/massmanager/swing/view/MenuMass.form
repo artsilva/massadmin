@@ -82,7 +82,6 @@
                       <Component id="btnAnual" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnMensual" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnPeriodico" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnHistorico" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
               </Group>
@@ -99,9 +98,7 @@
                   <Component id="btnMensual" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnPeriodico" min="-2" pref="43" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnHistorico" min="-2" pref="43" max="-2" attributes="0"/>
-                  <EmptySpace pref="295" max="32767" attributes="0"/>
+                  <EmptySpace pref="356" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -209,15 +206,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMensualActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnHistorico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Historico"/>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
-            </Property>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnAnual">
           <Properties>

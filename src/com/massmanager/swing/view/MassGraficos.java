@@ -11,7 +11,9 @@ import com.massmanager.swing.model.GestionArchivos;
 import com.massmanager.swing.model.QuerysAnuales;
 import com.massmanager.swing.model.QuerysPeriodicas;
 import com.massmanager.swing.model.Utils;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -192,6 +194,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelMensual.setBackground(new java.awt.Color(255, 255, 255));
         panelMensual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        panelGraficoMensual.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoMensual.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
         javax.swing.GroupLayout panelGraficoMensualLayout = new javax.swing.GroupLayout(panelGraficoMensual);
@@ -242,7 +245,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaMensual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
+        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad.setText("Extremidad");
@@ -322,11 +325,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnGraficarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
             .addComponent(panelGraficoMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -372,7 +375,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaAnual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
+        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdExtremidad2.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad2.setText("Extremidad");
@@ -429,6 +432,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        panelGraficoAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoAnual.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
         javax.swing.GroupLayout panelGraficoAnualLayout = new javax.swing.GroupLayout(panelGraficoAnual);
@@ -454,11 +458,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnualLayout.setHorizontalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(62, 62, 62)
                 .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1020, Short.MAX_VALUE))
+                .addContainerGap(1014, Short.MAX_VALUE))
             .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAnualLayout.createSequentialGroup()
                     .addContainerGap()
@@ -471,11 +475,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnualLayout.setVerticalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAnualLayout.createSequentialGroup()
-                .addContainerGap(378, Short.MAX_VALUE)
+                .addContainerGap(379, Short.MAX_VALUE)
                 .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
+                .addGap(148, 148, 148))
             .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAnualLayout.createSequentialGroup()
                     .addContainerGap()
@@ -547,7 +551,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaPeriodico.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
+        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdExtremidad3.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad3.setText("Extremidad");
@@ -604,6 +608,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        panelGraficoPeriodico.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoPeriodico.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
         javax.swing.GroupLayout panelGraficoPeriodicoLayout = new javax.swing.GroupLayout(panelGraficoPeriodico);
@@ -659,6 +664,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelTorta.setBackground(new java.awt.Color(255, 255, 255));
         panelTorta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        panelGraficoTorta.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoTorta.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
         panelGraficoTorta.setEnabled(false);
 
@@ -747,7 +753,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelFiltroTorta2.setBackground(new java.awt.Color(255, 255, 255));
-        panelFiltroTorta2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Secundario"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
+        panelFiltroTorta2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Secundario"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
 
         rdTortaSector.setBackground(new java.awt.Color(255, 255, 255));
         rdTortaSector.setText("Sector");
@@ -1139,11 +1145,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
                     
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaArea.isSelected()) {
                 String variable = (String) this.boxTortaArea.getSelectedItem();
@@ -1194,11 +1200,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaSector.isSelected()) {
                 String variable = (String) this.boxTortaSector.getSelectedItem();
@@ -1249,11 +1255,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             }
 
@@ -1305,11 +1311,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaArea.isSelected()) {
                 String variable = "area";
@@ -1371,11 +1377,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaSector.isSelected()) {
                 String variable = "sector";
@@ -1426,11 +1432,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             }
 
@@ -1483,11 +1489,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaArea.isSelected()) {
                 String where = "trimestre";
@@ -1539,11 +1545,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             } else if (rdTortaSector.isSelected()) {
                 String where = "trimestre";
@@ -1595,11 +1601,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     }
 
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 } else {
                     util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
-                            Torta, true, true, false);
+                            Torta, false, true, false);
                 }
             }
         } else {
@@ -1607,7 +1613,14 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         }
             GraficaTorta.setBackgroundPaint(new Color(222, 222, 255));
             final PiePlot plot = (PiePlot) GraficaTorta.getPlot();
+            plot.setLabelFont(new Font("Courier New", Font.BOLD, 15));
             plot.setBackgroundPaint(Color.white);
+            plot.setLabelLinkPaint(Color.YELLOW);
+            plot.setLabelLinkStroke(new BasicStroke(2.0f));
+            plot.setLabelOutlineStroke(null);
+            plot.setLabelPaint(Color.BLACK);
+            plot.setLabelBackgroundPaint(Color.WHITE);
+            //plot.setLabelGenerator(null);
 
             PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
                     "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%"));
