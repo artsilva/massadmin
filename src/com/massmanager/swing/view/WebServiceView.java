@@ -31,8 +31,8 @@ public class WebServiceView extends javax.swing.JFrame {
             @Override
             public void run() {
                 // textField_t.setText(YOUR TEXT);
-                for (int i = 0; i < 900000000; i++) {
-                    if (i == 899999999) {
+                for (int i = 0; i < 9; i++) {
+                    if (i == 8) {
                         for (int j = 0; j < 900000000; j++) {
                             if (j == 899999999) {
                                 for (int k = 0; k < 900000000; k++) {
