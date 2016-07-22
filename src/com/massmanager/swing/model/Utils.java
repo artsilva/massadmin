@@ -55,7 +55,7 @@ public class Utils {
         correo.append("<p class=MsoNormal>&nbsp;</p>");
         correo.append("<p class=MsoNormal>").append(fecha.obtenerSaludoHorario(fecha.getHoraMinutos())).append(", junto con saludar, se informa sobre");
         correo.append(" la atención de índole ").append(atenciones.getIncidente()).append(" prestada al Sr. ").append(atenciones.getNombre()).append(" ").append(atenciones.getApellido()).append(" el día ").append(fecha.getFecha()).append(" a causa ");
-        correo.append("de una lesión provocada por un/a ").append(atenciones.getLesion()).append(" cuando el trabajador desempeñaba sus funciones en el área ").append(atenciones.getArea()).append(" específicamente en ");
+        correo.append("de una lesión provocada por una atención de tipo ").append(atenciones.getLesion()).append(" cuando el trabajador desempeñaba sus funciones en el área ").append(atenciones.getArea()).append(" específicamente en ");
         correo.append(atenciones.getLugar()).append(" provocado por un ").append(atenciones.getDetalles()).append(", ");
         correo.append("siendo atendido en SPA con el siguiente comentario de atención: ").append(atenciones.getComentario()).append("</p><p class=MsoNormal><br></p>");
 
