@@ -65,9 +65,15 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         
         QuerysMensuales query = new QuerysMensuales();
         rs = query.ExtraerAtencionesMensual();
+        String nombre = "";
+        String apellido = "";
+        int cont = 0;
         try{
             while(rs.next()){
-                dfm.addRow(new Object[] { rs.getInt("id_atencion"), rs.getString("nombre"),rs.getString("apellido"),  rs.getInt("rut"), 
+                nombre = Utils.convertToMayus(rs.getString("nombre"));
+                apellido = Utils.convertToMayus(rs.getString("apellido"));
+                cont++;
+                dfm.addRow(new Object[] { cont, nombre, apellido,  rs.getInt("rut"), 
                     rs.getString("sector"), rs.getString("area"), rs.getString("jefe_area"),rs.getString("fecha"), rs.getString("mes") , 
                     rs.getString("lugarincidente"), rs.getString("detalles"), rs.getString("lesion"), rs.getString("incidente"), 
                     rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario") });
@@ -341,8 +347,9 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
         String area = (String) this.boxOpcion.getSelectedItem();
         String sector = (String) this.boxOpcion.getSelectedItem();
         String where = "";
+        String nombre = "";
+        String apellido = "";
         
-        Utils util = new Utils();
         grdMensual.setModel(new DefaultTableModel());
         QuerysMensuales query = new QuerysMensuales();
         DefaultTableModel dfm = new DefaultTableModel();
@@ -359,14 +366,16 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"), 
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
                         rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -382,14 +391,16 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"), 
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
                         rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -405,14 +416,16 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"), 
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
                         rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -428,14 +441,16 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"), 
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"), 
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"), 
                         rsExtr.getString("mes"), rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"), 
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -446,7 +461,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
             this.grdMensual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha", 
                 "Mes", "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            util.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
+            Utils.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos", "Advertencia");
         }
         
     }//GEN-LAST:event_btnFiltrarActionPerformed
@@ -508,8 +523,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
                             Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         //Opcion para abrir el archivo exportado
-                        Utils util = new Utils();
-                        boolean respuesta = util.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
+                        boolean respuesta = Utils.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);

@@ -62,7 +62,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jPanel2" min="-2" pref="1149" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jPanel4" max="32767" attributes="0"/>
@@ -84,9 +84,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jPanel3" alignment="0" pref="125" max="32767" attributes="0"/>
+                          <Component id="jPanel3" alignment="0" pref="138" max="32767" attributes="0"/>
                           <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="panelTipo" pref="125" max="32767" attributes="0"/>
+                          <Component id="panelTipo" pref="138" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -230,7 +230,7 @@
                           </Group>
                           <Component id="chkSemana" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnExportar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnFiltrar" alignment="0" max="32767" attributes="0"/>
@@ -345,7 +345,7 @@
                           <Component id="rdExtremidad" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rdArea" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="158" max="32767" attributes="0"/>
+                      <EmptySpace pref="152" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

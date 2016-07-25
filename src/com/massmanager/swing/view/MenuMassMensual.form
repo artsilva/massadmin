@@ -57,7 +57,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="panelGrillasMensuales" min="-2" pref="1144" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
                           <Component id="boxOpcion" min="-2" pref="151" max="-2" attributes="0"/>
                           <Component id="boxMes" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnExportar" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnFiltrar" alignment="0" max="32767" attributes="0"/>
@@ -137,7 +137,7 @@
                           <Component id="btnExportar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="boxMes" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -219,14 +219,14 @@
                           <Component id="rdExtremidad" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rdArea" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="174" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="rdTipo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rdArea" min="-2" max="-2" attributes="0"/>

@@ -454,7 +454,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Utils util = new Utils();
+
         String rut = this.txtRut.getText();
         try {
             Conexion cn = new Conexion();
@@ -480,9 +480,9 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
             this.txtJefe.setText(trabajador.getJefeArea());
             this.txtSector.setText(trabajador.getSector());
         } catch (Exception e) {
-            util.showMessageWarning("Ingrese un rut válido", "Advertencia");
+            Utils.showMessageWarning("Ingrese un rut válido", "Advertencia");
             this.txtRut.requestFocus();
-        }
+        } 
     
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -531,13 +531,12 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         //INSERTA LA ATENCION DIRECTO A BD
         cn.InsertarAtenciones(listaAtencion,cn.convierteAtenciones(listaAtencion));
 
-        Utils util = new Utils();
         try {
-            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", util.asuntoCorreo(listaAtencion), util.cuerpoCorreo(listaAtencion));
+            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", Utils.asuntoCorreo(listaAtencion), Utils.cuerpoCorreo(listaAtencion));
             JOptionPane.showMessageDialog(null, "Se envio el mail correctamente");
         } catch (Exception ex) {
             ex.printStackTrace();
-            util.showMessageWarning("Ocurrio un problema al mandar el mail", "Advertencia");            
+            Utils.showMessageWarning("Ocurrio un problema al mandar el mail", "Advertencia");            
         }
     }//GEN-LAST:event_btnCorreoActionPerformed
 
