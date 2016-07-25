@@ -5,8 +5,10 @@
  */
 package com.massmanager.swing.view;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
 
 /**
  *
@@ -25,7 +27,12 @@ public class WebServiceView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         btnAceptar.setVisible(false);
+        progressAnual.setForeground(new Color(79, 160, 240));
+        progressAnual.setBackground(new Color(255,255,255));
+        UIManager.put("ScrollBar.background", (new Color(255, 255, 255)));
+        
         barraProgreso = this.progressAnual;
+        barraProgreso.setStringPainted(true);
         try {
         Thread t = new Thread() {
             @Override
@@ -111,9 +118,10 @@ public class WebServiceView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
+        panelWS.setBackground(new java.awt.Color(255, 255, 255));
         panelWS.setMinimumSize(new java.awt.Dimension(400, 111));
 
-        btnAceptar.setBackground(new java.awt.Color(255, 255, 255));
+        btnAceptar.setBackground(new java.awt.Color(232, 243, 253));
         btnAceptar.setText("Aceptar");
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +134,7 @@ public class WebServiceView extends javax.swing.JFrame {
 
         txtDescarga.setBackground(new java.awt.Color(255, 255, 255));
 
+        txtActualizacion.setBackground(new java.awt.Color(255, 255, 255));
         txtActualizacion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtActualizacion.setText("Comprobando Actualizaciones");
 
