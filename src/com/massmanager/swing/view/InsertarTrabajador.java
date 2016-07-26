@@ -114,8 +114,9 @@ public class InsertarTrabajador extends javax.swing.JFrame {
 
         jLabel7.setText("Jefe");
 
+        btnGuardar.setBackground(new java.awt.Color(232, 243, 253));
         btnGuardar.setText("Guardar");
-        btnGuardar.setBorder(null);
+        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.setMaximumSize(new java.awt.Dimension(56, 20));
         btnGuardar.setMinimumSize(new java.awt.Dimension(56, 20));
@@ -184,7 +185,6 @@ public class InsertarTrabajador extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel7)
                     .addComponent(boxJefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -197,6 +197,7 @@ public class InsertarTrabajador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnEliminar.setBackground(new java.awt.Color(232, 243, 253));
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -206,6 +207,7 @@ public class InsertarTrabajador extends javax.swing.JFrame {
             }
         });
 
+        btnUltimo.setBackground(new java.awt.Color(232, 243, 253));
         btnUltimo.setText("Ver Ultimo");
         btnUltimo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUltimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

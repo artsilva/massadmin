@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -45,7 +44,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
      * Creates new form MenuMassAnual
      */
     public MenuMassAnual() {
-        initComponents();                
+        initComponents();
 
         grdAnual.setAutoResizeMode(grdAnual.AUTO_RESIZE_OFF);
         grdAnual.doLayout();
@@ -69,15 +68,21 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
 
         QuerysAnuales query = new QuerysAnuales();
         rs = query.ExtraerAtencionesAnual();
+        String nombre = "";
+        String apellido = "";
+        int cont = 0;
         try {
             while (rs.next()) {
-                dfm.addRow(new Object[]{rs.getInt("id_atencion"), rs.getString("nombre"), rs.getString("apellido"), rs.getInt("rut"), rs.getString("sector"),
+                nombre = Utils.convertToMayus(rs.getString("nombre"));
+                apellido = Utils.convertToMayus(rs.getString("apellido"));
+                cont++;
+                dfm.addRow(new Object[]{cont, nombre, apellido, rs.getInt("rut"), rs.getString("sector"),
                     rs.getString("area"), rs.getString("jefe_area"), rs.getString("fecha"), rs.getString("lugarincidente"), rs.getString("detalles"),
                     rs.getString("lesion"), rs.getString("incidente"), rs.getString("extremidad"), rs.getString("paramedico"), rs.getString("tratamiento"), rs.getString("comentario")});
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }        
+        } 
         //Setea el ancho de las columnas con valores del Metodo de la Clase AnchoColumnas
         PropiedadesColumnas columna = new PropiedadesColumnas();
         columna.setAnchoColumnasAnual(grdAnual);
@@ -257,7 +262,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/excel-icon.png"))); // NOI18N
+        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-excel.png"))); // NOI18N
         btnExportar.setText("Exportar");
         btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
@@ -355,13 +360,14 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
         String area = (String) this.boxOpcion.getSelectedItem();
         String sector = (String) this.boxOpcion.getSelectedItem();
 
-        Utils util = new Utils();
         QuerysAnuales query = new QuerysAnuales();
         grdAnual.setModel(new DefaultTableModel());
         DefaultTableModel dfm = new DefaultTableModel();
         PropiedadesColumnas ancho = new PropiedadesColumnas();
         int cont = 1;
         int countRs = 0;
+        String nombre = "";
+        String apellido = "";
 
         //Borra el contenido de la tabla antes de cargar datos
         if (rdExtremidad.isSelected()) {
@@ -374,13 +380,15 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             try {
                 while (rsExtr.next()) {
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 } 
                     
             } catch (Exception ex) {
@@ -396,14 +404,16 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -418,14 +428,16 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -440,14 +452,16 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
             try {
                 while (rsExtr.next()) {
+                    nombre = Utils.convertToMayus(rsExtr.getString("nombre"));
+                    apellido = Utils.convertToMayus(rsExtr.getString("apellido"));
                     countRs++;
-                    dfm.addRow(new Object[]{cont++, rsExtr.getString("nombre"), rsExtr.getString("apellido"), rsExtr.getInt("rut"),
+                    dfm.addRow(new Object[]{cont++, nombre, apellido, rsExtr.getInt("rut"),
                         rsExtr.getString("sector"), rsExtr.getString("area"), rsExtr.getString("jefe_area"), rsExtr.getString("fecha"),
                         rsExtr.getString("lugarincidente"), rsExtr.getString("detalles"), rsExtr.getString("lesion"), rsExtr.getString("incidente"),
                         rsExtr.getString("extremidad"), rsExtr.getString("paramedico"), rsExtr.getString("tratamiento"), rsExtr.getString("comentario")});
                 }
                 if (countRs <= 0){
-                    util.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
+                    Utils.showMessageInfo("No existen reportes para los filtros seleccionados.", "Sin reportes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -457,7 +471,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
             this.grdAnual.setModel(dfm);
             dfm.setColumnIdentifiers(new Object[]{"ID", "Nombre", "Apellido", "Rut", "Sector", "Area", "Jefe Area", "Fecha",
                 "Lugar Incidente", "Detalles", "Lesion", "Incidente", "Extremidad", "Paramedico", "Tratamiento", "Comentario"});
-            util.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos","Advertencia");
+            Utils.showMessageWarning("Debe seleccionar algun filtro para poder mostrar reportes especificos","Advertencia");
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
@@ -518,8 +532,7 @@ public class MenuMassAnual extends javax.swing.JInternalFrame {
                             Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         //Opcion para abrir el archivo exportado
-                        Utils util = new Utils();
-                        boolean respuesta = util.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
+                        boolean respuesta = Utils.showMessageOption("¿Desea visualizar el archivo guardado?", "Archivo exportado exitosamente");
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);

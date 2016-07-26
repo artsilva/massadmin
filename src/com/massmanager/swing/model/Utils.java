@@ -18,7 +18,7 @@ import javax.swing.plaf.ColorUIResource;
  */
 public class Utils {
     
-    public void showMessageWarning(String msg, String title) {
+    public static void showMessageWarning(String msg, String title) {
         Toolkit.getDefaultToolkit().beep();
         UIManager UI = new UIManager();
         UI.put("OptionPane.background", new ColorUIResource(255, 255, 255));
@@ -26,7 +26,7 @@ public class Utils {
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
     }
     
-    public void showMessageInfo(String msg, String title) {
+    public static void showMessageInfo(String msg, String title) {
         Toolkit.getDefaultToolkit().beep();
         UIManager UI = new UIManager();
         UI.put("OptionPane.background", new ColorUIResource(255, 255, 255));
@@ -34,7 +34,7 @@ public class Utils {
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public boolean showMessageOption(String msgPregunta, String msgTitulo) {
+    public static boolean showMessageOption(String msgPregunta, String msgTitulo) {
         boolean respuesta = false;
         Toolkit.getDefaultToolkit().beep();
         UIManager UI = new UIManager();
@@ -46,8 +46,22 @@ public class Utils {
         }
         return respuesta;
     }
+    
+    public static String convertToMayus(String variable) {
+        String variableCompleta = "";
+        String var[] = variable.split("\\s+");
+        String var1 = var[0];
+        String var2 = var[1];
+        String var1Mayus = var1.substring(0,1).toUpperCase();
+        String var1Res = var1.substring(1);
+        String var2Mayus = var2.substring(0,1).toUpperCase();
+        String var2Res = var2.substring(1);
+        
+        variableCompleta = var1Mayus + var1Res + " " + var2Mayus + var2Res;
+        return variableCompleta;
+    }
 
-    public String asuntoCorreo(List<Atencion> atencion) {
+    public static String asuntoCorreo(List<Atencion> atencion) {
         StringBuilder asunto = new StringBuilder();
         for (Atencion atenciones : atencion) {
             asunto.append("Atencion a ").append(atenciones.getNombre()).append(" ").append(atenciones.getApellido()).append(" en Sala de Primeros Auxilios Lirquen Santiago");
@@ -55,7 +69,7 @@ public class Utils {
         return asunto.toString();
     }
     
-    public String cuerpoCorreo(List <Atencion> atencion) {
+    public static String cuerpoCorreo(List <Atencion> atencion) {
 
         FechaHora fecha = new FechaHora("dd-MM-yyyy");
         StringBuilder correo = new StringBuilder();
@@ -66,7 +80,7 @@ public class Utils {
         correo.append("<p class=MsoNormal>&nbsp;</p>");
         correo.append("<p class=MsoNormal>").append(fecha.obtenerSaludoHorario(fecha.getHoraMinutos())).append(", junto con saludar, se informa sobre");
         correo.append(" la atención de índole ").append(atenciones.getIncidente()).append(" prestada al Sr. ").append(atenciones.getNombre()).append(" ").append(atenciones.getApellido()).append(" el día ").append(fecha.getFecha()).append(" a causa ");
-        correo.append("de una lesión provocada por un/a ").append(atenciones.getLesion()).append(" cuando el trabajador desempeñaba sus funciones en el área ").append(atenciones.getArea()).append(" específicamente en ");
+        correo.append("de una lesión provocada por una atención de tipo ").append(atenciones.getLesion()).append(" cuando el trabajador desempeñaba sus funciones en el área ").append(atenciones.getArea()).append(" específicamente en ");
         correo.append(atenciones.getLugar()).append(" provocado por un ").append(atenciones.getDetalles()).append(", ");
         correo.append("siendo atendido en SPA con el siguiente comentario de atención: ").append(atenciones.getComentario()).append("</p><p class=MsoNormal><br></p>");
 

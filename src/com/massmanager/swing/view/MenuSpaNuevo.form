@@ -36,10 +36,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuTrabajador">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                  <Color blue="ff" green="cc" red="0" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/account.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Trabajador"/>
               </Properties>
@@ -50,10 +53,13 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuPatologia">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                  <Color blue="ff" green="cc" red="0" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/hospital.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Patolog&#xed;a"/>
               </Properties>
@@ -128,7 +134,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="283" max="-2" attributes="0"/>
-                          <Component id="btnCorreo" min="-2" pref="157" max="-2" attributes="0"/>
+                          <Component id="btnCorreo" min="-2" pref="138" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -360,7 +366,7 @@
             <Component class="javax.swing.JButton" name="btnBuscar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="fd" green="f3" red="e8" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
@@ -613,6 +619,12 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnCorreo">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fd" green="f3" red="e8" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/massmanager/swing/view/Images/email.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Enviar Correo"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">

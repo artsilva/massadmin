@@ -10,6 +10,7 @@ import com.massmanager.swing.model.Conexion;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JRadioButton;
@@ -54,6 +55,7 @@ public class MenuMass extends javax.swing.JFrame {
         desktopMass = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         menuDatos = new javax.swing.JMenu();
         menuAtenciones = new javax.swing.JMenuItem();
@@ -173,18 +175,27 @@ public class MenuMass extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel3.setText("Arturo Silva, Patricio Arévalo");
+
         javax.swing.GroupLayout desktopMassLayout = new javax.swing.GroupLayout(desktopMass);
         desktopMass.setLayout(desktopMassLayout);
         desktopMassLayout.setHorizontalGroup(
             desktopMassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopMassLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(162, 162, 162))
             .addGroup(desktopMassLayout.createSequentialGroup()
                 .addGap(405, 405, 405)
                 .addComponent(jLabel2)
-                .addContainerGap(568, Short.MAX_VALUE))
+                .addContainerGap(553, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopMassLayout.createSequentialGroup()
+                .addContainerGap(1008, Short.MAX_VALUE)
+                .addGroup(desktopMassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopMassLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(162, 162, 162))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopMassLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap())))
         );
         desktopMassLayout.setVerticalGroup(
             desktopMassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,10 +204,13 @@ public class MenuMass extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(116, 116, 116)
                 .addComponent(jLabel2)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         desktopMass.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         desktopMass.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopMass.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(desktopMass, java.awt.BorderLayout.CENTER);
 
@@ -333,6 +347,7 @@ public class MenuMass extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoPrimero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

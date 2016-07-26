@@ -171,7 +171,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
 
         txtLugar.setToolTipText("");
 
-        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setBackground(new java.awt.Color(232, 243, 253));
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +360,8 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnCorreo.setBackground(new java.awt.Color(232, 243, 253));
+        btnCorreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/email.png"))); // NOI18N
         btnCorreo.setText("Enviar Correo");
         btnCorreo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -387,7 +389,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(283, 283, 283)
-                        .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -415,8 +417,9 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         jMenu1.setForeground(new java.awt.Color(255, 255, 255));
         jMenu1.setText("Menu");
 
-        menuTrabajador.setBackground(new java.awt.Color(102, 153, 255));
+        menuTrabajador.setBackground(new java.awt.Color(0, 204, 255));
         menuTrabajador.setForeground(new java.awt.Color(255, 255, 255));
+        menuTrabajador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/account.png"))); // NOI18N
         menuTrabajador.setText("Agregar Trabajador");
         menuTrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,8 +428,9 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         });
         jMenu1.add(menuTrabajador);
 
-        menuPatologia.setBackground(new java.awt.Color(102, 153, 255));
+        menuPatologia.setBackground(new java.awt.Color(0, 204, 255));
         menuPatologia.setForeground(new java.awt.Color(255, 255, 255));
+        menuPatologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/hospital.png"))); // NOI18N
         menuPatologia.setText("Agregar Patología");
         menuPatologia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
