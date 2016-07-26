@@ -82,11 +82,10 @@ public class DatosGraficos extends MassGraficos {
     public static Integer DatosGraficosAnterior(String ext, String variable, String where) {
 
         QuerysMensuales query = new QuerysMensuales();
+        Integer filtro = null;
+        ResultSet rs = null;
 
-        if (variable.equals("Enero")) {
-            ResultSet rs = null;
-            Integer filtro = null;
-
+        if (variable.equals("Enero")) {         
             rs = query.graficoMensualAnterior(ext, ObtieneVariableAnterior(variable), where);
             try {
                 while (rs.next()) {
@@ -95,11 +94,7 @@ public class DatosGraficos extends MassGraficos {
             } catch (SQLException ex) {
                 Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return filtro;
         } else {
-            ResultSet rs = null;
-            Integer filtro = null;
-
             rs = query.graficoMensualActual(ext, ObtieneVariableAnterior(variable), where);
             try {
                 while (rs.next()) {
@@ -107,9 +102,9 @@ public class DatosGraficos extends MassGraficos {
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return filtro;
+            }           
         }
+        return filtro;
     }
 
     //Datos Anuales
@@ -122,7 +117,7 @@ public class DatosGraficos extends MassGraficos {
         rs = query.countAtencionAnualVariable(ext, variable, where);
         try {
             while (rs.next()) {
-                filtro = rs.getInt("count");
+            filtro = rs.getInt("count");
             }
         } catch (SQLException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,7 +135,7 @@ public class DatosGraficos extends MassGraficos {
         rs = query.countAtencionAnualVariable(ext, ObtieneVariableAnterior(variable), where);
         try {
             while (rs.next()) {
-                filtro = rs.getInt("count");
+            filtro = rs.getInt("count");
             }
         } catch (SQLException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);

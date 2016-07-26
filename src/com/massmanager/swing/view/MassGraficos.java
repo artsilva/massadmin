@@ -878,9 +878,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra = DatosGraficos.DatosGraficosActual("Brazos", mes, extremidad);
             Integer tro = DatosGraficos.DatosGraficosActual("Tronco", mes, extremidad);
             Integer abd = DatosGraficos.DatosGraficosActual("Abdomen", mes, extremidad);
-            Integer cox = DatosGraficos.DatosGraficosActual("Coxis", mes, extremidad);
             Integer pi = DatosGraficos.DatosGraficosActual("Piernas", mes, extremidad);
             Integer pie = DatosGraficos.DatosGraficosActual("Pies", mes, extremidad);
+            Integer cad = DatosGraficos.DatosGraficosActual("Cadera", mes, extremidad);
+            Integer hom = DatosGraficos.DatosGraficosActual("Hombros", mes, extremidad);
 
             Integer man2 = DatosGraficos.DatosGraficosAnterior("Manos", mes, extremidad);
             Integer cab2 = DatosGraficos.DatosGraficosAnterior("Cabeza", mes, extremidad);
@@ -888,9 +889,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra2 = DatosGraficos.DatosGraficosAnterior("Brazos", mes, extremidad);
             Integer tro2 = DatosGraficos.DatosGraficosAnterior("Tronco", mes, extremidad);
             Integer abd2 = DatosGraficos.DatosGraficosAnterior("Abdomen", mes, extremidad);
-            Integer cox2 = DatosGraficos.DatosGraficosAnterior("Coxis", mes, extremidad);
             Integer pi2 = DatosGraficos.DatosGraficosAnterior("Piernas", mes, extremidad);
             Integer pie2 = DatosGraficos.DatosGraficosAnterior("Pies", mes, extremidad);
+            Integer cad2 = DatosGraficos.DatosGraficosAnterior("Cadera", mes, extremidad);
+            Integer hom2 = DatosGraficos.DatosGraficosAnterior("Hombros", mes, extremidad);
 
             //Configuracion del gráfico        
             Extremidad.addValue(man, "Mes Seleccionado", "Manos");
@@ -899,9 +901,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Extremidad.addValue(bra, "Mes Seleccionado", "Brazos");
             Extremidad.addValue(tro, "Mes Seleccionado", "Tronco");
             Extremidad.addValue(abd, "Mes Seleccionado", "Abd.");
-            Extremidad.addValue(cox, "Mes Seleccionado", "Coxis");
             Extremidad.addValue(pi, "Mes Seleccionado", "Piernas");
             Extremidad.addValue(pie, "Mes Seleccionado", "Pies");
+            Extremidad.addValue(cad, "Mes Seleccionado", "Cadera");
+            Extremidad.addValue(hom, "Mes Seleccionado", "Hombros");
 
             Extremidad.addValue(man2, "Mes Anterior", "Manos");
             Extremidad.addValue(cab2, "Mes Anterior", "Cab");
@@ -909,13 +912,14 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Extremidad.addValue(bra2, "Mes Anterior", "Brazos");
             Extremidad.addValue(tro2, "Mes Anterior", "Tronco");
             Extremidad.addValue(abd2, "Mes Anterior", "Abd.");
-            Extremidad.addValue(cox2, "Mes Anterior", "Coxis");
             Extremidad.addValue(pi2, "Mes Anterior", "Piernas");
             Extremidad.addValue(pie2, "Mes Anterior", "Pies");
+            Extremidad.addValue(cad2, "Mes Anterior", "Cadera");
+            Extremidad.addValue(hom2, "Mes Anterior", "Hombros");
 
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Extremidad",
                     "Extremidades", "Cantidad Incidentes", Extremidad, PlotOrientation.VERTICAL, true, true, false);
-        } else if (rdSector.isSelected()) {
+        } else if (rdSector.isSelected()) {            
             panelGraficoMensual.removeAll();
             Integer cor = DatosGraficos.DatosGraficosActual("Corte", mes, sector);
             Integer lam = DatosGraficos.DatosGraficosActual("Laminado", mes, sector);
@@ -1654,9 +1658,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra = DatosGraficos.DatosGraficosAñoActual("Brazos", año, extremidad);
             Integer tro = DatosGraficos.DatosGraficosAñoActual("Tronco", año, extremidad);
             Integer abd = DatosGraficos.DatosGraficosAñoActual("Abdomen", año, extremidad);
-            Integer cox = DatosGraficos.DatosGraficosAñoActual("Coxis", año, extremidad);
             Integer pi = DatosGraficos.DatosGraficosAñoActual("Piernas", año, extremidad);
             Integer pie = DatosGraficos.DatosGraficosAñoActual("Pies", año, extremidad);
+            Integer cad = DatosGraficos.DatosGraficosAñoActual("Cadera", año, extremidad);
+            Integer hom = DatosGraficos.DatosGraficosAñoActual("Hombros", año, extremidad);
 
             Integer man2 = DatosGraficos.DatosGraficosAñoAnterior("Manos", año, extremidad);
             Integer cab2 = DatosGraficos.DatosGraficosAñoAnterior("Cabeza", año, extremidad);
@@ -1664,9 +1669,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra2 = DatosGraficos.DatosGraficosAñoAnterior("Brazos", año, extremidad);
             Integer tro2 = DatosGraficos.DatosGraficosAñoAnterior("Tronco", año, extremidad);
             Integer abd2 = DatosGraficos.DatosGraficosAñoAnterior("Abdomen", año, extremidad);
-            Integer cox2 = DatosGraficos.DatosGraficosAñoAnterior("Coxis", año, extremidad);
             Integer pi2 = DatosGraficos.DatosGraficosAñoAnterior("Piernas", año, extremidad);
             Integer pie2 = DatosGraficos.DatosGraficosAñoAnterior("Pies", año, extremidad);
+            Integer cad2 = DatosGraficos.DatosGraficosAñoAnterior("Cadera", año, extremidad);
+            Integer hom2 = DatosGraficos.DatosGraficosAñoAnterior("Hombros", año, extremidad);
 
             //Configuracion del gráfico        
             AExtremidad.addValue(man, "año Seleccionado", "Manos");
@@ -1675,9 +1681,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             AExtremidad.addValue(bra, "año Seleccionado", "Brazos");
             AExtremidad.addValue(tro, "año Seleccionado", "Tronco");
             AExtremidad.addValue(abd, "año Seleccionado", "Abd.");
-            AExtremidad.addValue(cox, "año Seleccionado", "Coxis");
             AExtremidad.addValue(pi, "año Seleccionado", "Piernas");
             AExtremidad.addValue(pie, "año Seleccionado", "Pies");
+            AExtremidad.addValue(cad, "año Seleccionado", "Cadera");
+            AExtremidad.addValue(hom, "año Seleccionado", "Hombros");
 
             AExtremidad.addValue(man2, "año Anterior", "Manos");
             AExtremidad.addValue(cab2, "año Anterior", "Cab");
@@ -1685,9 +1692,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             AExtremidad.addValue(bra2, "año Anterior", "Brazos");
             AExtremidad.addValue(tro2, "año Anterior", "Tronco");
             AExtremidad.addValue(abd2, "año Anterior", "Abd.");
-            AExtremidad.addValue(cox2, "año Anterior", "Coxis");
             AExtremidad.addValue(pi2, "año Anterior", "Piernas");
             AExtremidad.addValue(pie2, "año Anterior", "Pies");
+            AExtremidad.addValue(cad2, "año Anterior", "Cadera");
+            AExtremidad.addValue(hom2, "año Anterior", "Hombros");
 
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad",
                     "Extremidades", "Cantidad Incidentes", AExtremidad, PlotOrientation.VERTICAL, true, true, false);
@@ -1875,9 +1883,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra = DatosGraficos.DatosGraficosPeriodoActual("Brazos", periodo, extremidad, semTrim);
             Integer tro = DatosGraficos.DatosGraficosPeriodoActual("Tronco", periodo, extremidad, semTrim);
             Integer abd = DatosGraficos.DatosGraficosPeriodoActual("Abdomen", periodo, extremidad, semTrim);
-            Integer cox = DatosGraficos.DatosGraficosPeriodoActual("Coxis", periodo, extremidad, semTrim);
             Integer pi = DatosGraficos.DatosGraficosPeriodoActual("Piernas", periodo, extremidad, semTrim);
             Integer pie = DatosGraficos.DatosGraficosPeriodoActual("Pies", periodo, extremidad, semTrim);
+            Integer cad = DatosGraficos.DatosGraficosPeriodoActual("Cadera", periodo, extremidad, semTrim);
+            Integer hom = DatosGraficos.DatosGraficosPeriodoActual("Hombros", periodo, extremidad, semTrim);
 
             Integer man2 = DatosGraficos.DatosGraficosPeriodoAnterior("Manos", periodo, extremidad, semTrim);
             Integer cab2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cabeza", periodo, extremidad, semTrim);
@@ -1885,9 +1894,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Integer bra2 = DatosGraficos.DatosGraficosPeriodoAnterior("Brazos", periodo, extremidad, semTrim);
             Integer tro2 = DatosGraficos.DatosGraficosPeriodoAnterior("Tronco", periodo, extremidad, semTrim);
             Integer abd2 = DatosGraficos.DatosGraficosPeriodoAnterior("Abdomen", periodo, extremidad, semTrim);
-            Integer cox2 = DatosGraficos.DatosGraficosPeriodoAnterior("Coxis", periodo, extremidad, semTrim);
             Integer pi2 = DatosGraficos.DatosGraficosPeriodoAnterior("Piernas", periodo, extremidad, semTrim);
             Integer pie2 = DatosGraficos.DatosGraficosPeriodoAnterior("Pies", periodo, extremidad, semTrim);
+            Integer cad2 = DatosGraficos.DatosGraficosPeriodoAnterior("Cadera", periodo, extremidad, semTrim);
+            Integer hom2 = DatosGraficos.DatosGraficosPeriodoAnterior("Hombros", periodo, extremidad, semTrim);
 
             //Configuracion del gráfico        
             PExtremidad.addValue(man, "Periodo Seleccionado", "Manos");
@@ -1896,9 +1906,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PExtremidad.addValue(bra, "Periodo Seleccionado", "Brazos");
             PExtremidad.addValue(tro, "Periodo Seleccionado", "Tronco");
             PExtremidad.addValue(abd, "Periodo Seleccionado", "Abd.");
-            PExtremidad.addValue(cox, "Periodo Seleccionado", "Coxis");
             PExtremidad.addValue(pi, "Periodo Seleccionado", "Piernas");
             PExtremidad.addValue(pie, "Periodo Seleccionado", "Pies");
+            PExtremidad.addValue(cad, "Periodo Seleccionado", "Cadera");
+            PExtremidad.addValue(hom, "Periodo Seleccionado", "Hombros");
 
             PExtremidad.addValue(man2, "Periodo Anterior", "Manos");
             PExtremidad.addValue(cab2, "Periodo Anterior", "Cab");
@@ -1906,9 +1917,10 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PExtremidad.addValue(bra2, "Periodo Anterior", "Brazos");
             PExtremidad.addValue(tro2, "Periodo Anterior", "Tronco");
             PExtremidad.addValue(abd2, "Periodo Anterior", "Abd.");
-            PExtremidad.addValue(cox2, "Periodo Anterior", "Coxis");
             PExtremidad.addValue(pi2, "Periodo Anterior", "Piernas");
             PExtremidad.addValue(pie2, "Periodo Anterior", "Pies");
+            PExtremidad.addValue(cad2, "Periodo Seleccionado", "Cadera");
+            PExtremidad.addValue(hom2, "Periodo Seleccionado", "Hombros");
 
             GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Extremidad",
                     "Extremidades", "Cantidad Incidentes", PExtremidad, PlotOrientation.VERTICAL, true, true, false);

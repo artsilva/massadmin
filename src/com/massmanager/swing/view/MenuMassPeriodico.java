@@ -20,6 +20,9 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JProgressBar;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -44,7 +47,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
      */
     public MenuMassPeriodico() {
         initComponents();
-
+        
         this.boxSemana.setVisible(false);
 
         grdPeriodico.setAutoResizeMode(grdPeriodico.AUTO_RESIZE_OFF);
@@ -59,9 +62,10 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         grupoSegundo.add(rdSemestral);
         grupoSegundo.add(rdTrimestral);
 
-        progressPeriodico.setForeground(new Color(93, 130, 189));
-        progressPeriodico.setBackground(new Color(240, 255, 255));
-
+        progressPeriodico.setForeground(new Color(79, 160, 240));
+        progressPeriodico.setBackground(new Color(255,255,255));
+        UIManager.put("ScrollBar.background", (new Color(255, 255, 255)));
+        
         DefaultTableModel dfm = new DefaultTableModel();
         grid = this.grdPeriodico;
         grid.setModel(dfm);
@@ -81,7 +85,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }        
         //Setea el ancho de las columnas con valores del Metodo de la Clase AnchoColumnas
         PropiedadesColumnas columna = new PropiedadesColumnas();
         columna.setAnchoColumnasPeriodico(grdPeriodico);
@@ -121,12 +125,15 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         rdTrimestral = new javax.swing.JRadioButton();
         boxSemTrim = new javax.swing.JComboBox();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Reportes Periodicos");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(1180, 662));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1180, 662));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atenciones Periodos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1140, 465));
 
@@ -146,6 +153,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        grdPeriodico.setGridColor(new java.awt.Color(154, 201, 247));
         grdPeriodico.setRowSelectionAllowed(false);
         grdPeriodico.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(grdPeriodico);
@@ -155,6 +163,9 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             grdPeriodico.getColumnModel().getColumn(2).setResizable(false);
             grdPeriodico.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        progressPeriodico.setForeground(new java.awt.Color(102, 255, 102));
+        progressPeriodico.setPreferredSize(new java.awt.Dimension(146, 16));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,6 +190,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/lirquen-logo-top.png"))); // NOI18N
 
+        panelTipo.setBackground(new java.awt.Color(255, 255, 255));
         panelTipo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtro Secundario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
         panelTipo.setPreferredSize(new java.awt.Dimension(340, 129));
 
@@ -204,6 +216,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
 
         boxSemana.setEditable(true);
 
+        chkSemana.setBackground(new java.awt.Color(255, 255, 255));
         chkSemana.setText("Nº Semana");
         chkSemana.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -251,9 +264,11 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtrar por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP), "Filtro Primario"));
         jPanel3.setPreferredSize(new java.awt.Dimension(340, 129));
 
+        rdTipo.setBackground(new java.awt.Color(255, 255, 255));
         rdTipo.setText("Tipo");
         rdTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdTipo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,6 +277,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         });
 
+        rdArea.setBackground(new java.awt.Color(255, 255, 255));
         rdArea.setText("Area");
         rdArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdArea.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,6 +286,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         });
 
+        rdSector.setBackground(new java.awt.Color(255, 255, 255));
         rdSector.setText("Sector");
         rdSector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdSector.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,6 +295,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         });
 
+        rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad.setText("Extremidad Afectada");
         rdExtremidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdExtremidad.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -312,8 +330,10 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro Periodos")));
 
+        rdSemestral.setBackground(new java.awt.Color(255, 255, 255));
         rdSemestral.setText("Semestral");
         rdSemestral.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -321,6 +341,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
             }
         });
 
+        rdTrimestral.setBackground(new java.awt.Color(255, 255, 255));
         rdTrimestral.setText("Trimestral");
         rdTrimestral.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -373,16 +394,16 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -874,7 +895,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         barraProgreso = this.progressPeriodico;
         grid = this.grdPeriodico;
-
+        
         try {
             Thread t = new Thread() {
 
@@ -882,11 +903,12 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                     seleccionado.setSelectedFile(new File("Atenciones_Periodicas.xlsx"));
                     if (seleccionado.showDialog(null, "Guardar Archivo") == JFileChooser.APPROVE_OPTION) {
                         archivo = seleccionado.getSelectedFile();
+                        barraProgreso.setStringPainted(true);
                         String rutaNombreArchivo = archivo.toString();
 
                         Workbook wb = null;
                         try {
-                            wb = new XSSFWorkbook(OPCPackage.open("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\templates\\template_atencion_periodico.xlsx"));
+                            wb = new XSSFWorkbook(OPCPackage.open("templates\\template_atencion_periodico.xlsx"));
                         } catch (Exception ex) {
                             Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                             System.out.println("No se encuentra el archivo de template");
@@ -908,7 +930,7 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                             }
 
                             try {
-                                Thread.sleep(12);
+                                Thread.sleep(6);
                             } catch (Exception e) {
                             }
                         }
@@ -926,9 +948,12 @@ public class MenuMassPeriodico extends javax.swing.JInternalFrame {
                         if (respuesta) {
                             try {
                                 Desktop.getDesktop().open(archivo);
+                                barraProgreso.setStringPainted(false);
                             } catch (Exception ex) {
                                 Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                        } else {
+                            barraProgreso.setStringPainted(false);
                         }
                     }
                 }

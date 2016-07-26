@@ -9,6 +9,8 @@ import com.massmanager.controller.Atencion;
 import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -18,17 +20,26 @@ public class Utils {
     
     public void showMessageWarning(String msg, String title) {
         Toolkit.getDefaultToolkit().beep();
+        UIManager UI = new UIManager();
+        UI.put("OptionPane.background", new ColorUIResource(255, 255, 255));
+        UI.put("Panel.background", new ColorUIResource(255, 255, 255));
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
     }
     
     public void showMessageInfo(String msg, String title) {
         Toolkit.getDefaultToolkit().beep();
+        UIManager UI = new UIManager();
+        UI.put("OptionPane.background", new ColorUIResource(255, 255, 255));
+        UI.put("Panel.background", new ColorUIResource(255, 255, 255));
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
     }
     
     public boolean showMessageOption(String msgPregunta, String msgTitulo) {
         boolean respuesta = false;
         Toolkit.getDefaultToolkit().beep();
+        UIManager UI = new UIManager();
+        UI.put("OptionPane.background", new ColorUIResource(255, 255, 255));
+        UI.put("Panel.background", new ColorUIResource(255, 255, 255));
         int confirmado = JOptionPane.showConfirmDialog(null, msgPregunta, msgTitulo, JOptionPane.YES_NO_OPTION);
         if (JOptionPane.OK_OPTION == confirmado) {
             respuesta = true;

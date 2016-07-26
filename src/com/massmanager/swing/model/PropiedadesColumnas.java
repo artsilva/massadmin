@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -19,6 +21,19 @@ import javax.swing.table.TableColumn;
 public class PropiedadesColumnas {
 
     public void setAnchoColumnasAnual(JTable nombreTabla) {
+        
+        UIManager.put("ScrollBar.trackHighlightForeground", (new Color(255, 255, 255)));
+        UIManager.put("scrollbar", (new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.thumb", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.thumbHeight", 2);        
+        UIManager.put("ScrollBar.thumbDarkShadow", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.thumbShadow", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.thumbHighlight", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.trackForeground", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.trackHighlight", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.foreground", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.shadow", new ColorUIResource(new Color(255, 255, 255)));
+        UIManager.put("ScrollBar.highlight", new ColorUIResource(new Color(255, 255, 255)));
 
         //TableColumn nos provee de métodos para minimizar, maximizar,etc. columnas de tabla.
         TableColumn columnaTabla = null;
