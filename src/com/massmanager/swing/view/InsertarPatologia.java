@@ -8,6 +8,7 @@ package com.massmanager.swing.view;
 import com.massmanager.controller.Lesion;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.Utils;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,6 +21,7 @@ public class InsertarPatologia extends javax.swing.JFrame {
      */
     public InsertarPatologia() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
     }
 
     /**
@@ -49,6 +51,7 @@ public class InsertarPatologia extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre ");
 
+        btnGuardar.setBackground(new java.awt.Color(232, 243, 253));
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -82,6 +85,7 @@ public class InsertarPatologia extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        btnUltimo.setBackground(new java.awt.Color(232, 243, 253));
         btnUltimo.setText("Ver Ultimo");
         btnUltimo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnUltimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -91,6 +95,7 @@ public class InsertarPatologia extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(232, 243, 253));
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -109,7 +114,6 @@ public class InsertarPatologia extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUltimo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -7,6 +7,7 @@ package com.massmanager.swing.view;
 
 import com.massmanager.swing.model.PropiedadesColumnas;
 import com.massmanager.swing.model.Conexion;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -60,10 +61,13 @@ public class AtencionesSpaMass extends javax.swing.JInternalFrame {
         grdAtenciones = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1180, 662));
 
+        panelMenuMassPrueba.setBackground(new java.awt.Color(255, 255, 255));
         panelMenuMassPrueba.setPreferredSize(new java.awt.Dimension(1180, 662));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atenciones del Mes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP)));
 
         grdAtenciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,7 +112,7 @@ public class AtencionesSpaMass extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21))
         );
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/excel-icon.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-excel.png"))); // NOI18N
         jButton2.setText("Exportar");
 
         javax.swing.GroupLayout panelMenuMassPruebaLayout = new javax.swing.GroupLayout(panelMenuMassPrueba);

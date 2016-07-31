@@ -102,9 +102,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="panelIncidenciaMensual" alignment="1" pref="130" max="32767" attributes="0"/>
-                          <Component id="btnGraficarMensual" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="panelFiltroMensual" pref="130" max="32767" attributes="0"/>
-                          <Component id="btnGuardarMensual" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="btnGraficarMensual" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnGuardarMensual" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="panelGraficoMensual" max="32767" attributes="0"/>
@@ -146,18 +146,42 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1003" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="372" max="32767" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/massmanager/swing/view/logolirquenGrande.jpg"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="jLabel2"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnGraficarMensual">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/chart-bar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Graficar"/>
               </Properties>
               <Events>
@@ -351,6 +375,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnGuardarMensual">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/file-image.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -380,12 +407,12 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnGraficarAnual" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="btnGuardarAnual" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="btnGuardarAnual" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGraficarAnual" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="1014" max="32767" attributes="0"/>
+                      <EmptySpace pref="1022" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -425,6 +452,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnGraficarAnual">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/chart-bar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Graficar"/>
               </Properties>
               <Events>
@@ -630,18 +660,42 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1003" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="372" max="32767" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/massmanager/swing/view/logolirquenGrande.jpg"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="jLabel4"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnGuardarAnual">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/file-image.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -677,8 +731,10 @@
                               <Component id="panelIncidenciaPeriodico" min="-2" pref="130" max="-2" attributes="0"/>
                               <Component id="panelFiltroPeriodico" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="btnGraficarPeriodico" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="btnGuardarPeriodico" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnGraficarPeriodico" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnGuardarPeriodico" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="panelGraficoPeriodico" max="32767" attributes="0"/>
@@ -705,6 +761,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnGraficarPeriodico">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/chart-bar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Graficar"/>
               </Properties>
               <Events>
@@ -932,18 +991,42 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1003" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="372" max="32767" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/massmanager/swing/view/logolirquenGrande.jpg"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="jLabel5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnGuardarPeriodico">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/file-image.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -979,8 +1062,10 @@
                               <Component id="panelTortaFiltro1" min="-2" pref="130" max="-2" attributes="0"/>
                               <Component id="panelFiltroTorta2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnGuardaTorta" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="btnGraficarTorta" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnGraficarTorta" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnGuardaTorta" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="panelGraficoTorta" max="32767" attributes="0"/>
@@ -994,11 +1079,11 @@
                       <Component id="panelTortaFiltro1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="panelFiltroTorta2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnGraficarTorta" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnGuardaTorta" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace pref="150" max="32767" attributes="0"/>
                   </Group>
                   <Component id="panelGraficoTorta" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -1023,18 +1108,42 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1003" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="370" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="373" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel6">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/massmanager/swing/view/logolirquenGrande.jpg"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="jLabel6"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnGraficarTorta">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/chart-pie.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Graficar"/>
               </Properties>
               <Events>
@@ -1043,6 +1152,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnGuardaTorta">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/massmanager/swing/view/Images/file-image.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>

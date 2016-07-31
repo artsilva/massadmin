@@ -14,6 +14,7 @@ import com.massmanager.swing.model.Utils;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -127,6 +128,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelMensual = new javax.swing.JPanel();
         panelGraficoMensual = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         btnGraficarMensual = new javax.swing.JButton();
         panelFiltroMensual = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -150,6 +152,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdTipo2 = new javax.swing.JRadioButton();
         rdLesion2 = new javax.swing.JRadioButton();
         panelGraficoAnual = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         btnGuardarAnual = new javax.swing.JButton();
         panelPeriodico = new javax.swing.JPanel();
         btnGraficarPeriodico = new javax.swing.JButton();
@@ -164,9 +167,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         rdTipo3 = new javax.swing.JRadioButton();
         rdLesion3 = new javax.swing.JRadioButton();
         panelGraficoPeriodico = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         btnGuardarPeriodico = new javax.swing.JButton();
         panelTorta = new javax.swing.JPanel();
         panelGraficoTorta = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         btnGraficarTorta = new javax.swing.JButton();
         btnGuardaTorta = new javax.swing.JButton();
         panelTortaFiltro1 = new javax.swing.JPanel();
@@ -197,17 +202,28 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoMensual.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoMensual.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout panelGraficoMensualLayout = new javax.swing.GroupLayout(panelGraficoMensual);
         panelGraficoMensual.setLayout(panelGraficoMensualLayout);
         panelGraficoMensualLayout.setHorizontalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1003, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGraficoMensualLayout.createSequentialGroup()
+                .addContainerGap(372, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(371, 371, 371))
         );
         panelGraficoMensualLayout.setVerticalGroup(
             panelGraficoMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelGraficoMensualLayout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGraficarMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/chart-bar.png"))); // NOI18N
         btnGraficarMensual.setText("Graficar");
         btnGraficarMensual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,7 +261,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaMensual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaMensual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad.setText("Extremidad");
@@ -297,6 +313,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        btnGuardarMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-image.png"))); // NOI18N
         btnGuardarMensual.setText("Guardar");
         btnGuardarMensual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,9 +329,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelMensualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelIncidenciaMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(btnGraficarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelFiltroMensual, javax.swing.GroupLayout.PREFERRED_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(btnGuardarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGraficarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardarMensual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoMensual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -338,6 +355,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelAnual.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnGraficarAnual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/chart-bar.png"))); // NOI18N
         btnGraficarAnual.setText("Graficar");
         btnGraficarAnual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,7 +393,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaAnual.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaAnual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad2.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad2.setText("Extremidad");
@@ -435,17 +453,28 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoAnual.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoAnual.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout panelGraficoAnualLayout = new javax.swing.GroupLayout(panelGraficoAnual);
         panelGraficoAnual.setLayout(panelGraficoAnualLayout);
         panelGraficoAnualLayout.setHorizontalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1003, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGraficoAnualLayout.createSequentialGroup()
+                .addContainerGap(372, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(371, 371, 371))
         );
         panelGraficoAnualLayout.setVerticalGroup(
             panelGraficoAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelGraficoAnualLayout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGuardarAnual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-image.png"))); // NOI18N
         btnGuardarAnual.setText("Guardar");
         btnGuardarAnual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,11 +487,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelAnualLayout.setHorizontalGroup(
             panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAnualLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(34, 34, 34)
                 .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGraficarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1014, Short.MAX_VALUE))
+                    .addComponent(btnGuardarAnual)
+                    .addComponent(btnGraficarAnual))
+                .addContainerGap(1022, Short.MAX_VALUE))
             .addGroup(panelAnualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelAnualLayout.createSequentialGroup()
                     .addContainerGap()
@@ -495,6 +524,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelPeriodico.setBackground(new java.awt.Color(255, 255, 255));
         panelPeriodico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnGraficarPeriodico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/chart-bar.png"))); // NOI18N
         btnGraficarPeriodico.setText("Graficar");
         btnGraficarPeriodico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -551,7 +581,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelIncidenciaPeriodico.setBackground(new java.awt.Color(255, 255, 255));
-        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelIncidenciaPeriodico.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Incidencia"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdExtremidad3.setBackground(new java.awt.Color(255, 255, 255));
         rdExtremidad3.setText("Extremidad");
@@ -611,17 +641,28 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoPeriodico.setBackground(new java.awt.Color(255, 255, 255));
         panelGraficoPeriodico.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+
         javax.swing.GroupLayout panelGraficoPeriodicoLayout = new javax.swing.GroupLayout(panelGraficoPeriodico);
         panelGraficoPeriodico.setLayout(panelGraficoPeriodicoLayout);
         panelGraficoPeriodicoLayout.setHorizontalGroup(
             panelGraficoPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1003, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGraficoPeriodicoLayout.createSequentialGroup()
+                .addContainerGap(372, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(371, 371, 371))
         );
         panelGraficoPeriodicoLayout.setVerticalGroup(
             panelGraficoPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelGraficoPeriodicoLayout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGuardarPeriodico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-image.png"))); // NOI18N
         btnGuardarPeriodico.setText("Guardar");
         btnGuardarPeriodico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -639,8 +680,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     .addGroup(panelPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(panelIncidenciaPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(panelFiltroPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarPeriodico, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPeriodicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnGraficarPeriodico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardarPeriodico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoPeriodico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -668,17 +710,28 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoTorta.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
         panelGraficoTorta.setEnabled(false);
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/logolirquenGrande.jpg"))); // NOI18N
+        jLabel6.setText("jLabel6");
+
         javax.swing.GroupLayout panelGraficoTortaLayout = new javax.swing.GroupLayout(panelGraficoTorta);
         panelGraficoTorta.setLayout(panelGraficoTortaLayout);
         panelGraficoTortaLayout.setHorizontalGroup(
             panelGraficoTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1003, Short.MAX_VALUE)
+            .addGroup(panelGraficoTortaLayout.createSequentialGroup()
+                .addGap(370, 370, 370)
+                .addComponent(jLabel6)
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         panelGraficoTortaLayout.setVerticalGroup(
             panelGraficoTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelGraficoTortaLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGraficarTorta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/chart-pie.png"))); // NOI18N
         btnGraficarTorta.setText("Graficar");
         btnGraficarTorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -686,6 +739,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGuardaTorta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/massmanager/swing/view/Images/file-image.png"))); // NOI18N
         btnGuardaTorta.setText("Guardar");
         btnGuardaTorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -753,7 +807,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         );
 
         panelFiltroTorta2.setBackground(new java.awt.Color(255, 255, 255));
-        panelFiltroTorta2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Secundario"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        panelFiltroTorta2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Filtro Secundario"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), java.awt.Color.white)); // NOI18N
 
         rdTortaSector.setBackground(new java.awt.Color(255, 255, 255));
         rdTortaSector.setText("Sector");
@@ -817,8 +871,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     .addGroup(panelTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(panelTortaFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(panelFiltroTorta2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGuardaTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGraficarTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTortaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnGraficarTorta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardaTorta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelGraficoTorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -829,11 +884,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                 .addComponent(panelTortaFiltro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelFiltroTorta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnGraficarTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardaTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addContainerGap(150, Short.MAX_VALUE))
             .addComponent(panelGraficoTorta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -896,22 +951,22 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
             //Configuracion del gráfico        
             Extremidad.addValue(man, "Mes Seleccionado", "Manos");
-            Extremidad.addValue(cab, "Mes Seleccionado", "Cab");
+            Extremidad.addValue(cab, "Mes Seleccionado", "Cabeza");
             Extremidad.addValue(cue, "Mes Seleccionado", "Cuello");
             Extremidad.addValue(bra, "Mes Seleccionado", "Brazos");
             Extremidad.addValue(tro, "Mes Seleccionado", "Tronco");
-            Extremidad.addValue(abd, "Mes Seleccionado", "Abd.");
+            Extremidad.addValue(abd, "Mes Seleccionado", "Abdomen");
             Extremidad.addValue(pi, "Mes Seleccionado", "Piernas");
             Extremidad.addValue(pie, "Mes Seleccionado", "Pies");
             Extremidad.addValue(cad, "Mes Seleccionado", "Cadera");
             Extremidad.addValue(hom, "Mes Seleccionado", "Hombros");
 
             Extremidad.addValue(man2, "Mes Anterior", "Manos");
-            Extremidad.addValue(cab2, "Mes Anterior", "Cab");
+            Extremidad.addValue(cab2, "Mes Anterior", "Cabeza");
             Extremidad.addValue(cue2, "Mes Anterior", "Cuello");
             Extremidad.addValue(bra2, "Mes Anterior", "Brazos");
             Extremidad.addValue(tro2, "Mes Anterior", "Tronco");
-            Extremidad.addValue(abd2, "Mes Anterior", "Abd.");
+            Extremidad.addValue(abd2, "Mes Anterior", "Abdomen");
             Extremidad.addValue(pi2, "Mes Anterior", "Piernas");
             Extremidad.addValue(pie2, "Mes Anterior", "Pies");
             Extremidad.addValue(cad2, "Mes Anterior", "Cadera");
@@ -1064,8 +1119,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Lesion",
                     "Tipo de Lesiones", "Cantidad Incidentes", Lesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
-            Utils util = new Utils();
-            util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
+            Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
 
         ChartPanel panelMensual = new ChartPanel(GraficaMensual);
@@ -1086,7 +1140,6 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         panelGraficoTorta.removeAll();
         QuerysPeriodicas per = new QuerysPeriodicas();
         QuerysAnuales anual = new QuerysAnuales();
-        Utils util = new Utils();
         String anio = (String) this.boxTortaTiempo.getSelectedItem();
         String semestre = (String) this.boxTortaTiempo.getSelectedItem();
         String trimestre = (String) this.boxTortaTiempo.getSelectedItem();
@@ -1151,7 +1204,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías año " + anio,
                             Torta, false, true, false);
                 }
@@ -1206,7 +1259,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + variable + " año " + anio,
                             Torta, false, true, false);
                 }
@@ -1261,7 +1314,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje patologías del sector " + variable + " año " + anio,
                             Torta, false, true, false);
                 }
@@ -1317,7 +1370,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + semestre + " 2015",
                             Torta, false, true, false);
                 }
@@ -1383,7 +1436,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + semestre + " 2015",
                             Torta, false, true, false);
                 }
@@ -1438,7 +1491,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + semestre + " 2015",
                             Torta, false, true, false);
                 }
@@ -1495,7 +1548,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías " + trimestre + " 2015",
                             Torta, false, true, false);
                 }
@@ -1551,7 +1604,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del área " + area + " " + trimestre + " 2015",
                             Torta, false, true, false);
                 }
@@ -1607,13 +1660,13 @@ public class MassGraficos extends javax.swing.JInternalFrame {
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
                             Torta, false, true, false);
                 } else {
-                    util.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
+                    Utils.showMessageInfo("No existen registros para los filtros seleccionados.", "Sin registros");
                     GraficaTorta = ChartFactory.createPieChart("Porcentaje total de patologías del sector " + sector + " " + trimestre + " 2015",
                             Torta, false, true, false);
                 }
             }
         } else {
-            util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
+            Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
             GraficaTorta.setBackgroundPaint(new Color(222, 222, 255));
             final PiePlot plot = (PiePlot) GraficaTorta.getPlot();
@@ -1676,22 +1729,22 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
             //Configuracion del gráfico        
             AExtremidad.addValue(man, "año Seleccionado", "Manos");
-            AExtremidad.addValue(cab, "año Seleccionado", "Cab");
+            AExtremidad.addValue(cab, "año Seleccionado", "Cabeza");
             AExtremidad.addValue(cue, "año Seleccionado", "Cuello");
             AExtremidad.addValue(bra, "año Seleccionado", "Brazos");
             AExtremidad.addValue(tro, "año Seleccionado", "Tronco");
-            AExtremidad.addValue(abd, "año Seleccionado", "Abd.");
+            AExtremidad.addValue(abd, "año Seleccionado", "Abdomen.");
             AExtremidad.addValue(pi, "año Seleccionado", "Piernas");
             AExtremidad.addValue(pie, "año Seleccionado", "Pies");
             AExtremidad.addValue(cad, "año Seleccionado", "Cadera");
             AExtremidad.addValue(hom, "año Seleccionado", "Hombros");
 
             AExtremidad.addValue(man2, "año Anterior", "Manos");
-            AExtremidad.addValue(cab2, "año Anterior", "Cab");
+            AExtremidad.addValue(cab2, "año Anterior", "Cabeza");
             AExtremidad.addValue(cue2, "año Anterior", "Cuello");
             AExtremidad.addValue(bra2, "año Anterior", "Brazos");
             AExtremidad.addValue(tro2, "año Anterior", "Tronco");
-            AExtremidad.addValue(abd2, "año Anterior", "Abd.");
+            AExtremidad.addValue(abd2, "año Anterior", "Abdomen");
             AExtremidad.addValue(pi2, "año Anterior", "Piernas");
             AExtremidad.addValue(pie2, "año Anterior", "Pies");
             AExtremidad.addValue(cad2, "año Anterior", "Cadera");
@@ -1844,8 +1897,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Lesion",
                     "Tipo de Lesiones", "Cantidad Incidentes", ALesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
-            Utils util = new Utils();
-            util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
+            Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
 
         ChartPanel panelAnual = new ChartPanel(GraficaAnual);
@@ -1901,22 +1953,22 @@ public class MassGraficos extends javax.swing.JInternalFrame {
 
             //Configuracion del gráfico        
             PExtremidad.addValue(man, "Periodo Seleccionado", "Manos");
-            PExtremidad.addValue(cab, "Periodo Seleccionado", "Cab");
+            PExtremidad.addValue(cab, "Periodo Seleccionado", "Cabeza");
             PExtremidad.addValue(cue, "Periodo Seleccionado", "Cuello");
             PExtremidad.addValue(bra, "Periodo Seleccionado", "Brazos");
             PExtremidad.addValue(tro, "Periodo Seleccionado", "Tronco");
-            PExtremidad.addValue(abd, "Periodo Seleccionado", "Abd.");
+            PExtremidad.addValue(abd, "Periodo Seleccionado", "Abdomen");
             PExtremidad.addValue(pi, "Periodo Seleccionado", "Piernas");
             PExtremidad.addValue(pie, "Periodo Seleccionado", "Pies");
             PExtremidad.addValue(cad, "Periodo Seleccionado", "Cadera");
             PExtremidad.addValue(hom, "Periodo Seleccionado", "Hombros");
 
             PExtremidad.addValue(man2, "Periodo Anterior", "Manos");
-            PExtremidad.addValue(cab2, "Periodo Anterior", "Cab");
+            PExtremidad.addValue(cab2, "Periodo Anterior", "Cabeza");
             PExtremidad.addValue(cue2, "Periodo Anterior", "Cuello");
             PExtremidad.addValue(bra2, "Periodo Anterior", "Brazos");
             PExtremidad.addValue(tro2, "Periodo Anterior", "Tronco");
-            PExtremidad.addValue(abd2, "Periodo Anterior", "Abd.");
+            PExtremidad.addValue(abd2, "Periodo Anterior", "Abdomen");
             PExtremidad.addValue(pi2, "Periodo Anterior", "Piernas");
             PExtremidad.addValue(pie2, "Periodo Anterior", "Pies");
             PExtremidad.addValue(cad2, "Periodo Seleccionado", "Cadera");
@@ -2069,8 +2121,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Lesion",
                     "Tipo de Lesiones", "Cantidad Incidentes", PLesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
-            Utils util = new Utils();
-            util.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
+            Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
         }
         ChartPanel panelPeriodico = new ChartPanel(GraficaPeriodica);
         panelGraficoPeriodico.setLayout(new java.awt.BorderLayout());
@@ -2112,7 +2163,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico torta.jpg"), GraficaTorta, 1024, 768);
-            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
@@ -2123,7 +2174,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Periodico.jpg"), GraficaPeriodica, 1024, 768);
-            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
@@ -2134,7 +2185,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Anual.jpg"), GraficaAnual, 1024, 768);
-            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
@@ -2145,7 +2196,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Mensual.jpg"), GraficaMensual, 1024, 768);
-            JOptionPane.showMessageDialog(null, "Imagen guardada correctamente");
+            Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
             Logger.getLogger(MassGraficos.class.getName()).log(Level.SEVERE, null, ex);
@@ -2243,7 +2294,11 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup grupoTortaSectores;
     private javax.swing.ButtonGroup grupoTortaTiempo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelAnual;
     private javax.swing.JPanel panelFiltroAnual;

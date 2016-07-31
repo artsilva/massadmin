@@ -96,7 +96,6 @@ public class LoginModel implements ActionListener {
                 MenuSpaNuevo spa = new MenuSpaNuevo();                
                 view.setVisible(false);
                 view.dispose();
-                web.setVisible(true);
                 spa.setVisible(true);
             } else if (!usuarioexistente || !passwordCorrecto) {
                 showMessage("Usuario o contraseña incorrectos");
