@@ -6,6 +6,7 @@
 package com.massmanager.swing.view;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
@@ -25,6 +26,7 @@ public class WebServiceView extends javax.swing.JFrame {
 
     public WebServiceView() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));        
         setLocationRelativeTo(null);
         btnAceptar.setVisible(false);
         progressAnual.setForeground(new Color(79, 160, 240));
@@ -116,6 +118,7 @@ public class WebServiceView extends javax.swing.JFrame {
         txtActualizacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Actualizador de Atenciones");
         setBackground(new java.awt.Color(255, 255, 255));
 
         panelWS.setBackground(new java.awt.Color(255, 255, 255));

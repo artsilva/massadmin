@@ -7,11 +7,9 @@ package com.massmanager.controller;
 
 import com.massmanager.swing.model.LoginModel;
 import com.massmanager.swing.view.LoginView;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 /**
  *

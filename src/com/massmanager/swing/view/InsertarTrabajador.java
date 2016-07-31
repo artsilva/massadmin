@@ -8,6 +8,7 @@ package com.massmanager.swing.view;
 import com.massmanager.controller.Trabajador;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.Utils;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class InsertarTrabajador extends javax.swing.JFrame {
      */
     public InsertarTrabajador() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
 
         boxArea.removeAllItems();
         boxSector.removeAllItems();

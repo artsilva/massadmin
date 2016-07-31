@@ -7,6 +7,7 @@ package com.massmanager.swing.view;
 
 import com.massmanager.controller.Usuarios;
 import com.massmanager.swing.model.Conexion;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ public class MenuMass extends javax.swing.JFrame {
      */
     public MenuMass() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
         setLocationRelativeTo(null);
         
         Conexion cn = new Conexion();
@@ -61,6 +63,7 @@ public class MenuMass extends javax.swing.JFrame {
         menuAtenciones = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mass Admin MASS");
         setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(93, 130, 189));

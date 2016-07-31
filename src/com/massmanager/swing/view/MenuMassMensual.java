@@ -499,7 +499,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
 
                         Workbook wb = null;
                         try {
-                            wb = new XSSFWorkbook(OPCPackage.open("templates\\template_atencion_mensual.xlsx"));
+                            wb = new XSSFWorkbook(OPCPackage.open("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\templates\\template_atencion_mensual.xlsx"));
                         } catch (Exception ex) {
                             Logger.getLogger(MenuMassAnual.class.getName()).log(Level.SEVERE, null, ex);
                             System.out.println("No se encuentra el archivo de template");

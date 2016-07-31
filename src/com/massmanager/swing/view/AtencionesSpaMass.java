@@ -7,6 +7,7 @@ package com.massmanager.swing.view;
 
 import com.massmanager.swing.model.PropiedadesColumnas;
 import com.massmanager.swing.model.Conexion;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

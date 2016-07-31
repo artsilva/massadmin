@@ -8,6 +8,7 @@ package com.massmanager.swing.view;
 import com.massmanager.controller.Lesion;
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.Utils;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,6 +21,7 @@ public class InsertarPatologia extends javax.swing.JFrame {
      */
     public InsertarPatologia() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
     }
 
     /**

@@ -11,6 +11,7 @@ import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.EnviadorMail;
 import com.massmanager.swing.model.FechaHora;
 import com.massmanager.swing.model.Utils;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
      */
     public MenuSpaNuevo() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
         setLocationRelativeTo(null);
         
         this.boxLesion.removeAllItems();
@@ -130,6 +132,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         menuPatologia = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mass Admin SPA");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -535,13 +538,21 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         //INSERTA LA ATENCION DIRECTO A BD
         cn.InsertarAtenciones(listaAtencion,cn.convierteAtenciones(listaAtencion));
 
-        Utils util = new Utils();
         try {
-            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", util.asuntoCorreo(listaAtencion), util.cuerpoCorreo(listaAtencion));
+            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", Utils.asuntoCorreo(listaAtencion), Utils.cuerpoCorreo(listaAtencion));
             JOptionPane.showMessageDialog(null, "Se envio el mail correctamente");
+            this.txtRut.setText("");
+            this.txtNombre.setText("");
+            this.txtArea.setText("");
+            this.txtJefe.setText("");
+            this.txtSector.setText("");
+            this.txtLugar.setText("");
+            this.txtTto.setText("");
+            this.txtDetalles.setText("");
+            this.textAreaComentario.setText("");
         } catch (Exception ex) {
             ex.printStackTrace();
-            util.showMessageWarning("Ocurrio un problema al mandar el mail", "Advertencia");            
+            Utils.showMessageWarning("Ocurrio un problema al mandar el mail", "Advertencia");
         }
     }//GEN-LAST:event_btnCorreoActionPerformed
 

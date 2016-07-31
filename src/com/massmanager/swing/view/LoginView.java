@@ -5,6 +5,7 @@
  */
 package com.massmanager.swing.view;
 
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -21,7 +22,8 @@ public class LoginView extends javax.swing.JDialog {
     public LoginView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Artsk\\Documents\\NetBeansProjects\\massadmin\\massadmin.png"));
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +43,7 @@ public class LoginView extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login MASSADMIN");
+        setTitle("Login MASSADMIN 2.0");
         setPreferredSize(new java.awt.Dimension(435, 190));
         setResizable(false);
 

@@ -7,7 +7,12 @@ package com.massmanager.swing.model;
 
 import com.massmanager.controller.Atencion;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
@@ -68,7 +73,7 @@ public class Utils {
         }
         return asunto.toString();
     }
-    
+
     public static String cuerpoCorreo(List <Atencion> atencion) {
 
         FechaHora fecha = new FechaHora("dd-MM-yyyy");
