@@ -563,6 +563,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     private void rdTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTipoMouseClicked
         // TODO add your handling code here:
         this.boxOpcion.removeAllItems();
+        this.boxMes.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs2;
         rs2 = cn.ExtraerIncidente();
@@ -587,6 +588,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     private void rdAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAreaMouseClicked
         // TODO add your handling code here:
         this.boxOpcion.removeAllItems();
+        this.boxMes.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs3;
         rs3 = cn.ExtraerArea();
@@ -611,6 +613,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     private void rdSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdSectorMouseClicked
         // TODO add your handling code here:
         this.boxOpcion.removeAllItems();
+        this.boxMes.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs4;
         rs4 = cn.ExtraerSector();
@@ -635,6 +638,7 @@ public class MenuMassMensual extends javax.swing.JInternalFrame {
     private void rdExtremidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdExtremidadMouseClicked
         // TODO add your handling code here:
         this.boxOpcion.removeAllItems();
+        this.boxMes.removeAllItems();
         Conexion cn = new Conexion();
         ResultSet rs5;
         rs5 = cn.ExtraerExtremidad();

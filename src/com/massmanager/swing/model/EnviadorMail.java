@@ -15,9 +15,9 @@ import java.util.*;
  */
 public class EnviadorMail {
 
-    final String miCorreo = "arturosk8silva@gmail.com";
-    final String miContraseña = "ncofqoivzzbtgqop";
-    final String servidorSMTP = "smtp.gmail.com";
+    final String miCorreo = "no_responder@rpro.cl";
+    final String miContraseña = "???";
+    final String servidorSMTP = "smtp.googlemail.com";
     final String puertoEnvio = "465";
     String mailReceptor = null;
     String asunto = null;

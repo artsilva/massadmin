@@ -539,7 +539,7 @@ public class MenuSpaNuevo extends javax.swing.JFrame {
         cn.InsertarAtenciones(listaAtencion,cn.convierteAtenciones(listaAtencion));
 
         try {
-            EnviadorMail mail = new EnviadorMail("arturosk8_art13@hotmail.com", Utils.asuntoCorreo(listaAtencion), Utils.cuerpoCorreo(listaAtencion));
+            EnviadorMail mail = new EnviadorMail("artsilvaromero@gmail.com", Utils.asuntoCorreo(listaAtencion), Utils.cuerpoCorreo(listaAtencion));
             JOptionPane.showMessageDialog(null, "Se envio el mail correctamente");
             this.txtRut.setText("");
             this.txtNombre.setText("");

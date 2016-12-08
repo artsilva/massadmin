@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/model/QuerysMensuales.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/model/DatosGraficos.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/MenuMassPeriodico.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/MenuMassAnual.java</file>
-=======
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/MenuSpaNuevo.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/InsertarTrabajador.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/WebServiceView.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/MenuMass.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/LoginView.java</file>
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/InsertarPatologia.java</file>
->>>>>>> origin/develop
-            <file>file:/C:/Users/Artsk/Documents/NetBeansProjects/massadmin/src/com/massmanager/swing/view/MassGraficos.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

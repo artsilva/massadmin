@@ -7,6 +7,7 @@ package com.massmanager.swing.view;
 
 import com.massmanager.swing.model.Conexion;
 import com.massmanager.swing.model.DatosGraficos;
+import com.massmanager.swing.model.FechaHora;
 import com.massmanager.swing.model.GestionArchivos;
 import com.massmanager.swing.model.QuerysAnuales;
 import com.massmanager.swing.model.QuerysPeriodicas;
@@ -972,7 +973,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Extremidad.addValue(cad2, "Mes Anterior", "Cadera");
             Extremidad.addValue(hom2, "Mes Anterior", "Hombros");
 
-            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Extremidad",
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Extremidad " + mes,
                     "Extremidades", "Cantidad Incidentes", Extremidad, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdSector.isSelected()) {            
             panelGraficoMensual.removeAll();
@@ -1032,7 +1033,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Sector.addValue(tale2, "Mes Anterior", "T.Elec.");
             Sector.addValue(talm2, "Mes Anterior", "T.Mec.");
 
-            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Sector",
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Sector " + mes,
                     "Sectores", "Cantidad Incidentes", Sector, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdArea.isSelected()) {
             panelGraficoMensual.removeAll();
@@ -1060,7 +1061,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Area.addValue(mass2, "Mes Anterior", "Mass");
             Area.addValue(pro2, "Mes Anterior", "Producción");
 
-            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Area",
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Area " + mes,
                     "Areas", "Cantidad Incidentes", Area, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdTipo.isSelected()) {
             panelGraficoMensual.removeAll();
@@ -1076,7 +1077,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Tipo.addValue(lab2, "Mes Anterior", "Laboral");
             Tipo.addValue(tra2, "Mes Anterior", "Trayecto");
 
-            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Tipo de Incidente",
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Tipo de Incidente " + mes,
                     "Tipo de Incidentes", "Cantidad Incidentes", Tipo, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdLesion.isSelected()) {
             panelGraficoMensual.removeAll();
@@ -1116,7 +1117,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             Lesion.addValue(que2, "Mes Anterior", "Quemadura");
             Lesion.addValue(mus2, "Mes Anterior", "Muscular");
 
-            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Lesion",
+            GraficaMensual = ChartFactory.createBarChart3D("Incidencias Mensuales por Lesion " + mes,
                     "Tipo de Lesiones", "Cantidad Incidentes", Lesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
             Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
@@ -1750,7 +1751,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             AExtremidad.addValue(cad2, "año Anterior", "Cadera");
             AExtremidad.addValue(hom2, "año Anterior", "Hombros");
 
-            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad",
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Extremidad " + año,
                     "Extremidades", "Cantidad Incidentes", AExtremidad, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdSector2.isSelected()) {
             panelGraficoAnual.removeAll();
@@ -1810,7 +1811,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             ASector.addValue(tale2, "Año Anterior", "T.Elec.");
             ASector.addValue(talm2, "Año Anterior", "T.Mec.");
 
-            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Sector",
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Sector " + año,
                     "Sectores", "Cantidad Incidentes", ASector, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdArea2.isSelected()) {
             panelGraficoAnual.removeAll();
@@ -1838,7 +1839,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             AArea.addValue(mass2, "Año Anterior", "Mass");
             AArea.addValue(pro2, "Año Anterior", "Producción");
 
-            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Area",
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Area " + año,
                     "Areas", "Cantidad Incidentes", AArea, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdTipo2.isSelected()) {
             panelGraficoAnual.removeAll();
@@ -1854,7 +1855,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             ATipo.addValue(lab2, "Año Anterior", "Laboral");
             ATipo.addValue(tra2, "Año Anterior", "Trayecto");
 
-            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Tipo de Incidente",
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Tipo de Incidente " + año,
                     "Tipo de Incidentes", "Cantidad Incidentes", ATipo, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdLesion2.isSelected()) {
             panelGraficoAnual.removeAll();
@@ -1894,7 +1895,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             ALesion.addValue(que2, "Año Anterior", "Quemadura");
             ALesion.addValue(mus2, "Año Anterior", "Muscular");
 
-            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Lesion",
+            GraficaAnual = ChartFactory.createBarChart3D("Incidencias Anuales por Lesion " + año,
                     "Tipo de Lesiones", "Cantidad Incidentes", ALesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
             Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
@@ -1974,7 +1975,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PExtremidad.addValue(cad2, "Periodo Seleccionado", "Cadera");
             PExtremidad.addValue(hom2, "Periodo Seleccionado", "Hombros");
 
-            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Extremidad",
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Extremidad " + periodo,
                     "Extremidades", "Cantidad Incidentes", PExtremidad, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdSector3.isSelected()) {
             panelGraficoPeriodico.removeAll();
@@ -2034,7 +2035,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PSector.addValue(tale2, "Periodo Anterior", "T.Elec.");
             PSector.addValue(talm2, "Periodo Anterior", "T.Mec.");
 
-            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Sector",
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Sector " + periodo,
                     "Sectores", "Cantidad Incidentes", PSector, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdArea3.isSelected()) {
             panelGraficoPeriodico.removeAll();
@@ -2062,7 +2063,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PArea.addValue(mass2, "Periodo Anterior", "Mass");
             PArea.addValue(pro2, "Periodo Anterior", "Producción");
 
-            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Area",
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Area " + periodo,
                     "Areas", "Cantidad Incidentes", PArea, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdTipo3.isSelected()) {
             panelGraficoPeriodico.removeAll();
@@ -2078,7 +2079,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PTipo.addValue(lab2, "Periodo Anterior", "Laboral");
             PTipo.addValue(tra2, "Periodo Anterior", "Trayecto");
 
-            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Tipo de Incidente",
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Tipo de Incidente " + periodo,
                     "Tipo de Incidentes", "Cantidad Incidentes", PTipo, PlotOrientation.VERTICAL, true, true, false);
         } else if (rdLesion3.isSelected()) {
             panelGraficoPeriodico.removeAll();
@@ -2118,7 +2119,7 @@ public class MassGraficos extends javax.swing.JInternalFrame {
             PLesion.addValue(que2, "Periodo Anterior", "Quemadura");
             PLesion.addValue(mus2, "Periodo Anterior", "Muscular");
 
-            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Lesion",
+            GraficaPeriodica = ChartFactory.createBarChart3D("Incidencias Periodicas por Lesion " + periodo,
                     "Tipo de Lesiones", "Cantidad Incidentes", PLesion, PlotOrientation.VERTICAL, true, true, false);
         } else {
             Utils.showMessageWarning("Se deben seleccionar los filtros para mostrar graficos", "Seleccione un filtro. ");
@@ -2162,7 +2163,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void btnGuardaTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaTortaActionPerformed
         // TODO add your handling code here:
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico torta.jpg"), GraficaTorta, 1024, 768);
+            FechaHora fecha = new FechaHora("dd-MM-yyyy");
+            String fechaActual = fecha.getFecha();
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico torta " + fechaActual + ".jpg"), GraficaTorta, 1024, 768);
             Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
@@ -2173,7 +2176,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void btnGuardarPeriodicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPeriodicoActionPerformed
         // TODO add your handling code here:
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Periodico.jpg"), GraficaPeriodica, 1024, 768);
+            FechaHora fecha = new FechaHora("dd-MM-yyyy");
+            String fechaActual = fecha.getFecha();
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Periodico " + fechaActual + ".jpg"), GraficaPeriodica, 1024, 768);
             Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
@@ -2184,7 +2189,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void btnGuardarAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAnualActionPerformed
         // TODO add your handling code here:
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Anual.jpg"), GraficaAnual, 1024, 768);
+            FechaHora fecha = new FechaHora("dd-MM-yyyy");
+            String fechaActual = fecha.getFecha();
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Anual " + fechaActual + ".jpg"), GraficaAnual, 1024, 768);
             Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
@@ -2195,7 +2202,9 @@ public class MassGraficos extends javax.swing.JInternalFrame {
     private void btnGuardarMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMensualActionPerformed
         // TODO add your handling code here:
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Mensual.jpg"), GraficaMensual, 1024, 768);
+            FechaHora fecha = new FechaHora("dd-MM-yyyy");
+            String fechaActual = fecha.getFecha();
+            ChartUtilities.saveChartAsJPEG(new File("D:\\Graficos\\Grafico Mensual " + fechaActual + ".jpg"), GraficaMensual, 1024, 768);
             Utils.showMessageInfo("Imagen guardada correctamente.", "Guardada");
             gestion.verificaDirectorio();
         } catch (IOException ex) {
